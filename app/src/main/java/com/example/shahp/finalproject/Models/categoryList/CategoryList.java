@@ -34,7 +34,7 @@ public class CategoryList implements Parcelable
         })
         public CategoryList createFromParcel(Parcel in) {
             CategoryList instance = new CategoryList();
-            in.readList(instance.categories, (com.example.shahp.finalproject.Models.Drink.class.getClassLoader()));
+            in.readList(instance.categories, (com.example.shahp.finalproject.Models.categoryList.Category.class.getClassLoader()));
             return instance;
         }
 
