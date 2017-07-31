@@ -19,6 +19,7 @@ import com.example.shahp.finalproject.Models.categoryList.Category;
 import com.example.shahp.finalproject.Models.categoryList.CategoryList;
 import com.example.shahp.finalproject.Models.drinksResult.Drink;
 import com.example.shahp.finalproject.Models.drinksResult.DrinksResult;
+import com.example.shahp.finalproject.Models.glassList.Glass;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -44,12 +45,17 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                interactor_.getCategoryList()
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.newThread())
-                        .subscribe(MainActivity.this::onSuccess, MainActivity.this::OnError);
+//                interactor_.getCategoryList()
+//                        .observeOn(AndroidSchedulers.mainThread())
+//                        .subscribeOn(Schedulers.newThread())
+//                        .subscribe(MainActivity.this::onSuccess, MainActivity.this::OnError);
+//
+//                interactor_.getByCategory("Cocktail")
+//                        .observeOn(AndroidSchedulers.mainThread())
+//                        .subscribeOn(Schedulers.newThread())
+//                        .subscribe(MainActivity.this::onSuccess, MainActivity.this::OnError);
 
-                interactor_.getCategory("Cocktail")
+                interactor_.getGlassList()
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.newThread())
                         .subscribe(MainActivity.this::onSuccess, MainActivity.this::OnError);
@@ -69,6 +75,13 @@ public class MainActivity extends AppCompatActivity
         menu = navigationView.getMenu();
         navigationView.setNavigationItemSelectedListener(this);
 
+    }
+
+    private void onSuccess(Glass glass) {
+        Log.i("DrinksResult", String.valueOf(glass.getDrinks()));
+        for(com.example.shahp.finalproject.Models.glassList.Drink c: glass.getDrinks()){
+            Log.i("DrinksResult",c.getStrGlass());
+        }
     }
 
     private void onSuccess(DrinksResult drinksResult) {
