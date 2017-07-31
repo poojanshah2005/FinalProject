@@ -1,8 +1,8 @@
 package com.example.shahp.finalproject.Service;
 
-import com.example.shahp.finalproject.Models.categoryList.CategoryList;
+import com.example.shahp.finalproject.Models.categoryList.CategoryResults;
 import com.example.shahp.finalproject.Models.drinksResult.DrinksResult;
-import com.example.shahp.finalproject.Models.glassList.Glass;
+import com.example.shahp.finalproject.Models.glassList.GlassResults;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -15,9 +15,9 @@ import retrofit2.http.Query;
 public interface RequestInterface {
 
     @GET(Consts.CategoryList)
-    Observable<CategoryList> getCategoryList();
+    Observable<CategoryResults> getCategoryList();
     @GET(Consts.GlassList)
-    Observable<Glass> getGlassList();
+    Observable<GlassResults> getGlassList();
     @GET(Consts.BY_CATEOGY)
     Observable<DrinksResult> getByCategory(@Query("c") String category);
 

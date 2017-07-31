@@ -16,10 +16,11 @@ import android.view.MenuItem;
 
 import com.example.shahp.finalproject.MVP.Interactor.InteractorImpl;
 import com.example.shahp.finalproject.Models.categoryList.Category;
-import com.example.shahp.finalproject.Models.categoryList.CategoryList;
+import com.example.shahp.finalproject.Models.categoryList.CategoryResults;
 import com.example.shahp.finalproject.Models.drinksResult.Drink;
 import com.example.shahp.finalproject.Models.drinksResult.DrinksResult;
 import com.example.shahp.finalproject.Models.glassList.Glass;
+import com.example.shahp.finalproject.Models.glassList.GlassResults;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -77,9 +78,9 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    private void onSuccess(Glass glass) {
+    private void onSuccess(GlassResults glass) {
         Log.i("DrinksResult", String.valueOf(glass.getDrinks()));
-        for(com.example.shahp.finalproject.Models.glassList.Drink c: glass.getDrinks()){
+        for(Glass c: glass.getDrinks()){
             Log.i("DrinksResult",c.getStrGlass());
         }
     }
@@ -95,7 +96,7 @@ public class MainActivity extends AppCompatActivity
         Log.i("OnError", throwable.getMessage());
     }
 
-    private void onSuccess(CategoryList categoryList) {
+    private void onSuccess(CategoryResults categoryList) {
         Log.i("categoryList", String.valueOf(categoryList.getDrinks()));
         for(Category c: categoryList.getDrinks()){
             Log.i("categoryList",c.getStrCategory());

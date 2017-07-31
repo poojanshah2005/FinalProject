@@ -12,7 +12,7 @@ package com.example.shahp.finalproject.Models.categoryList;
         import com.google.gson.annotations.Expose;
         import com.google.gson.annotations.SerializedName;
 
-public class CategoryList implements Parcelable
+public class CategoryResults implements Parcelable
 {
 
     public List<Category> getCategories() {
@@ -26,20 +26,20 @@ public class CategoryList implements Parcelable
     @SerializedName("drinks")
     @Expose
     private List<Category> categories = null;
-    public final static Parcelable.Creator<CategoryList> CREATOR = new Creator<CategoryList>() {
+    public final static Parcelable.Creator<CategoryResults> CREATOR = new Creator<CategoryResults>() {
 
 
         @SuppressWarnings({
                 "unchecked"
         })
-        public CategoryList createFromParcel(Parcel in) {
-            CategoryList instance = new CategoryList();
+        public CategoryResults createFromParcel(Parcel in) {
+            CategoryResults instance = new CategoryResults();
             in.readList(instance.categories, (com.example.shahp.finalproject.Models.categoryList.Category.class.getClassLoader()));
             return instance;
         }
 
-        public CategoryList[] newArray(int size) {
-            return (new CategoryList[size]);
+        public CategoryResults[] newArray(int size) {
+            return (new CategoryResults[size]);
         }
 
     }

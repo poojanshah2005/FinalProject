@@ -1,8 +1,8 @@
 package com.example.shahp.finalproject.MVP.Interactor;
 
-import com.example.shahp.finalproject.Models.categoryList.CategoryList;
+import com.example.shahp.finalproject.Models.categoryList.CategoryResults;
 import com.example.shahp.finalproject.Models.drinksResult.DrinksResult;
-import com.example.shahp.finalproject.Models.glassList.Glass;
+import com.example.shahp.finalproject.Models.glassList.GlassResults;
 import com.example.shahp.finalproject.Service.Consts;
 import com.example.shahp.finalproject.Service.RequestInterface;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -46,12 +46,12 @@ public class InteractorImpl implements  Interactor {
     }
 
     @Override
-    public Observable<CategoryList> getCategoryList() {
+    public Observable<CategoryResults> getCategoryList() {
         return requestInterface.getCategoryList();
     }
 
     @Override
-    public Observable<Glass> getGlassList() {
+    public Observable<GlassResults> getGlassList() {
         return requestInterface.getGlassList();
     }
 
