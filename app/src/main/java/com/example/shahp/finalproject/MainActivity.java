@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
+import android.view.SubMenu;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -42,6 +43,11 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         interactor_ = new InteractorImpl();
 
+        interactor_.getCategoryList()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.newThread())
+                .subscribe(MainActivity.this::onSuccessgGetCategoryList, MainActivity.this::OnError);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,13 +63,6 @@ public class MainActivity extends AppCompatActivity
 //                        .observeOn(AndroidSchedulers.mainThread())
 //                        .subscribeOn(Schedulers.newThread())
 //                        .subscribe(MainActivity.this::onSuccess, MainActivity.this::OnError);
-
-                interactor_.getIngredientList()
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.newThread())
-                        .subscribe(MainActivity.this::onSuccess, MainActivity.this::OnError);
-
-
             }
         });
 
@@ -80,37 +79,19 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    private void onSuccess(IngredientResults ingredientResults) {
-        Log.i("ingredientResults", String.valueOf(ingredientResults.getDrinks()));
-        for(Ingredient c: ingredientResults.getDrinks()){
-            Log.i("ingredientResults",c.getStrIngredient1());
-        }
-    }
+    private void onSuccessgGetCategoryList(CategoryResults categoryResults) {
 
-    private void onSuccess(GlassResults glass) {
-        Log.i("DrinksResult", String.valueOf(glass.getDrinks()));
-        for(Glass c: glass.getDrinks()){
-            Log.i("DrinksResult",c.getStrGlass());
-        }
-    }
+        SubMenu CategoriesMenu = menu.addSubMenu("Categories");
 
-    private void onSuccess(DrinksResult drinksResult) {
-        Log.i("DrinksResult", String.valueOf(drinksResult.getDrinks()));
-        for(Drink c: drinksResult.getDrinks()){
-            Log.i("DrinksResult",c.getStrDrink());
+        for(Category c: categoryResults.getCategories()){
+            CategoriesMenu.add(c.getStrCategory());
         }
     }
 
     private void OnError(Throwable throwable) {
         Log.i("OnError", throwable.getMessage());
     }
-
-    private void onSuccess(CategoryResults categoryList) {
-        Log.i("categoryList", String.valueOf(categoryList.getDrinks()));
-        for(Category c: categoryList.getDrinks()){
-            Log.i("categoryList",c.getStrCategory());
-        }
-    }
+    
 
 
     @Override
@@ -149,21 +130,21 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
+//        int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
+//        if (id == R.id.nav_camera) {
+//            // Handle the camera action
+//        } else if (id == R.id.nav_gallery) {
+//
+//        } else if (id == R.id.nav_slideshow) {
+//
+//        } else if (id == R.id.nav_manage) {
+//
+//        } else if (id == R.id.nav_share) {
+//
+//        } else if (id == R.id.nav_send) {
+//
+//        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
