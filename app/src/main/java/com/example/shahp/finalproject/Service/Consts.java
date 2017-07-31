@@ -9,4 +9,5 @@ public class Consts {
     public static final String CategoryList = "list.php?c=list";
     public static final String BY_CATEOGY = "filter.php";
     public static final String GlassList = "list.php?g=list";
+    public static final String IngredientList = "list.php?i=list";
 }

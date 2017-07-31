@@ -21,6 +21,7 @@ import com.example.shahp.finalproject.Models.drinksResult.Drink;
 import com.example.shahp.finalproject.Models.drinksResult.DrinksResult;
 import com.example.shahp.finalproject.Models.glassList.Glass;
 import com.example.shahp.finalproject.Models.glassList.GlassResults;
+import com.example.shahp.finalproject.Models.ingredientResults.IngredientResults;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity
 //                        .subscribeOn(Schedulers.newThread())
 //                        .subscribe(MainActivity.this::onSuccess, MainActivity.this::OnError);
 
-                interactor_.getGlassList()
+                interactor_.getIngredientList()
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.newThread())
                         .subscribe(MainActivity.this::onSuccess, MainActivity.this::OnError);
@@ -76,6 +77,13 @@ public class MainActivity extends AppCompatActivity
         menu = navigationView.getMenu();
         navigationView.setNavigationItemSelectedListener(this);
 
+    }
+
+    private void onSuccess(IngredientResults ingredientResults) {
+        Log.i("ingredientResults", String.valueOf(ingredientResults.getDrinks()));
+        for(com.example.shahp.finalproject.Models.ingredientResults.Drink c: ingredientResults.getDrinks()){
+            Log.i("ingredientResults",c.getStrIngredient1());
+        }
     }
 
     private void onSuccess(GlassResults glass) {
