@@ -1,6 +1,7 @@
 package com.example.shahp.finalproject.MVP.Interactor;
 
 import com.example.shahp.finalproject.Models.categoryList.CategoryList;
+import com.example.shahp.finalproject.Models.drinksResult.DrinksResult;
 
 import io.reactivex.Observable;
 
@@ -10,4 +11,5 @@ import io.reactivex.Observable;
 
 public interface Interactor {
     Observable<CategoryList> getCategoryList();
+    Observable<DrinksResult> getByCategory(String category);
 }

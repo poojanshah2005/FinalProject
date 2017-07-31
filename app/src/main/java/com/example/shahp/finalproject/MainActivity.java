@@ -17,6 +17,8 @@ import android.view.MenuItem;
 import com.example.shahp.finalproject.MVP.Interactor.InteractorImpl;
 import com.example.shahp.finalproject.Models.categoryList.Category;
 import com.example.shahp.finalproject.Models.categoryList.CategoryList;
+import com.example.shahp.finalproject.Models.drinksResult.Drink;
+import com.example.shahp.finalproject.Models.drinksResult.DrinksResult;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -42,16 +44,24 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                interactor_.getCategoryList()
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.newThread())
+                        .subscribe(MainActivity.this::onSuccess, MainActivity.this::OnError);
+
+                interactor_.getCategory("Cocktail")
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.newThread())
+                        .subscribe(MainActivity.this::onSuccess, MainActivity.this::OnError);
+
+
             }
         });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        interactor_.getCategoryList()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.newThread())
-                .subscribe(MainActivity.this::onSuccess, MainActivity.this::OnError);
+
                 drawer.setDrawerListener(toggle);
         toggle.syncState();
 
@@ -59,6 +69,13 @@ public class MainActivity extends AppCompatActivity
         menu = navigationView.getMenu();
         navigationView.setNavigationItemSelectedListener(this);
 
+    }
+
+    private void onSuccess(DrinksResult drinksResult) {
+        Log.i("DrinksResult", String.valueOf(drinksResult.getDrinks()));
+        for(Drink c: drinksResult.getDrinks()){
+            Log.i("DrinksResult",c.getStrDrink());
+        }
     }
 
     private void OnError(Throwable throwable) {
