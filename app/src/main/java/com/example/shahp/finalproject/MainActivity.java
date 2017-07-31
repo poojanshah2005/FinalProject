@@ -21,6 +21,7 @@ import com.example.shahp.finalproject.Models.drinksResult.Drink;
 import com.example.shahp.finalproject.Models.drinksResult.DrinksResult;
 import com.example.shahp.finalproject.Models.glassList.Glass;
 import com.example.shahp.finalproject.Models.glassList.GlassResults;
+import com.example.shahp.finalproject.Models.ingredientResults.Ingredient;
 import com.example.shahp.finalproject.Models.ingredientResults.IngredientResults;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -81,7 +82,7 @@ public class MainActivity extends AppCompatActivity
 
     private void onSuccess(IngredientResults ingredientResults) {
         Log.i("ingredientResults", String.valueOf(ingredientResults.getDrinks()));
-        for(com.example.shahp.finalproject.Models.ingredientResults.Drink c: ingredientResults.getDrinks()){
+        for(Ingredient c: ingredientResults.getDrinks()){
             Log.i("ingredientResults",c.getStrIngredient1());
         }
     }

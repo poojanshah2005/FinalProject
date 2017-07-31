@@ -6,30 +6,30 @@ package com.example.shahp.finalproject.Models.ingredientResults;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Drink implements Parcelable
+public class Ingredient implements Parcelable
 {
 
     @SerializedName("strIngredient1")
     @Expose
     private String strIngredient1;
-    public final static Parcelable.Creator<Drink> CREATOR = new Creator<Drink>() {
+    public final static Parcelable.Creator<Ingredient> CREATOR = new Creator<Ingredient>() {
 
 
         @SuppressWarnings({
                 "unchecked"
         })
-        public Drink createFromParcel(Parcel in) {
-            Drink instance = new Drink();
+        public Ingredient createFromParcel(Parcel in) {
+            Ingredient instance = new Ingredient();
             instance.strIngredient1 = ((String) in.readValue((String.class.getClassLoader())));
             return instance;
         }
 
-        public Drink[] newArray(int size) {
-            return (new Drink[size]);
+        public Ingredient[] newArray(int size) {
+            return (new Ingredient[size]);
         }
 
     }
