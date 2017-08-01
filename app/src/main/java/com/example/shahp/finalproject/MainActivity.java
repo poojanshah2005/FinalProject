@@ -84,7 +84,22 @@ public class MainActivity extends AppCompatActivity
         SubMenu CategoriesMenu = menu.addSubMenu("Categories");
 
         for(Category c: categoryResults.getCategories()){
-            CategoriesMenu.add(c.getStrCategory());
+            CategoriesMenu.add(c.getStrCategory()).setIcon(R.drawable.ic_local_drink_48px).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem menuItem) {
+                    interactor_.getByCategory(c.getStrCategory())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribeOn(Schedulers.newThread())
+                        .subscribe(MainActivity.this::onDisplayCategoryListSuccess, MainActivity.this::OnError);
+                    return false;
+                }
+            });
+        }
+    }
+
+    private void onDisplayCategoryListSuccess(DrinksResult drinksResult) {
+        for(Drink drink: drinksResult.getDrinks()){
+            Log.i("drinksResultList", drink.getStrDrink() + " " + drink.getStrDrinkThumb().toString());
         }
     }
 

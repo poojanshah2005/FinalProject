@@ -23,7 +23,6 @@ public interface RequestInterface {
     Observable<IngredientResults> getIngredientList();
     @GET(Consts.BY_CATEOGY)
     Observable<DrinksResult> getByCategory(@Query("c") String category);
-
 //    http://www.thecocktaildb.com/api/json/v1/1/list.php?c=list
 //    http://www.thecocktaildb.com/api/json/v1/1/list.php?g=list
 //    http://www.thecocktaildb.com/api/json/v1/1/list.php?i=list
