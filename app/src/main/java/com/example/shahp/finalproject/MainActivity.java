@@ -14,7 +14,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.example.shahp.finalproject.MVP.DisplayDrinks;
+import com.example.shahp.finalproject.MVP.IMusicListPresenter;
+import com.example.shahp.finalproject.MVP.IMusicListView;
 import com.example.shahp.finalproject.MVP.Interactor.InteractorImpl;
 import com.example.shahp.finalproject.Models.categoryList.Category;
 import com.example.shahp.finalproject.Models.categoryList.CategoryResults;
@@ -24,24 +28,35 @@ import com.example.shahp.finalproject.Models.glassList.Glass;
 import com.example.shahp.finalproject.Models.glassList.GlassResults;
 import com.example.shahp.finalproject.Models.ingredientResults.Ingredient;
 import com.example.shahp.finalproject.Models.ingredientResults.IngredientResults;
+import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork;
+
+import java.util.ArrayList;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, IMusicListView {
 
     Menu menu;
     InteractorImpl interactor_;
+    static IMusicListPresenter iMusicListPresenter;
+    IMusicListView iMusicListView;
+    android.support.v4.app.FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.iMusicListView = this;
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         interactor_ = new InteractorImpl();
+        iMusicListPresenter = new DisplayDrinks(interactor_);
+        iMusicListPresenter.attachView(this);
+
 
         interactor_.getCategoryList()
                 .observeOn(AndroidSchedulers.mainThread())
@@ -87,14 +102,21 @@ public class MainActivity extends AppCompatActivity
             CategoriesMenu.add(c.getStrCategory()).setIcon(R.drawable.ic_local_drink_48px).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem menuItem) {
-                    interactor_.getByCategory(c.getStrCategory())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribeOn(Schedulers.newThread())
-                        .subscribe(MainActivity.this::onDisplayCategoryListSuccess, MainActivity.this::OnError);
+                    displayResults(c.getStrCategory());
+//                    interactor_.getByCategory(c.getStrCategory())
+//                            .observeOn(AndroidSchedulers.mainThread())
+//                            .subscribeOn(Schedulers.newThread())
+//                        .subscribe(MainActivity.this::onDisplayCategoryListSuccess, MainActivity.this::OnError);
                     return false;
                 }
             });
         }
+    }
+
+    private void displayResults(String value) {
+        iMusicListPresenter.attachView(iMusicListView);
+        iMusicListPresenter.performListDisplay(value);
+
     }
 
     private void onDisplayCategoryListSuccess(DrinksResult drinksResult) {
@@ -164,5 +186,27 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onFetchDataSuccess(DrinksResult drinksResult) {
+        Log.i("onFetchDataSuccess","onFetchDataSuccess");
+    }
+
+    @Override
+    public void onFetchDataFailure(Throwable throwable) {
+        Log.i("onFetchDataFailure","onFetchDataFailure");
+        Log.i("onFetchDataFailure",throwable.getMessage());
+
+    }
+
+    @Override
+    public void onFetchDataCompleted() {
+        Log.i("ClassTrack","onFetchDataCompleted");
+    }
+
+    @Override
+    public void onFetchDataInProgress() {
+        Log.i("ClassTrack","onFetchDataInProgress");
     }
 }
