@@ -3,12 +3,16 @@ package com.example.shahp.finalproject.Fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.shahp.finalproject.Adapters.DrinkAdapter;
 import com.example.shahp.finalproject.Models.drinksResult.Drink;
 import com.example.shahp.finalproject.Models.drinksResult.DrinksResult;
 import com.example.shahp.finalproject.R;
@@ -22,16 +26,11 @@ import com.example.shahp.finalproject.R;
  * create an instance of this fragment.
  */
 public class DrinksFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
 //    private OnFragmentInteractionListener mListener;
+
+    private RecyclerView mRecyclerView;
+    DrinksResult drinksResult;
 
     public DrinksFragment() {
         // Required empty public constructor
@@ -41,16 +40,12 @@ public class DrinksFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment DrinksFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static DrinksFragment newInstance(String param1, String param2) {
+    public static DrinksFragment newInstance() {
         DrinksFragment fragment = new DrinksFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -60,7 +55,7 @@ public class DrinksFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         Bundle b = getArguments();
-        DrinksResult drinksResult = b.getParcelable("drinksResult");
+        this.drinksResult = b.getParcelable("drinksResult");
         for (Drink drinkResult : drinksResult.getDrinks()) {
             Log.i("drinkResult 65", drinkResult.getStrDrink());
         }
@@ -73,6 +68,13 @@ public class DrinksFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_drinks, container, false);
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.fragmentDrinksRecycleView);
+        mRecyclerView.setAdapter(new DrinkAdapter(drinksResult,getContext()));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
 
     /**
      * This interface must be implemented by activities that contain this
