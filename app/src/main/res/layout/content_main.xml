@@ -7,6 +7,16 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.shahp.finalproject.MainActivity"
     tools:showIn="@layout/app_bar_main">
+    <FrameLayout
+        android:id="@+id/content_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_weight="1">
+
+    </FrameLayout>
 
 
 </RelativeLayout>

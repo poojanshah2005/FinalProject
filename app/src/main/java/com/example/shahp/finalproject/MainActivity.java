@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.shahp.finalproject.Fragment.DrinksFragment;
 import com.example.shahp.finalproject.MVP.DisplayDrinks;
 import com.example.shahp.finalproject.MVP.IMusicListPresenter;
 import com.example.shahp.finalproject.MVP.IMusicListView;
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        fragmentManager = getSupportFragmentManager();
         interactor_ = new InteractorImpl();
         iMusicListPresenter = new DisplayDrinks(interactor_);
         iMusicListPresenter.attachView(this);
@@ -107,10 +109,17 @@ public class MainActivity extends AppCompatActivity
 //                            .observeOn(AndroidSchedulers.mainThread())
 //                            .subscribeOn(Schedulers.newThread())
 //                        .subscribe(MainActivity.this::onDisplayCategoryListSuccess, MainActivity.this::OnError);
+                    onDisplayCategoryList(c.getStrCategory());
                     return false;
                 }
             });
         }
+    }
+
+    private void onDisplayCategoryList(String strCategory) {
+        interactor_.getByCategory(strCategory).observeOn(AndroidSchedulers.mainThread())
+                            .subscribeOn(Schedulers.newThread())
+                        .subscribe(MainActivity.this::onDisplayCategoryListSuccess, MainActivity.this::OnError);
     }
 
     private void displayResults(String value) {
@@ -120,9 +129,18 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void onDisplayCategoryListSuccess(DrinksResult drinksResult) {
-        for(Drink drink: drinksResult.getDrinks()){
-            Log.i("drinksResultList", drink.getStrDrink() + " " + drink.getStrDrinkThumb().toString());
-        }
+        Bundle args = new Bundle();
+        args.putParcelable("drinksResult", drinksResult);
+        DrinksFragment drinksFragment = new DrinksFragment ();
+        drinksFragment.onAttach(MainActivity.this);
+        drinksFragment.setArguments(args);
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_main, drinksFragment)
+                .addToBackStack(drinksFragment.getClass().getName())
+                .commit();
+//        for(Drink drink: drinksResult.getDrinks()){
+//            Log.i("drinksResultList", drink.getStrDrink() + " " + drink.getStrDrinkThumb().toString());
+//        }
     }
 
     private void OnError(Throwable throwable) {
