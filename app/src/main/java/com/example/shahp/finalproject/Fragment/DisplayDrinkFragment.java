@@ -126,7 +126,8 @@ public class DisplayDrinkFragment extends Fragment {
             TextView tv1I = new TextView(getContext());
             TextView tv1Q = new TextView(getContext());
             tv1I.setText(s1);
-            tv1Q.setText(s2);
+            if(s2.length()>1)tv1Q.setText(s2);
+            Log.i("addRow",s1+ " " +  s2 +  " " + String.valueOf((s2!="\n"))+ " s2 len:" + s2.length());
             TableRow row1 = new TableRow(getContext());
             row1.setLayoutParams(lp);
             row1.setMinimumHeight(a);
