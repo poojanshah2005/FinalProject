@@ -23,6 +23,7 @@ import com.example.shahp.finalproject.MVP.IMusicListView;
 import com.example.shahp.finalproject.MVP.Interactor.InteractorImpl;
 import com.example.shahp.finalproject.Models.categoryList.Category;
 import com.example.shahp.finalproject.Models.categoryList.CategoryResults;
+import com.example.shahp.finalproject.Models.drinkResult.DrinkResult;
 import com.example.shahp.finalproject.Models.drinksResult.Drink;
 import com.example.shahp.finalproject.Models.drinksResult.DrinksResult;
 import com.example.shahp.finalproject.Models.glassList.Glass;
@@ -36,13 +37,16 @@ import java.util.ArrayList;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, IMusicListView {
 
     Menu menu;
-    InteractorImpl interactor_;
+    static InteractorImpl interactor_ = new InteractorImpl();
     static IMusicListPresenter iMusicListPresenter;
     IMusicListView iMusicListView;
     android.support.v4.app.FragmentManager fragmentManager;
@@ -184,22 +188,24 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-//        int id = item.getItemId();
+        /*
+Handle navigation view item clicks here.
+int id = item.getItemId();
 
-//        if (id == R.id.nav_camera) {
-//            // Handle the camera action
-//        } else if (id == R.id.nav_gallery) {
-//
-//        } else if (id == R.id.nav_slideshow) {
-//
-//        } else if (id == R.id.nav_manage) {
-//
-//        } else if (id == R.id.nav_share) {
-//
-//        } else if (id == R.id.nav_send) {
-//
-//        }
+if (id == R.id.nav_camera) {
+// Handle the camera action
+} else if (id == R.id.nav_gallery) {
+
+} else if (id == R.id.nav_slideshow) {
+
+} else if (id == R.id.nav_manage) {
+
+} else if (id == R.id.nav_share) {
+
+} else if (id == R.id.nav_send) {
+
+}
+*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -226,5 +232,20 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onFetchDataInProgress() {
         Log.i("ClassTrack","onFetchDataInProgress");
+    }
+
+    public static void displayDrink(String idDrink) {
+        interactor_.getDrinkById(idDrink).enqueue(new Callback<DrinkResult>() {
+            @Override
+            public void onResponse(Call<DrinkResult> call, Response<DrinkResult> response) {
+                DrinkResult drinkResult = response.body();
+                Log.i("",drinkResult.getDrinks().get(0).getStrDrink());
+            }
+
+            @Override
+            public void onFailure(Call<DrinkResult> call, Throwable t) {
+
+            }
+        });
     }
 }

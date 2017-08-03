@@ -1,6 +1,7 @@
 package com.example.shahp.finalproject.Adapters;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.shahp.finalproject.MainActivity;
 import com.example.shahp.finalproject.Models.drinksResult.DrinksResult;
 import com.example.shahp.finalproject.R;
 import com.squareup.picasso.Picasso;
@@ -50,6 +52,13 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.MyViewHolder
             Log.i("Error", e.getMessage());
             Log.i("Error", String.valueOf(e.getCause()));
         }
+        holder.drinkCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("drinkID",drinksResult.getDrinks().get(position).getIdDrink().toString());
+                MainActivity.displayDrink(drinksResult.getDrinks().get(position).getIdDrink());
+            }
+        });
     }
 
     @Override
@@ -60,10 +69,12 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.MyViewHolder
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tvDrink;
         ImageView ivDrinkThumb;
+        CardView drinkCard;
         public MyViewHolder(View v) {
             super(v);
             tvDrink = (TextView) v.findViewById(R.id.tvDrink);
             ivDrinkThumb = (ImageView) v.findViewById(R.id.ivDrinkThumb);
+            drinkCard = (CardView) v.findViewById(R.id.drinkCard);
         }
     }
 }

@@ -1,11 +1,13 @@
 package com.example.shahp.finalproject.Service;
 
 import com.example.shahp.finalproject.Models.categoryList.CategoryResults;
+import com.example.shahp.finalproject.Models.drinkResult.DrinkResult;
 import com.example.shahp.finalproject.Models.drinksResult.DrinksResult;
 import com.example.shahp.finalproject.Models.glassList.GlassResults;
 import com.example.shahp.finalproject.Models.ingredientResults.IngredientResults;
 
 import io.reactivex.Observable;
+import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
@@ -23,6 +25,8 @@ public interface RequestInterface {
     Observable<IngredientResults> getIngredientList();
     @GET(Consts.BY_CATEOGY)
     Observable<DrinksResult> getByCategory(@Query("c") String category);
+    @GET(Consts.BY_ID)
+    Call<DrinkResult> getDrinkById(@Query("i") String id);
 //    http://www.thecocktaildb.com/api/json/v1/1/list.php?c=list
 //    http://www.thecocktaildb.com/api/json/v1/1/list.php?g=list
 //    http://www.thecocktaildb.com/api/json/v1/1/list.php?i=list

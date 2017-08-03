@@ -1,6 +1,7 @@
 package com.example.shahp.finalproject.MVP.Interactor;
 
 import com.example.shahp.finalproject.Models.categoryList.CategoryResults;
+import com.example.shahp.finalproject.Models.drinkResult.DrinkResult;
 import com.example.shahp.finalproject.Models.drinksResult.DrinksResult;
 import com.example.shahp.finalproject.Models.glassList.GlassResults;
 import com.example.shahp.finalproject.Models.ingredientResults.IngredientResults;
@@ -11,6 +12,7 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import io.reactivex.Observable;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -64,5 +66,10 @@ public class InteractorImpl implements  Interactor {
     @Override
     public Observable<DrinksResult> getByCategory(String category) {
         return requestInterface.getByCategory(category);
+    }
+
+    @Override
+    public Call<DrinkResult> getDrinkById(String id) {
+        return requestInterface.getDrinkById(id);
     }
 }

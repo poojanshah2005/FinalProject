@@ -9,12 +9,12 @@
     android:maxHeight="150dp">
 
     <android.support.v7.widget.CardView
+        android:id="@+id/drinkCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/colorPrimary"
         app:cardCornerRadius="14dp"
-        app:cardElevation="0dp"
-        app:contentPadding="5dp">
+        app:cardElevation="0dp">
 
 
             <ImageView
