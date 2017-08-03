@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.shahp.finalproject.Fragment.DisplayDrinkFragment;
 import com.example.shahp.finalproject.Fragment.DrinksFragment;
 import com.example.shahp.finalproject.MVP.DisplayDrinks;
 import com.example.shahp.finalproject.MVP.IMusicListPresenter;
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity
     static InteractorImpl interactor_ = new InteractorImpl();
     static IMusicListPresenter iMusicListPresenter;
     IMusicListView iMusicListView;
-    android.support.v4.app.FragmentManager fragmentManager;
+    static android.support.v4.app.FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -240,6 +241,16 @@ if (id == R.id.nav_camera) {
             public void onResponse(Call<DrinkResult> call, Response<DrinkResult> response) {
                 DrinkResult drinkResult = response.body();
                 Log.i("",drinkResult.getDrinks().get(0).getStrDrink());
+                if(drinkResult.getDrinks().size() > 0) {
+                    com.example.shahp.finalproject.Models.drinkResult.Drink drink = drinkResult.getDrinks().get(0);
+                    Bundle args = new Bundle();
+                    args.putParcelable("drink", drink);
+                    DisplayDrinkFragment displayDrinkFragment = new DisplayDrinkFragment();
+                    displayDrinkFragment.setArguments(args);
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.content_main, displayDrinkFragment)
+                            .commit();
+                }
             }
 
             @Override
@@ -248,4 +259,19 @@ if (id == R.id.nav_camera) {
             }
         });
     }
+
+//    private void onDisplayCategoryListSuccess(DrinksResult drinksResult) {
+//        Bundle args = new Bundle();
+//        args.putParcelable("drinksResult", drinksResult);
+//        DrinksFragment drinksFragment = new DrinksFragment ();
+//        drinksFragment.onAttach(MainActivity.this);
+//        drinksFragment.setArguments(args);
+//        fragmentManager.beginTransaction()
+//                .replace(R.id.content_main, drinksFragment)
+//                .addToBackStack(drinksFragment.getClass().getName())
+//                .commit();
+////        for(Drink drink: drinksResult.getDrinks()){
+////            Log.i("drinksResultList", drink.getStrDrink() + " " + drink.getStrDrinkThumb().toString());
+////        }
+//    }
 }
