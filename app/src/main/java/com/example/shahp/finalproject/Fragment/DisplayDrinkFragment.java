@@ -82,61 +82,69 @@ public class DisplayDrinkFragment extends Fragment {
 
         TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
         int a = 35;
+
+
+        TableRow row4= new TableRow(getContext());
+        row4.setLayoutParams(lp);
+        row4.setMinimumHeight(a);
+
+
+        TableRow row5= new TableRow(getContext());
+        row5.setLayoutParams(lp);
+        row5.setMinimumHeight(a);
+
+
+
+        TableRow row6= new TableRow(getContext());
+        row6.setLayoutParams(lp);
+        row6.setMinimumHeight(a);
+
+
+        TableRow row7= new TableRow(getContext());
+        row7.setLayoutParams(lp);
+        row7.setMinimumHeight(a);
+
+
+        TableRow row8= new TableRow(getContext());
+        row8.setLayoutParams(lp);
+        row8.setMinimumHeight(a);
+
+
+        TableRow row9= new TableRow(getContext());
+        row9.setLayoutParams(lp);
+        row9.setMinimumHeight(a);
+
+
+        TableRow row10= new TableRow(getContext());
+        row10.setLayoutParams(lp);
+        row10.setMinimumHeight(a);
+
+
+        TableRow row11= new TableRow(getContext());
+        row11.setLayoutParams(lp);
+        row11.setMinimumHeight(a);
+
+
+        TableRow row12= new TableRow(getContext());
+        row12.setLayoutParams(lp);
+        row12.setMinimumHeight(a);
+
+
+        TableRow row13= new TableRow(getContext());
+        row13.setLayoutParams(lp);
+        row13.setMinimumHeight(a);
+
+
+        TableRow row14= new TableRow(getContext());
+        row14.setLayoutParams(lp);
+        row14.setMinimumHeight(a);
+
+
+
+
         TableRow row1= new TableRow(getContext());
         row1.setLayoutParams(lp);
         row1.setMinimumHeight(a);
-
-
-        TableRow row2= new TableRow(getContext());
-        TableRow row3= new TableRow(getContext());
-        TableRow row4= new TableRow(getContext());
-        TableRow row5= new TableRow(getContext());
-        TableRow row6= new TableRow(getContext());
-        TableRow row7= new TableRow(getContext());
-        TableRow row8= new TableRow(getContext());
-        TableRow row9= new TableRow(getContext());
-        TableRow row10= new TableRow(getContext());
-        TableRow row11= new TableRow(getContext());
-        TableRow row12= new TableRow(getContext());
-        TableRow row13= new TableRow(getContext());
-        TableRow row14= new TableRow(getContext());
-        TableRow row15= new TableRow(getContext());
-//
-//
-//
-//
-//
-//        row2.setLayoutParams(lp);
-//        row3.setLayoutParams(lp);
-//        row4.setLayoutParams(lp);
-//        row5.setLayoutParams(lp);
-//        row6.setLayoutParams(lp);
-//        row7.setLayoutParams(lp);
-//        row8.setLayoutParams(lp);
-//        row9.setLayoutParams(lp);
-//        row10.setLayoutParams(lp);
-//        row11.setLayoutParams(lp);
-//        row12.setLayoutParams(lp);
-//        row13.setLayoutParams(lp);
-//        row14.setLayoutParams(lp);
-//        row15.setLayoutParams(lp);
-//
-//        row2.setMinimumHeight(a);
-//        row3.setMinimumHeight(a);
-//        row4.setMinimumHeight(a);
-//        row5.setMinimumHeight(a);
-//        row6.setMinimumHeight(a);
-//        row7.setMinimumHeight(a);
-//        row8.setMinimumHeight(a);
-//        row9.setMinimumHeight(a);
-//        row10.setMinimumHeight(a);
-//        row11.setMinimumHeight(a);
-//        row12.setMinimumHeight(a);
-//        row13.setMinimumHeight(a);
-//        row14.setMinimumHeight(a);
-//        row15.setMinimumHeight(a);
-
-
         TextView tv1I = new TextView(getContext());
         TextView tv1Q = new TextView(getContext());
         tv1I.setText(drink.getStrIngredient1());
@@ -145,6 +153,9 @@ public class DisplayDrinkFragment extends Fragment {
         row1.addView(tv1Q);
         DrinkIngs.addView(row1);
 
+        TableRow row2= new TableRow(getContext());
+        row2.setLayoutParams(lp);
+        row2.setMinimumHeight(a);
         TextView tv2I = new TextView(getContext());
         TextView tv2Q = new TextView(getContext());
         tv2I.setText(drink.getStrIngredient2());
@@ -153,6 +164,9 @@ public class DisplayDrinkFragment extends Fragment {
         row2.addView(tv2Q);
         DrinkIngs.addView(row2);
 
+        TableRow row3= new TableRow(getContext());
+        row3.setLayoutParams(lp);
+        row3.setMinimumHeight(a);
         TextView tv3I = new TextView(getContext());
         TextView tv3Q = new TextView(getContext());
         tv3I.setText(drink.getStrIngredient3());
@@ -163,7 +177,6 @@ public class DisplayDrinkFragment extends Fragment {
 
         TextView tv4I = new TextView(getContext());
         TextView tv4Q = new TextView(getContext());
-
         tv4I.setText(drink.getStrIngredient4());
         tv4Q.setText(drink.getStrMeasure4());
         row4.addView(tv4I);
@@ -263,6 +276,10 @@ public class DisplayDrinkFragment extends Fragment {
         row14.addView(tv14Q);
         DrinkIngs.addView(row14);
 
+
+        TableRow row15= new TableRow(getContext());
+        row15.setLayoutParams(lp);
+        row15.setMinimumHeight(a);
         TextView tv15I = new TextView(getContext());
         TextView tv15Q = new TextView(getContext());
         tv15I.setText(drink.getStrIngredient15());
