@@ -34,6 +34,7 @@ public class DisplayDrinkFragment extends Fragment {
     TextView tvCatergories;
     TextView tvAlc;
     int a = 35;
+    TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
 
 
     public DisplayDrinkFragment() {
@@ -81,28 +82,8 @@ public class DisplayDrinkFragment extends Fragment {
         tvAlc.setText("Alcoholic: " + drink.getStrAlcoholic());
         tvInstructions.setText("Instructions: " + drink.getStrInstructions());
 
-        TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
 
-
-
-
-
-
-        addRow(lp,drink.getStrIngredient1(), drink.getStrMeasure1());
-        addRow(lp,drink.getStrIngredient2(), drink.getStrMeasure2());
-        addRow(lp,drink.getStrIngredient3(), drink.getStrMeasure3());
-        addRow(lp,drink.getStrIngredient4(), drink.getStrMeasure4());
-        addRow(lp,drink.getStrIngredient5(), drink.getStrMeasure5());
-        addRow(lp,drink.getStrIngredient6(), drink.getStrMeasure6());
-        addRow(lp,drink.getStrIngredient7(), drink.getStrMeasure7());
-        addRow(lp,drink.getStrIngredient8(), drink.getStrMeasure8());
-        addRow(lp,drink.getStrIngredient9(), drink.getStrMeasure9());
-        addRow(lp,drink.getStrIngredient10(), drink.getStrMeasure10());
-        addRow(lp,drink.getStrIngredient11(), drink.getStrMeasure11());
-        addRow(lp,drink.getStrIngredient12(), drink.getStrMeasure12());
-        addRow(lp,drink.getStrIngredient13(), drink.getStrMeasure13());
-        addRow(lp,drink.getStrIngredient14(), drink.getStrMeasure14());
-        addRow(lp,drink.getStrIngredient15(), drink.getStrMeasure15());
+        initRows();
 
 
         try {
@@ -121,19 +102,36 @@ public class DisplayDrinkFragment extends Fragment {
         }
     }
 
-    private void addRow(TableRow.LayoutParams lp, String s1, String s2) {
-        if(s1.length()> 1) {
+    private void initRows() {
+        addRow(drink.getStrIngredient1(), drink.getStrMeasure1());
+        addRow(drink.getStrIngredient2(), drink.getStrMeasure2());
+        addRow(drink.getStrIngredient3(), drink.getStrMeasure3());
+        addRow(drink.getStrIngredient4(), drink.getStrMeasure4());
+        addRow(drink.getStrIngredient5(), drink.getStrMeasure5());
+        addRow(drink.getStrIngredient6(), drink.getStrMeasure6());
+        addRow(drink.getStrIngredient7(), drink.getStrMeasure7());
+        addRow(drink.getStrIngredient8(), drink.getStrMeasure8());
+        addRow(drink.getStrIngredient9(), drink.getStrMeasure9());
+        addRow(drink.getStrIngredient10(), drink.getStrMeasure10());
+        addRow(drink.getStrIngredient11(), drink.getStrMeasure11());
+        addRow(drink.getStrIngredient12(), drink.getStrMeasure12());
+        addRow(drink.getStrIngredient13(), drink.getStrMeasure13());
+        addRow(drink.getStrIngredient14(), drink.getStrMeasure14());
+        addRow(drink.getStrIngredient15(), drink.getStrMeasure15());
+    }
+
+    private void addRow(String ingredient, String measurement) {
+        if(ingredient.length()> 1) {
+            TableRow row = new TableRow(getContext());
             TextView tv1I = new TextView(getContext());
             TextView tv1Q = new TextView(getContext());
-            tv1I.setText(s1);
-            if(s2.length()>1)tv1Q.setText(s2);
-            Log.i("addRow",s1+ " " +  s2 +  " " + String.valueOf((s2!="\n"))+ " s2 len:" + s2.length());
-            TableRow row1 = new TableRow(getContext());
-            row1.setLayoutParams(lp);
-            row1.setMinimumHeight(a);
-            row1.addView(tv1I);
-            row1.addView(tv1Q);
-            DrinkIngs.addView(row1);
+            tv1I.setText(ingredient);
+            if (measurement.length() > 1) tv1Q.setText(measurement);
+            row.setLayoutParams(lp);
+            row.setMinimumHeight(a);
+            row.addView(tv1I);
+            row.addView(tv1Q);
+            DrinkIngs.addView(row);
         }
     }
 
