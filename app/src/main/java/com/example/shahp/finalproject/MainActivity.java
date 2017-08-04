@@ -262,7 +262,7 @@ if (id == R.id.nav_camera) {
     }
 
     public static void displayDrinkByIngredient(String ingredient) {
-        interactor_.getByIngredient(ingredient).enqueue(new Callback<DrinksResult>() {
+        interactor_.getCallByIngredient(ingredient).enqueue(new Callback<DrinksResult>() {
             @Override
             public void onResponse(Call<DrinksResult> call, Response<DrinksResult> response) {
                 DrinksResult drinkResult = response.body();
