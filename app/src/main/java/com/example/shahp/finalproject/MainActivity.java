@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.crashlytics.android.answers.Answers;
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, IMusicListView {
 
     Menu menu;
+    ProgressBar progressBar;
     static InteractorImpl interactor_ = new InteractorImpl();
     static IMusicListPresenter iMusicListPresenter;
     IMusicListView iMusicListView;
@@ -61,6 +63,8 @@ public class MainActivity extends AppCompatActivity
         this.iMusicListView = this;
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar2);
+        progressBar.setVisibility(View.VISIBLE);
         setSupportActionBar(toolbar);
         fragmentManager = getSupportFragmentManager();
         interactor_ = new InteractorImpl();
@@ -106,9 +110,15 @@ public class MainActivity extends AppCompatActivity
 
     private void onSuccessgGetCategoryList(CategoryResults categoryResults) {
 
+        progressBar.setVisibility(View.VISIBLE);
+
         SubMenu CategoriesMenu = menu.addSubMenu("Categories");
 
+        progressBar.setMax(categoryResults.getCategories().size());
+        int i = 0;
+
         for(Category c: categoryResults.getCategories()){
+            progressBar.setProgress(i++);
             CategoriesMenu.add(c.getStrCategory()).setIcon(R.drawable.ic_local_drink_48px).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem menuItem) {
@@ -124,6 +134,8 @@ public class MainActivity extends AppCompatActivity
                 }
             });
         }
+
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     private void onDisplayCategoryList(String strCategory) {
@@ -154,6 +166,7 @@ public class MainActivity extends AppCompatActivity
 
     private void OnError(Throwable throwable) {
         Log.i("OnError", throwable.getMessage());
+        progressBar.setVisibility(View.INVISIBLE);
     }
     
 
