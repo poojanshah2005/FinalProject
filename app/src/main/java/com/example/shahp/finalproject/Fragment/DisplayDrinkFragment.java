@@ -79,8 +79,26 @@ public class DisplayDrinkFragment extends Fragment {
         tvDrinkName.setText("Drink Name: "+ drink.getStrDrink());
 //        DrinkIngs
         tvGlass.setText("Glass: " + drink.getStrGlass());
+        tvGlass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.displayDrinkByGlass(drink.getStrGlass());
+            }
+        });
         tvCatergories.setText("Category: " +drink.getStrCategory());
+        tvCatergories.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.displayDrinkByCategory(drink.getStrCategory());
+            }
+        });
         tvAlc.setText("Alcoholic: " + drink.getStrAlcoholic());
+        tvAlc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.displayDrinkByAlcoholic(drink.getStrAlcoholic());
+            }
+        });
         tvInstructions.setText("Instructions: " + drink.getStrInstructions());
 
 

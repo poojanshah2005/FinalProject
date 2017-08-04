@@ -284,26 +284,52 @@ if (id == R.id.nav_camera) {
     }
 
     public static void displayDrinkByIngredient(String ingredient) {
-        interactor_.getCallByIngredient(ingredient).enqueue(new Callback<DrinksResult>() {
-            @Override
-            public void onResponse(Call<DrinksResult> call, Response<DrinksResult> response) {
-                DrinksResult drinkResult = response.body();
-                if(drinkResult.getDrinks().size() > 0) {
-                    Bundle args = new Bundle();
-                    args.putParcelable("drinksResult", drinkResult);
-                    DrinksFragment displayDrinkFragment = new DrinksFragment();
-                    displayDrinkFragment.setArguments(args);
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.content_main, displayDrinkFragment)
-                            .commit();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<DrinksResult> call, Throwable t) {
-                Log.i("Onfailure",t.getMessage());
-            }
-        });
+        Log.i("DISPLAYDRINKS",ingredient);
+        Answers.getInstance().logCustom(new CustomEvent("displayDrinkByIngredient")
+                .putCustomAttribute("Ingredient", ingredient));
+        interactor_.getCallByIngredient(ingredient).enqueue(drinksResultCall);
     }
+
+    public static void displayDrinkByAlcoholic(String alcoholic) {
+        Log.i("DISPLAYDRINKS",alcoholic);
+        Answers.getInstance().logCustom(new CustomEvent("displayDrinkByAlcoholic")
+                .putCustomAttribute("Alcoholic", alcoholic));
+        interactor_.getCallByAlcoholic(alcoholic).enqueue(drinksResultCall);
+    }
+
+    public static void displayDrinkByCategory(String category) {
+        Log.i("DISPLAYDRINKS",category);
+        Answers.getInstance().logCustom(new CustomEvent("displayDrinkByCategory")
+                .putCustomAttribute("Category", category));
+        interactor_.getCallByCategory(category).enqueue(drinksResultCall);
+    }
+
+    public static void displayDrinkByGlass(String glass) {
+        Log.i("DISPLAYDRINKS",glass);
+        Answers.getInstance().logCustom(new CustomEvent("displayDrinkByGlass")
+                .putCustomAttribute("Glass", glass));
+        interactor_.getCallByGlass(glass).enqueue(drinksResultCall);
+    }
+
+    static Callback<DrinksResult> drinksResultCall = new Callback<DrinksResult>() {
+        @Override
+        public void onResponse(Call<DrinksResult> call, Response<DrinksResult> response) {
+            DrinksResult drinkResult = response.body();
+            if(drinkResult.getDrinks().size() > 0) {
+                Bundle args = new Bundle();
+                args.putParcelable("drinksResult", drinkResult);
+                DrinksFragment displayDrinkFragment = new DrinksFragment();
+                displayDrinkFragment.setArguments(args);
+                fragmentManager.beginTransaction()
+                        .replace(R.id.content_main, displayDrinkFragment)
+                        .commit();
+            }
+        }
+
+        @Override
+        public void onFailure(Call<DrinksResult> call, Throwable t) {
+            Log.i("Onfailure",t.getMessage());
+        }
+    };
 
 }
