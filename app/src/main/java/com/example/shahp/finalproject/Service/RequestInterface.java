@@ -23,16 +23,16 @@ public interface RequestInterface {
     Observable<GlassResults> getGlassList();
     @GET(Consts.IngredientList)
     Observable<IngredientResults> getIngredientList();
-    @GET(Consts.BY_CATEOGY)
+    @GET(Consts.FILTER)
     Observable<DrinksResult> getByCategory(@Query("c") String category);
     @GET(Consts.FILTER)
-    Call<DrinksResult> getByIngredient(@Query("i") String category);
-
-
+    Call<DrinksResult> getCallByCategory(@Query("c") String category);
+    @GET(Consts.FILTER)
+    Call<DrinksResult> getCallByIngredient(@Query("i") String ingredient);
+    @GET(Consts.FILTER)
+    Call<DrinksResult> getCallByAlcoholic(@Query("a") String alcoholic);
+    @GET(Consts.FILTER)
+    Call<DrinksResult> getCallByGlass(@Query("g") String glass);
     @GET(Consts.BY_ID)
     Call<DrinkResult> getDrinkById(@Query("i") String id);
-//    http://www.thecocktaildb.com/api/json/v1/1/list.php?c=list
-//    http://www.thecocktaildb.com/api/json/v1/1/list.php?g=list
-//    http://www.thecocktaildb.com/api/json/v1/1/list.php?i=list
-//    http://www.thecocktaildb.com/api/json/v1/1/list.php?a=list
 }
