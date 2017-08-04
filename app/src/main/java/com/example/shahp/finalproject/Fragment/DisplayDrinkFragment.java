@@ -14,6 +14,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.example.shahp.finalproject.MainActivity;
 import com.example.shahp.finalproject.Models.drinksResult.Drink;
 import com.example.shahp.finalproject.R;
 import com.squareup.picasso.Picasso;
@@ -132,6 +133,15 @@ public class DisplayDrinkFragment extends Fragment {
             row.addView(tv1I);
             row.addView(tv1Q);
             DrinkIngs.addView(row);
+            row.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    TableRow t = (TableRow) view;
+                    TextView firstTextView = (TextView) t.getChildAt(0);
+                    String Ingredient = firstTextView.getText().toString();
+                    MainActivity.displayDrinkByIngredient(Ingredient);
+                }
+            });
         }
     }
 

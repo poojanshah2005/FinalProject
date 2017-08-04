@@ -19,4 +19,5 @@ public interface Interactor {
     Observable<IngredientResults> getIngredientList();
     Observable<DrinksResult> getByCategory(String category);
     Call<DrinkResult> getDrinkById(String id);
+    Call<DrinksResult>getByIngredient(String ingredient);
 }

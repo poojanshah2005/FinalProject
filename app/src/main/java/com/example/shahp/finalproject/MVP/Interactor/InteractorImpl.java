@@ -72,4 +72,9 @@ public class InteractorImpl implements  Interactor {
     public Call<DrinkResult> getDrinkById(String id) {
         return requestInterface.getDrinkById(id);
     }
+
+    @Override
+    public Call<DrinksResult> getByIngredient(String ingredient) {
+        return requestInterface.getByIngredient(ingredient);
+    }
 }

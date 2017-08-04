@@ -34,6 +34,7 @@ import com.example.shahp.finalproject.Models.ingredientResults.IngredientResults
 import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
@@ -127,6 +128,8 @@ public class MainActivity extends AppCompatActivity
                         .subscribe(MainActivity.this::onDisplayCategoryListSuccess, MainActivity.this::OnError);
     }
 
+
+
     private void displayResults(String value) {
         iMusicListPresenter.attachView(iMusicListView);
         iMusicListPresenter.performListDisplay(value);
@@ -143,9 +146,6 @@ public class MainActivity extends AppCompatActivity
                 .replace(R.id.content_main, drinksFragment)
                 .addToBackStack(drinksFragment.getClass().getName())
                 .commit();
-//        for(Drink drink: drinksResult.getDrinks()){
-//            Log.i("drinksResultList", drink.getStrDrink() + " " + drink.getStrDrinkThumb().toString());
-//        }
     }
 
     private void OnError(Throwable throwable) {
@@ -255,23 +255,33 @@ if (id == R.id.nav_camera) {
 
             @Override
             public void onFailure(Call<DrinkResult> call, Throwable t) {
+                Log.i("Onfailure",t.getMessage());
 
             }
         });
     }
 
-//    private void onDisplayCategoryListSuccess(DrinksResult drinksResult) {
-//        Bundle args = new Bundle();
-//        args.putParcelable("drinksResult", drinksResult);
-//        DrinksFragment drinksFragment = new DrinksFragment ();
-//        drinksFragment.onAttach(MainActivity.this);
-//        drinksFragment.setArguments(args);
-//        fragmentManager.beginTransaction()
-//                .replace(R.id.content_main, drinksFragment)
-//                .addToBackStack(drinksFragment.getClass().getName())
-//                .commit();
-////        for(Drink drink: drinksResult.getDrinks()){
-////            Log.i("drinksResultList", drink.getStrDrink() + " " + drink.getStrDrinkThumb().toString());
-////        }
-//    }
+    public static void displayDrinkByIngredient(String ingredient) {
+        interactor_.getByIngredient(ingredient).enqueue(new Callback<DrinksResult>() {
+            @Override
+            public void onResponse(Call<DrinksResult> call, Response<DrinksResult> response) {
+                DrinksResult drinkResult = response.body();
+                if(drinkResult.getDrinks().size() > 0) {
+                    Bundle args = new Bundle();
+                    args.putParcelable("drinksResult", drinkResult);
+                    DrinksFragment displayDrinkFragment = new DrinksFragment();
+                    displayDrinkFragment.setArguments(args);
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.content_main, displayDrinkFragment)
+                            .commit();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DrinksResult> call, Throwable t) {
+                Log.i("Onfailure",t.getMessage());
+            }
+        });
+    }
+
 }

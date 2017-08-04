@@ -25,6 +25,10 @@ public interface RequestInterface {
     Observable<IngredientResults> getIngredientList();
     @GET(Consts.BY_CATEOGY)
     Observable<DrinksResult> getByCategory(@Query("c") String category);
+    @GET(Consts.FILTER)
+    Call<DrinksResult> getByIngredient(@Query("i") String category);
+
+
     @GET(Consts.BY_ID)
     Call<DrinkResult> getDrinkById(@Query("i") String id);
 //    http://www.thecocktaildb.com/api/json/v1/1/list.php?c=list
