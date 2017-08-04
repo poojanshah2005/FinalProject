@@ -115,10 +115,13 @@ public class MainActivity extends AppCompatActivity
         SubMenu CategoriesMenu = menu.addSubMenu("Categories");
 
         progressBar.setMax(categoryResults.getCategories().size());
-        int i = 0;
+        int i = 1;
 
         for(Category c: categoryResults.getCategories()){
-            progressBar.setProgress(i++);
+            progressBar.setProgress(i);
+            progressBar.setSecondaryProgress(i);
+            i++;
+            Log.i("Progress", String.valueOf(progressBar.getProgress()) + "/ " + progressBar.getMax());
             CategoriesMenu.add(c.getStrCategory()).setIcon(R.drawable.ic_local_drink_48px).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem menuItem) {
