@@ -16,6 +16,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.CustomEvent;
 import com.example.shahp.finalproject.Fragment.DisplayDrinkFragment;
 import com.example.shahp.finalproject.Fragment.DrinksFragment;
 import com.example.shahp.finalproject.MVP.DisplayDrinks;
@@ -111,6 +113,8 @@ public class MainActivity extends AppCompatActivity
                 @Override
                 public boolean onMenuItemClick(MenuItem menuItem) {
                     displayResults(c.getStrCategory());
+                    Answers.getInstance().logCustom(new CustomEvent("Category Selected")
+                            .putCustomAttribute("Drink", c.getStrCategory()));
 //                    interactor_.getByCategory(c.getStrCategory())
 //                            .observeOn(AndroidSchedulers.mainThread())
 //                            .subscribeOn(Schedulers.newThread())
@@ -243,6 +247,8 @@ if (id == R.id.nav_camera) {
                 Log.i("",drinkResult.getDrinks().get(0).getStrDrink());
                 if(drinkResult.getDrinks().size() > 0) {
                     com.example.shahp.finalproject.Models.drinkResult.Drink drink = drinkResult.getDrinks().get(0);
+                    Answers.getInstance().logCustom(new CustomEvent("Displaying Drink")
+                            .putCustomAttribute("Drink", drink.getStrDrink()));
                     Bundle args = new Bundle();
                     args.putParcelable("drink", drink);
                     DisplayDrinkFragment displayDrinkFragment = new DisplayDrinkFragment();
