@@ -121,9 +121,9 @@ public class MainActivity extends AppCompatActivity
     private void onSuccessgGetIngredientList(IngredientResults ingredientResults) {
         progressBar.setVisibility(View.VISIBLE);
 
-        SubMenu categoriesMenu = menu.addSubMenu("Ingredients");
+        SubMenu ingredientMenu = menu.addSubMenu("Ingredients");
 
-        categoriesMenu.setHeaderTitle("Ingredients");
+        ingredientMenu.setHeaderTitle("Ingredients");
 
         progressBar.setMax(ingredientResults.getDrinks().size());
         int i = 1;
@@ -133,17 +133,13 @@ public class MainActivity extends AppCompatActivity
             progressBar.setProgress(i);
             progressBar.setSecondaryProgress(i);
             i++;
-            categoriesMenu.add(ingredient.getStrIngredient1()).setIcon(R.drawable.ic_local_drink_48px).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            ingredientMenu.add(ingredient.getStrIngredient1()).setIcon(R.drawable.ic_local_drink_48px).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem menuItem) {
                     displayResults(ingredient.getStrIngredient1());
 
                     Answers.getInstance().logCustom(new CustomEvent("Ingredient Selected")
                             .putCustomAttribute("Ingredient",ingredient.getStrIngredient1()));
-//                    interactor_.getByCategory(c.getStrCategory())
-//                            .observeOn(AndroidSchedulers.mainThread())
-//                            .subscribeOn(Schedulers.newThread())
-//                        .subscribe(MainActivity.this::onDisplayCategoryListSuccess, MainActivity.this::OnError);
                     displayDrinkByIngredient(ingredient.getStrIngredient1());
                     return false;
                 }
@@ -156,9 +152,9 @@ public class MainActivity extends AppCompatActivity
     private void onSuccessgGetGlassList(GlassResults glassResults) {
         progressBar.setVisibility(View.VISIBLE);
 
-        SubMenu categoriesMenu = menu.addSubMenu("Glass");
+        SubMenu glassMenu = menu.addSubMenu("Glass");
 
-        categoriesMenu.setHeaderTitle("Glass");
+        glassMenu.setHeaderTitle("Glass");
 
         progressBar.setMax(glassResults.getGlass().size());
         int i = 1;
@@ -168,7 +164,7 @@ public class MainActivity extends AppCompatActivity
             progressBar.setProgress(i);
             progressBar.setSecondaryProgress(i);
             i++;
-            categoriesMenu.add(g.getStrGlass()).setIcon(R.drawable.ic_local_drink_48px).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            glassMenu.add(g.getStrGlass()).setIcon(R.drawable.ic_local_drink_48px).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem menuItem) {
                     displayResults(g.getStrGlass());
@@ -191,9 +187,9 @@ public class MainActivity extends AppCompatActivity
     private void onSuccessgGetAlcoholicList(AlcoholicResult alcoholicResult) {
         progressBar.setVisibility(View.VISIBLE);
 
-        SubMenu categoriesMenu = menu.addSubMenu("Alcoholic");
+        SubMenu alcoholicMenu = menu.addSubMenu("Alcoholic");
 
-        categoriesMenu.setHeaderTitle("Alcoholic");
+        alcoholicMenu.setHeaderTitle("Alcoholic");
 
         progressBar.setMax(alcoholicResult.getAlcoholics().size());
         int i = 1;
@@ -203,7 +199,7 @@ public class MainActivity extends AppCompatActivity
             progressBar.setProgress(i);
             progressBar.setSecondaryProgress(i);
             i++;
-            categoriesMenu.add(a.getStrAlcoholic()).setIcon(R.drawable.ic_local_drink_48px).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            alcoholicMenu.add(a.getStrAlcoholic()).setIcon(R.drawable.ic_local_drink_48px).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem menuItem) {
                     displayResults(a.getStrAlcoholic());
