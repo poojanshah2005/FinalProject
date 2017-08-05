@@ -2,20 +2,19 @@ package com.example.shahp.finalproject;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.util.Log;
-import android.view.SubMenu;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SubMenu;
+import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.CustomEvent;
@@ -30,20 +29,13 @@ import com.example.shahp.finalproject.Models.AlcoholicResult.AlcoholicResult;
 import com.example.shahp.finalproject.Models.categoryList.Category;
 import com.example.shahp.finalproject.Models.categoryList.CategoryResults;
 import com.example.shahp.finalproject.Models.drinkResult.DrinkResult;
-import com.example.shahp.finalproject.Models.drinksResult.Drink;
 import com.example.shahp.finalproject.Models.drinksResult.DrinksResult;
 import com.example.shahp.finalproject.Models.glassList.Glass;
 import com.example.shahp.finalproject.Models.glassList.GlassResults;
 import com.example.shahp.finalproject.Models.ingredientResults.Ingredient;
 import com.example.shahp.finalproject.Models.ingredientResults.IngredientResults;
-import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork;
-import com.google.firebase.FirebaseApp;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -63,7 +55,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FirebaseApp.initializeApp(getApplicationContext());
+//        FirebaseApp.initializeApp(getApplicationContext());
         this.iMusicListView = this;
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
