@@ -1,5 +1,6 @@
 package com.example.shahp.finalproject.Service;
 
+import com.example.shahp.finalproject.Models.AlcoholicResult.AlcoholicResult;
 import com.example.shahp.finalproject.Models.categoryList.CategoryResults;
 import com.example.shahp.finalproject.Models.drinkResult.DrinkResult;
 import com.example.shahp.finalproject.Models.drinksResult.DrinksResult;
@@ -24,7 +25,7 @@ public interface RequestInterface {
     @GET(Consts.IngredientList)
     Observable<IngredientResults> getIngredientList();
     @GET(Consts.AlcoholicList)
-    Observable<IngredientResults> getAlcoholicList();
+    Observable<AlcoholicResult> getAlcoholicList();
     @GET(Consts.FILTER)
     Observable<DrinksResult> getByCategory(@Query("c") String category);
     @GET(Consts.FILTER)

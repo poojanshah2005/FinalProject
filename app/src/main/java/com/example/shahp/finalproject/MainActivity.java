@@ -25,6 +25,8 @@ import com.example.shahp.finalproject.MVP.DisplayDrinks;
 import com.example.shahp.finalproject.MVP.IMusicListPresenter;
 import com.example.shahp.finalproject.MVP.IMusicListView;
 import com.example.shahp.finalproject.MVP.Interactor.InteractorImpl;
+import com.example.shahp.finalproject.Models.AlcoholicResult.Alcoholic;
+import com.example.shahp.finalproject.Models.AlcoholicResult.AlcoholicResult;
 import com.example.shahp.finalproject.Models.categoryList.Category;
 import com.example.shahp.finalproject.Models.categoryList.CategoryResults;
 import com.example.shahp.finalproject.Models.drinkResult.DrinkResult;
@@ -77,6 +79,11 @@ public class MainActivity extends AppCompatActivity
                 .subscribeOn(Schedulers.newThread())
                 .subscribe(MainActivity.this::onSuccessgGetCategoryList, MainActivity.this::OnError);
 
+        interactor_.getAlcoholicList()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.newThread())
+                .subscribe(MainActivity.this::onSuccessgGetAlcoholicList, MainActivity.this::OnError);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +115,41 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    private void onSuccessgGetAlcoholicList(AlcoholicResult alcoholicResult) {
+        progressBar.setVisibility(View.VISIBLE);
+
+        SubMenu categoriesMenu = menu.addSubMenu("Alcoholic");
+
+        categoriesMenu.setHeaderTitle("Alcoholic");
+
+        progressBar.setMax(alcoholicResult.getAlcoholics().size());
+        int i = 1;
+
+        for(Alcoholic a: alcoholicResult.getAlcoholics()){
+            Log.i("alcoholicResult", a.getStrAlcoholic());
+            progressBar.setProgress(i);
+            progressBar.setSecondaryProgress(i);
+            i++;
+            categoriesMenu.add(a.getStrAlcoholic()).setIcon(R.drawable.ic_local_drink_48px).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem menuItem) {
+                    displayResults(a.getStrAlcoholic());
+
+                    Answers.getInstance().logCustom(new CustomEvent("Alcoholic Selected")
+                            .putCustomAttribute("Drink",a.getStrAlcoholic()));
+//                    interactor_.getByCategory(c.getStrCategory())
+//                            .observeOn(AndroidSchedulers.mainThread())
+//                            .subscribeOn(Schedulers.newThread())
+//                        .subscribe(MainActivity.this::onDisplayCategoryListSuccess, MainActivity.this::OnError);
+                    displayDrinkByAlcoholic(a.getStrAlcoholic());
+                    return false;
+                }
+            });
+        }
+
+        progressBar.setVisibility(View.INVISIBLE);
+    }
+
     private void onSuccessgGetCategoryList(CategoryResults categoryResults) {
 
         progressBar.setVisibility(View.VISIBLE);
@@ -123,7 +165,6 @@ public class MainActivity extends AppCompatActivity
             progressBar.setProgress(i);
             progressBar.setSecondaryProgress(i);
             i++;
-            Log.i("Progress", String.valueOf(progressBar.getProgress()) + "/ " + progressBar.getMax());
             categoriesMenu.add(c.getStrCategory()).setIcon(R.drawable.ic_local_drink_48px).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem menuItem) {

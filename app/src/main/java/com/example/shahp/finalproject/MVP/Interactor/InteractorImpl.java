@@ -1,5 +1,6 @@
 package com.example.shahp.finalproject.MVP.Interactor;
 
+import com.example.shahp.finalproject.Models.AlcoholicResult.AlcoholicResult;
 import com.example.shahp.finalproject.Models.categoryList.CategoryResults;
 import com.example.shahp.finalproject.Models.drinkResult.DrinkResult;
 import com.example.shahp.finalproject.Models.drinksResult.DrinksResult;
@@ -64,7 +65,7 @@ public class InteractorImpl implements  Interactor {
     }
 
     @Override
-    public Observable<IngredientResults> getAlcoholicList() {
+    public Observable<AlcoholicResult> getAlcoholicList() {
         return requestInterface.getAlcoholicList();
     }
 

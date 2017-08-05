@@ -1,5 +1,6 @@
 package com.example.shahp.finalproject.MVP.Interactor;
 
+import com.example.shahp.finalproject.Models.AlcoholicResult.AlcoholicResult;
 import com.example.shahp.finalproject.Models.categoryList.CategoryResults;
 import com.example.shahp.finalproject.Models.drinkResult.DrinkResult;
 import com.example.shahp.finalproject.Models.drinksResult.DrinksResult;
@@ -20,7 +21,7 @@ public interface Interactor {
     Observable<CategoryResults> getCategoryList();
     Observable<GlassResults> getGlassList();
     Observable<IngredientResults> getIngredientList();
-    Observable<IngredientResults>getAlcoholicList();
+    Observable<AlcoholicResult>getAlcoholicList();
     Observable<DrinksResult> getByCategory(String category);
     Call<DrinkResult> getDrinkById(String id);
     Call<DrinksResult> getCallByIngredient(String ingredient);
