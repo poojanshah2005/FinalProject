@@ -37,6 +37,7 @@ import com.example.shahp.finalproject.Models.glassList.GlassResults;
 import com.example.shahp.finalproject.Models.ingredientResults.Ingredient;
 import com.example.shahp.finalproject.Models.ingredientResults.IngredientResults;
 import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork;
+import com.google.firebase.FirebaseApp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseApp.initializeApp(getApplicationContext());
         this.iMusicListView = this;
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
