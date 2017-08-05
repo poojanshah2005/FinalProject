@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -77,9 +78,9 @@ public class DisplayDrinkFragment extends Fragment {
 
 
         tvDrinkName.setText("Drink Name: "+ drink.getStrDrink());
-        tvGlass.setText("Glass: " + drink.getStrGlass());
-        tvCatergories.setText("Category: " +drink.getStrCategory());
-        tvAlc.setText("Alcoholic: " + drink.getStrAlcoholic());
+        tvGlass.setText(Html.fromHtml("Glass: " +  "<u> " + drink.getStrGlass() + "</u>"));
+        tvCatergories.setText(Html.fromHtml("Category: " + "<u> " +drink.getStrCategory() + "</u>"));
+        tvAlc.setText(Html.fromHtml("Alcoholic: " + "<u> " + drink.getStrAlcoholic() + "</u>"));
         tvInstructions.setText("Instructions: " + drink.getStrInstructions());
 
         tvGlass.setOnClickListener(new View.OnClickListener() {
@@ -104,9 +105,9 @@ public class DisplayDrinkFragment extends Fragment {
         });
 
 
-        tvGlass.setPaintFlags(tvGlass.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        tvCatergories.setPaintFlags(tvCatergories.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        tvAlc.setPaintFlags(tvAlc.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+//        tvGlass.setPaintFlags(tvGlass.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+//        tvCatergories.setPaintFlags(tvCatergories.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+//        tvAlc.setPaintFlags(tvAlc.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         initRows();
 
