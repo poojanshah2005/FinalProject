@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:layout_gravity="center_vertical"
         android:padding="10dp">
 
         <TextView
@@ -28,19 +29,12 @@
         <TextView
             android:id="@+id/tvInstructions"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_height="wrap_content" />
 
         <TableLayout
             android:id="@+id/displayLinear"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-            <TableRow
-                android:id="@+id/tv1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </TableRow>
         </TableLayout>
 
         <TextView
