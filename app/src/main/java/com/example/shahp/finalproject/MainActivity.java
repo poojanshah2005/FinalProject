@@ -84,6 +84,16 @@ public class MainActivity extends AppCompatActivity
                 .subscribeOn(Schedulers.newThread())
                 .subscribe(MainActivity.this::onSuccessgGetAlcoholicList, MainActivity.this::OnError);
 
+        interactor_.getGlassList()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.newThread())
+                .subscribe(MainActivity.this::onSuccessgGetGlassList, MainActivity.this::OnError);
+
+        interactor_.getIngredientList()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.newThread())
+                .subscribe(MainActivity.this::onSuccessgGetIngredientList, MainActivity.this::OnError);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +125,76 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    private void onSuccessgGetIngredientList(IngredientResults ingredientResults) {
+        progressBar.setVisibility(View.VISIBLE);
+
+        SubMenu categoriesMenu = menu.addSubMenu("Ingredients");
+
+        categoriesMenu.setHeaderTitle("Ingredients");
+
+        progressBar.setMax(ingredientResults.getDrinks().size());
+        int i = 1;
+
+        for(Ingredient ingredient: ingredientResults.getDrinks()){
+            Log.i("alcoholicResult", ingredient.getStrIngredient1());
+            progressBar.setProgress(i);
+            progressBar.setSecondaryProgress(i);
+            i++;
+            categoriesMenu.add(ingredient.getStrIngredient1()).setIcon(R.drawable.ic_local_drink_48px).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem menuItem) {
+                    displayResults(ingredient.getStrIngredient1());
+
+                    Answers.getInstance().logCustom(new CustomEvent("Ingredient Selected")
+                            .putCustomAttribute("Ingredient",ingredient.getStrIngredient1()));
+//                    interactor_.getByCategory(c.getStrCategory())
+//                            .observeOn(AndroidSchedulers.mainThread())
+//                            .subscribeOn(Schedulers.newThread())
+//                        .subscribe(MainActivity.this::onDisplayCategoryListSuccess, MainActivity.this::OnError);
+                    displayDrinkByIngredient(ingredient.getStrIngredient1());
+                    return false;
+                }
+            });
+        }
+
+        progressBar.setVisibility(View.INVISIBLE);
+    }
+
+    private void onSuccessgGetGlassList(GlassResults glassResults) {
+        progressBar.setVisibility(View.VISIBLE);
+
+        SubMenu categoriesMenu = menu.addSubMenu("Glass");
+
+        categoriesMenu.setHeaderTitle("Glass");
+
+        progressBar.setMax(glassResults.getGlass().size());
+        int i = 1;
+
+        for(Glass g: glassResults.getGlass()){
+            Log.i("alcoholicResult", g.getStrGlass());
+            progressBar.setProgress(i);
+            progressBar.setSecondaryProgress(i);
+            i++;
+            categoriesMenu.add(g.getStrGlass()).setIcon(R.drawable.ic_local_drink_48px).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem menuItem) {
+                    displayResults(g.getStrGlass());
+
+                    Answers.getInstance().logCustom(new CustomEvent("Glass Selected")
+                            .putCustomAttribute("Glass",g.getStrGlass()));
+//                    interactor_.getByCategory(c.getStrCategory())
+//                            .observeOn(AndroidSchedulers.mainThread())
+//                            .subscribeOn(Schedulers.newThread())
+//                        .subscribe(MainActivity.this::onDisplayCategoryListSuccess, MainActivity.this::OnError);
+                    displayDrinkByGlass(g.getStrGlass());
+                    return false;
+                }
+            });
+        }
+
+        progressBar.setVisibility(View.INVISIBLE);
+    }
+
     private void onSuccessgGetAlcoholicList(AlcoholicResult alcoholicResult) {
         progressBar.setVisibility(View.VISIBLE);
 
@@ -136,7 +216,7 @@ public class MainActivity extends AppCompatActivity
                     displayResults(a.getStrAlcoholic());
 
                     Answers.getInstance().logCustom(new CustomEvent("Alcoholic Selected")
-                            .putCustomAttribute("Drink",a.getStrAlcoholic()));
+                            .putCustomAttribute("Alcoholic",a.getStrAlcoholic()));
 //                    interactor_.getByCategory(c.getStrCategory())
 //                            .observeOn(AndroidSchedulers.mainThread())
 //                            .subscribeOn(Schedulers.newThread())
@@ -170,7 +250,7 @@ public class MainActivity extends AppCompatActivity
                 public boolean onMenuItemClick(MenuItem menuItem) {
                     displayResults(c.getStrCategory());
                     Answers.getInstance().logCustom(new CustomEvent("Category Selected")
-                            .putCustomAttribute("Drink", c.getStrCategory()));
+                            .putCustomAttribute("Category", c.getStrCategory()));
 //                    interactor_.getByCategory(c.getStrCategory())
 //                            .observeOn(AndroidSchedulers.mainThread())
 //                            .subscribeOn(Schedulers.newThread())

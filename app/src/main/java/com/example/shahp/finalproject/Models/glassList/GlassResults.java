@@ -16,7 +16,7 @@ public class GlassResults implements Parcelable
 
     @SerializedName("drinks")
     @Expose
-    private List<Glass> drinks = null;
+    private List<Glass> glass = null;
     public final static Parcelable.Creator<GlassResults> CREATOR = new Creator<GlassResults>() {
 
 
@@ -25,7 +25,7 @@ public class GlassResults implements Parcelable
         })
         public GlassResults createFromParcel(Parcel in) {
             GlassResults instance = new GlassResults();
-            in.readList(instance.drinks, (Glass.class.getClassLoader()));
+            in.readList(instance.glass, (Glass.class.getClassLoader()));
             return instance;
         }
 
@@ -36,16 +36,16 @@ public class GlassResults implements Parcelable
     }
             ;
 
-    public List<Glass> getDrinks() {
-        return drinks;
+    public List<Glass> getGlass() {
+        return glass;
     }
 
-    public void setDrinks(List<Glass> drinks) {
-        this.drinks = drinks;
+    public void setGlass(List<Glass> drinks) {
+        this.glass = drinks;
     }
 
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeList(drinks);
+        dest.writeList(glass);
     }
 
     public int describeContents() {
