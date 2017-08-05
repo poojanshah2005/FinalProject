@@ -1,6 +1,7 @@
 package com.example.shahp.finalproject.Fragment;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -30,11 +31,8 @@ import com.squareup.picasso.Picasso;
 public class DisplayDrinkFragment extends Fragment {
     com.example.shahp.finalproject.Models.drinkResult.Drink drink;
     ImageView imDrink;
-    TextView tvDrinkName, tvInstructions;
+    TextView tvDrinkName, tvInstructions, tvGlass, tvCatergories, tvAlc;
     TableLayout DrinkIngs;
-    TextView tvGlass;
-    TextView tvCatergories;
-    TextView tvAlc;
     int a = 35;
     TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
 
@@ -69,42 +67,48 @@ public class DisplayDrinkFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        imDrink = (ImageView) view.findViewById(R.id.imDrink);
-        tvDrinkName = (TextView) view.findViewById(R.id.tvDrinkName);
-        DrinkIngs = (TableLayout) view.findViewById(R.id.displayLinear);
-        tvGlass = (TextView) view.findViewById(R.id.tvGlass);
-        tvCatergories = (TextView) view.findViewById(R.id.tvCatergories);
-        tvAlc = (TextView) view.findViewById(R.id.tvAlc);
-        tvInstructions = (TextView) view.findViewById(R.id.tvInstructions);
-        //        imDrink
+        imDrink =  view.findViewById(R.id.imDrink);
+        tvDrinkName =  view.findViewById(R.id.tvDrinkName);
+        DrinkIngs = view.findViewById(R.id.displayLinear);
+        tvGlass = view.findViewById(R.id.tvGlass);
+        tvCatergories =  view.findViewById(R.id.tvCatergories);
+        tvAlc =  view.findViewById(R.id.tvAlc);
+        tvInstructions =  view.findViewById(R.id.tvInstructions);
+
+
         tvDrinkName.setText("Drink Name: "+ drink.getStrDrink());
-//        DrinkIngs
         tvGlass.setText("Glass: " + drink.getStrGlass());
+        tvCatergories.setText("Category: " +drink.getStrCategory());
+        tvAlc.setText("Alcoholic: " + drink.getStrAlcoholic());
+        tvInstructions.setText("Instructions: " + drink.getStrInstructions());
+
         tvGlass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 MainActivity.displayDrinkByGlass(drink.getStrGlass());
             }
         });
-        tvCatergories.setText("Category: " +drink.getStrCategory());
+
         tvCatergories.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 MainActivity.displayDrinkByCategory(drink.getStrCategory());
             }
         });
-        tvAlc.setText("Alcoholic: " + drink.getStrAlcoholic());
+
         tvAlc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 MainActivity.displayDrinkByAlcoholic(drink.getStrAlcoholic());
             }
         });
-        tvInstructions.setText("Instructions: " + drink.getStrInstructions());
 
+
+        tvGlass.setPaintFlags(tvGlass.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        tvCatergories.setPaintFlags(tvCatergories.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        tvAlc.setPaintFlags(tvAlc.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         initRows();
-
 
         try {
             String imageLink = (String) drink.getStrDrinkThumb();
@@ -146,6 +150,7 @@ public class DisplayDrinkFragment extends Fragment {
             TextView tv1I = new TextView(getContext());
             TextView tv1Q = new TextView(getContext());
             tv1I.setText(ingredient);
+            tv1I.setPaintFlags(tv1I.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
             if (measurement.length() > 1) tv1Q.setText(measurement);
             row.setLayoutParams(lp);
             row.setMinimumHeight(a);
