@@ -64,6 +64,11 @@ public class InteractorImpl implements  Interactor {
     }
 
     @Override
+    public Observable<IngredientResults> getAlcoholicList() {
+        return requestInterface.getAlcoholicList();
+    }
+
+    @Override
     public Observable<DrinksResult> getByCategory(String category) {
         return requestInterface.getByCategory(category);
     }
