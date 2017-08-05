@@ -112,7 +112,9 @@ public class MainActivity extends AppCompatActivity
 
         progressBar.setVisibility(View.VISIBLE);
 
-        SubMenu CategoriesMenu = menu.addSubMenu("Categories");
+        SubMenu categoriesMenu = menu.addSubMenu("Categories");
+
+        categoriesMenu.setHeaderTitle("Categories");
 
         progressBar.setMax(categoryResults.getCategories().size());
         int i = 1;
@@ -122,7 +124,7 @@ public class MainActivity extends AppCompatActivity
             progressBar.setSecondaryProgress(i);
             i++;
             Log.i("Progress", String.valueOf(progressBar.getProgress()) + "/ " + progressBar.getMax());
-            CategoriesMenu.add(c.getStrCategory()).setIcon(R.drawable.ic_local_drink_48px).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            categoriesMenu.add(c.getStrCategory()).setIcon(R.drawable.ic_local_drink_48px).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem menuItem) {
                     displayResults(c.getStrCategory());
