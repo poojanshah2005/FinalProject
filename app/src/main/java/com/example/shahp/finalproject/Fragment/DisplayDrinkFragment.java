@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -148,6 +149,7 @@ public class DisplayDrinkFragment extends Fragment {
             if (measurement.length() > 1) tv1Q.setText(measurement);
             row.setLayoutParams(lp);
             row.setMinimumHeight(a);
+            row.setGravity(LinearLayout.VERTICAL);
             row.addView(tv1I);
             row.addView(tv1Q);
             DrinkIngs.addView(row);

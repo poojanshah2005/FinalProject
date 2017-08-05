@@ -3,57 +3,77 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     tools:context="com.example.shahp.finalproject.Fragment.DisplayDrinkFragment">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_gravity="center_vertical"
-        android:padding="10dp">
-
-        <TextView
-            android:id="@+id/tvDrinkName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <ImageView
-            android:id="@+id/imDrink"
+            <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="150dp"
-            android:maxHeight="250dp"
-            android:minWidth="150dp"
-            android:maxWidth="250dp"/>
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:textAlignment="center">
 
-        <TextView
-            android:id="@+id/tvInstructions"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tvDrinkName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center" />
 
-        <TableLayout
-            android:id="@+id/displayLinear"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </TableLayout>
+            <ImageView
+                android:id="@+id/imDrink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tvDrinkName"
+                android:gravity="center"
+                android:maxHeight="250dp"
+                android:maxWidth="250dp"
+                android:minHeight="150dp"
+                android:minWidth="150dp" />
 
-        <TextView
-            android:id="@+id/tvGlass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tvInstructions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/imDrink"
+                android:gravity="center" />
 
-        <TextView
-            android:id="@+id/tvCatergories"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <TableLayout
+                android:id="@+id/displayLinear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tvInstructions"
+                android:layout_gravity="center_horizontal"
+                android:layout_centerInParent="true"
+                android:layout_marginHorizontal="10dp"
+                android:gravity="center" />
 
-        <TextView
-            android:id="@+id/tvAlc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tvGlass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/displayLinear"
+                android:gravity="center" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tvCatergories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvGlass"
+                android:gravity="center" />
 
+            <TextView
+                android:id="@+id/tvAlc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvCatergories"
+                android:gravity="center" />
 
-
+        </RelativeLayout>
 </ScrollView>
