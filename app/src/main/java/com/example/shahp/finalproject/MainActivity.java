@@ -23,8 +23,11 @@ import com.example.shahp.finalproject.Fragment.DisplayDrinkFragment;
 import com.example.shahp.finalproject.Fragment.DrinksFragment;
 import com.example.shahp.finalproject.MVP.DisplayAlcoholicDrinks;
 import com.example.shahp.finalproject.MVP.DisplayCategoryDrinks;
+import com.example.shahp.finalproject.MVP.DisplayDrink;
 import com.example.shahp.finalproject.MVP.DisplayGlassDrinks;
 import com.example.shahp.finalproject.MVP.DisplayIngredientDrinks;
+import com.example.shahp.finalproject.MVP.IDrinkPresenter;
+import com.example.shahp.finalproject.MVP.IDrinkView;
 import com.example.shahp.finalproject.MVP.IMusicListPresenter;
 import com.example.shahp.finalproject.MVP.IMusicListView;
 import com.example.shahp.finalproject.MVP.Interactor.InteractorImpl;
@@ -47,19 +50,22 @@ import retrofit2.Response;
 
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, IMusicListView {
+        implements NavigationView.OnNavigationItemSelectedListener, IMusicListView, IDrinkView {
 
     Menu menu;
     ProgressBar progressBar;
     static InteractorImpl interactor_ = new InteractorImpl();
     static IMusicListPresenter iMusicListPresenter;
+    static IDrinkPresenter iDrinkPresenter;
     static IMusicListView iMusicListView;
+    static IDrinkView iDrinkView;
     static android.support.v4.app.FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.iMusicListView = this;
+        this.iDrinkView = this;
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         progressBar = (ProgressBar) findViewById(R.id.progressBar2);
@@ -319,6 +325,22 @@ if (id == R.id.nav_camera) {
     }
 
     @Override
+    public void onFetchDataSuccess(DrinkResult drinkResult) {
+
+            com.example.shahp.finalproject.Models.drinkResult.Drink drink = drinkResult.getDrinks().get(0);
+            Answers.getInstance().logCustom(new CustomEvent("Displaying Drink")
+                    .putCustomAttribute("Drink", drink.getStrDrink()));
+            Bundle args = new Bundle();
+            args.putParcelable("drink", drink);
+            DisplayDrinkFragment displayDrinkFragment = new DisplayDrinkFragment();
+            displayDrinkFragment.setArguments(args);
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_main, displayDrinkFragment)
+                    .commit();
+
+    }
+
+    @Override
     public void onFetchDataFailure(Throwable throwable) {
         Log.i("onFetchDataFailure","onFetchDataFailure");
         Log.i("onFetchDataFailure",throwable.getMessage());
@@ -336,31 +358,36 @@ if (id == R.id.nav_camera) {
     }
 
     public static void displayDrink(String idDrink) {
-        interactor_.getDrinkById(idDrink).enqueue(new Callback<DrinkResult>() {
-            @Override
-            public void onResponse(Call<DrinkResult> call, Response<DrinkResult> response) {
-                DrinkResult drinkResult = response.body();
-                Log.i("",drinkResult.getDrinks().get(0).getStrDrink());
-                if(drinkResult.getDrinks().size() > 0) {
-                    com.example.shahp.finalproject.Models.drinkResult.Drink drink = drinkResult.getDrinks().get(0);
-                    Answers.getInstance().logCustom(new CustomEvent("Displaying Drink")
-                            .putCustomAttribute("Drink", drink.getStrDrink()));
-                    Bundle args = new Bundle();
-                    args.putParcelable("drink", drink);
-                    DisplayDrinkFragment displayDrinkFragment = new DisplayDrinkFragment();
-                    displayDrinkFragment.setArguments(args);
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.content_main, displayDrinkFragment)
-                            .commit();
-                }
-            }
+        iDrinkPresenter =  new DisplayDrink(interactor_);
+        iDrinkPresenter.attachView(iDrinkView);
+        iDrinkPresenter.performDrinkDisplay(idDrink);
+//        interactor_.getDrinkById(idDrink).enqueue(new Callback<DrinkResult>() {
+//            @Override
+//            public void onResponse(Call<DrinkResult> call, Response<DrinkResult> response) {
+//                DrinkResult drinkResult = response.body();
+//                Log.i("",drinkResult.getDrinks().get(0).getStrDrink());
+////                if(drinkResult.getDrinks().size() > 0) {
+////                    com.example.shahp.finalproject.Models.drinkResult.Drink drink = drinkResult.getDrinks().get(0);
+////                    Answers.getInstance().logCustom(new CustomEvent("Displaying Drink")
+////                            .putCustomAttribute("Drink", drink.getStrDrink()));
+////                    Bundle args = new Bundle();
+////                    args.putParcelable("drink", drink);
+////                    DisplayDrinkFragment displayDrinkFragment = new DisplayDrinkFragment();
+////                    displayDrinkFragment.setArguments(args);
+////                    fragmentManager.beginTransaction()
+////                            .replace(R.id.content_main, displayDrinkFragment)
+////                            .commit();
+////                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<DrinkResult> call, Throwable t) {
+//                Log.i("Onfailure",t.getMessage());
+//
+//            }
+//        });
 
-            @Override
-            public void onFailure(Call<DrinkResult> call, Throwable t) {
-                Log.i("Onfailure",t.getMessage());
 
-            }
-        });
     }
 
     public static void displayDrinkByIngredient(String ingredient) {

@@ -43,5 +43,5 @@ public interface RequestInterface {
     @GET(Consts.FILTER)
     Call<DrinksResult> getCallByGlass(@Query("g") String glass);
     @GET(Consts.BY_ID)
-    Call<DrinkResult> getDrinkById(@Query("i") String id);
+    Observable<DrinkResult> getDrinkById(@Query("i") String id);
 }

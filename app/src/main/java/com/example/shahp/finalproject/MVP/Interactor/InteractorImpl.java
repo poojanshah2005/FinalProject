@@ -91,7 +91,7 @@ public class InteractorImpl implements  Interactor {
     }
 
     @Override
-    public Call<DrinkResult> getDrinkById(String id) {
+    public Observable<DrinkResult> getDrinkById(String id) {
         return requestInterface.getDrinkById(id);
     }
 
