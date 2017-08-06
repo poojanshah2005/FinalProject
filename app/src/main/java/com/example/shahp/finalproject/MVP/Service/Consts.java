@@ -1,4 +1,4 @@
-package com.example.shahp.finalproject.Service;
+package com.example.shahp.finalproject.MVP.Service;
 
 /**
  * Created by shahp on 31/07/2017.

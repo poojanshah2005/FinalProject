@@ -5,5 +5,5 @@ package com.example.shahp.finalproject.MVP;
  */
 
 public interface IDrinkPresenter extends MVPPresenter<IDrinkView> {
-    void performDrinkDisplay(String category);
+    void performDrinkDisplay(String value);
 }

@@ -9,7 +9,7 @@ import com.example.shahp.finalproject.Models.drinksResult.DrinksResult;
 /**
  * Contract for the View
  */
-public interface IMusicListView extends MVPView {
+public interface IDrinksView extends MVPView {
 
     //mvp step 3
 

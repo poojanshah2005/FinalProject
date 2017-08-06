@@ -12,9 +12,9 @@ import io.reactivex.schedulers.Schedulers;
  * Created by shahp on 01/08/2017.
  */
 
-public class DisplayAlcoholicDrinks implements IMusicListPresenter {
+public class DisplayAlcoholicDrinks implements IDrinksPresenter {
     InteractorImpl interactor_;
-    IMusicListView iMusicListView;
+    IDrinksView iDrinksView;
 
 
     public DisplayAlcoholicDrinks(InteractorImpl interactor_) {
@@ -35,12 +35,12 @@ public class DisplayAlcoholicDrinks implements IMusicListPresenter {
     }
 
     private void onDisplayCategoryListSuccess(DrinksResult drinksResult) {
-        iMusicListView.onFetchDataSuccess(drinksResult);
+        iDrinksView.onFetchDataSuccess(drinksResult);
     }
 
     @Override
-    public void attachView(IMusicListView MVPView) {
-        this.iMusicListView = MVPView;
+    public void attachView(IDrinksView MVPView) {
+        this.iDrinksView = MVPView;
     }
 
     @Override
