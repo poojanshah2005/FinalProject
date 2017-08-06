@@ -16,6 +16,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Query;
 
 /**
  * Created by shahp on 31/07/2017.
@@ -72,6 +73,21 @@ public class InteractorImpl implements  Interactor {
     @Override
     public Observable<DrinksResult> getByCategory(String category) {
         return requestInterface.getByCategory(category);
+    }
+
+    @Override
+    public Observable<DrinksResult> getByIngredient(@Query("i") String ingredient) {
+        return requestInterface.getByIngredient(ingredient);
+    }
+
+    @Override
+    public Observable<DrinksResult> getByAlcoholic(@Query("a") String alcoholic) {
+        return requestInterface.getByAlcoholic(alcoholic);
+    }
+
+    @Override
+    public Observable<DrinksResult> getByGlass(@Query("g") String glass) {
+        return requestInterface.getByGlass(glass);
     }
 
     @Override

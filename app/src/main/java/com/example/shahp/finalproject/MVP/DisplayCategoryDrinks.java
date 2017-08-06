@@ -10,12 +10,12 @@ import io.reactivex.schedulers.Schedulers;
  * Created by shahp on 01/08/2017.
  */
 
-public class DisplayDrinks implements IMusicListPresenter {
+public class DisplayCategoryDrinks implements IMusicListPresenter {
     InteractorImpl interactor_;
     IMusicListView iMusicListView;
 
 
-    public DisplayDrinks(InteractorImpl interactor_) {
+    public DisplayCategoryDrinks(InteractorImpl interactor_) {
         this.interactor_ = interactor_;
     }
 
@@ -23,7 +23,7 @@ public class DisplayDrinks implements IMusicListPresenter {
     public void performListDisplay(String category) {
         interactor_.getByCategory(category).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
-                .subscribe(DisplayDrinks.this::onDisplayCategoryListSuccess, DisplayDrinks.this::OnError);
+                .subscribe(DisplayCategoryDrinks.this::onDisplayCategoryListSuccess, DisplayCategoryDrinks.this::OnError);
 
     }
 
