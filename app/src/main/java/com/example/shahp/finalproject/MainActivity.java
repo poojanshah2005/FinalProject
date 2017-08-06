@@ -119,10 +119,10 @@ public class MainActivity extends AppCompatActivity
         progressBar.setVisibility(View.VISIBLE);
         SubMenu ingredientMenu = menu.addSubMenu("Ingredients");
         ingredientMenu.setHeaderTitle("Ingredients");
-        progressBar.setMax(ingredientResults.getDrinks().size());
+        progressBar.setMax(ingredientResults.getIngredients().size());
         int i = 1;
 
-        for(Ingredient ingredient: ingredientResults.getDrinks()){
+        for(Ingredient ingredient: ingredientResults.getIngredients()){
             Log.i("alcoholicResult", ingredient.getStrIngredient1());
             progressBar.setProgress(i);
             progressBar.setSecondaryProgress(i);

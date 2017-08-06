@@ -40,8 +40,8 @@ public class GlassResults implements Parcelable
         return glass;
     }
 
-    public void setGlass(List<Glass> drinks) {
-        this.glass = drinks;
+    public void setGlass(List<Glass> glass) {
+        this.glass = glass;
     }
 
     public void writeToParcel(Parcel dest, int flags) {

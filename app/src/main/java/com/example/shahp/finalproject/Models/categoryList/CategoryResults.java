@@ -42,16 +42,8 @@ public class CategoryResults implements Parcelable
             return (new CategoryResults[size]);
         }
 
-    }
-            ;
+    };
 
-    public List<Category> getDrinks() {
-        return categories;
-    }
-
-    public void setDrinks(List<Category> drinks) {
-        this.categories = drinks;
-    }
 
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeList(categories);

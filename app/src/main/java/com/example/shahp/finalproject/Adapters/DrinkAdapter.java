@@ -72,9 +72,9 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.MyViewHolder
         CardView drinkCard;
         public MyViewHolder(View v) {
             super(v);
-            tvDrink = (TextView) v.findViewById(R.id.tvDrink);
-            ivDrinkThumb = (ImageView) v.findViewById(R.id.ivDrinkThumb);
-            drinkCard = (CardView) v.findViewById(R.id.drinkCard);
+            tvDrink = v.findViewById(R.id.tvDrink);
+            ivDrinkThumb = v.findViewById(R.id.ivDrinkThumb);
+            drinkCard = v.findViewById(R.id.drinkCard);
         }
     }
 }

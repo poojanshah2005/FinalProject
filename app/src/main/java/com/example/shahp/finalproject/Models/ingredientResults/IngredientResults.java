@@ -14,9 +14,17 @@ import com.google.gson.annotations.SerializedName;
 public class IngredientResults implements Parcelable
 {
 
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
     @SerializedName("drinks")
     @Expose
-    private List<Ingredient> drinks = null;
+    private List<Ingredient> ingredients = null;
     public final static Parcelable.Creator<IngredientResults> CREATOR = new Creator<IngredientResults>() {
 
 
@@ -25,7 +33,7 @@ public class IngredientResults implements Parcelable
         })
         public IngredientResults createFromParcel(Parcel in) {
             IngredientResults instance = new IngredientResults();
-            in.readList(instance.drinks, (Ingredient.class.getClassLoader()));
+            in.readList(instance.ingredients, (Ingredient.class.getClassLoader()));
             return instance;
         }
 
@@ -35,17 +43,8 @@ public class IngredientResults implements Parcelable
 
     }
             ;
-
-    public List<Ingredient> getDrinks() {
-        return drinks;
-    }
-
-    public void setDrinks(List<Ingredient> drinks) {
-        this.drinks = drinks;
-    }
-
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeList(drinks);
+        dest.writeList(ingredients);
     }
 
     public int describeContents() {
