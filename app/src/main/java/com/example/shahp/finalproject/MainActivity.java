@@ -175,21 +175,26 @@ public class MainActivity extends AppCompatActivity
         alcoholicMenu.setHeaderTitle("Alcoholic");
         progressBar.setMax(alcoholicResult.getAlcoholics().size());
         int i = 1;
-        for(Alcoholic a: alcoholicResult.getAlcoholics()){
-            progressBar.setProgress(i);
-            progressBar.setSecondaryProgress(i);
-            i++;
-            alcoholicMenu.add(a.getStrAlcoholic()).setIcon(R.drawable.ic_local_drink_48px).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem menuItem) {
-                    Answers.getInstance().logCustom(new CustomEvent("Alcoholic Selected")
-                            .putCustomAttribute("Alcoholic",a.getStrAlcoholic()));
-                    iDrinksPresenter =  new DisplayAlcoholicDrinks(interactor_);
-                    iDrinksPresenter.attachView(iDrinksView);
-                    iDrinksPresenter.performListDisplay(a.getStrAlcoholic());
-                    return false;
-                }
-            });
+        Log.i("alcoholicResult", String.valueOf(alcoholicResult.getAlcoholics().size()));
+        for(Alcoholic a: alcoholicResult.getAlcoholics()) {
+            Log.i("alcoholicResult", a.getStrAlcoholic().toString() + " " + String.valueOf(a.getStrAlcoholic().isEmpty()));
+            Log.i("alcoholicResult", String.valueOf(a.getStrAlcoholic().isEmpty()));
+            if (!a.getStrAlcoholic().isEmpty()) {
+                progressBar.setProgress(i);
+                progressBar.setSecondaryProgress(i);
+                i++;
+                alcoholicMenu.add(a.getStrAlcoholic()).setIcon(R.drawable.ic_local_drink_48px).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        Answers.getInstance().logCustom(new CustomEvent("Alcoholic Selected")
+                                .putCustomAttribute("Alcoholic", a.getStrAlcoholic()));
+                        iDrinksPresenter = new DisplayAlcoholicDrinks(interactor_);
+                        iDrinksPresenter.attachView(iDrinksView);
+                        iDrinksPresenter.performListDisplay(a.getStrAlcoholic());
+                        return false;
+                    }
+                });
+            }
         }
 
         progressBar.setVisibility(View.INVISIBLE);
