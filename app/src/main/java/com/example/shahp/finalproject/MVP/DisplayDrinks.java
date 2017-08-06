@@ -21,7 +21,6 @@ public class DisplayDrinks implements IMusicListPresenter {
 
     @Override
     public void performListDisplay(String category) {
-//        category ="Cocktail";
         interactor_.getByCategory(category).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
                 .subscribe(DisplayDrinks.this::onDisplayCategoryListSuccess, DisplayDrinks.this::OnError);
@@ -29,6 +28,7 @@ public class DisplayDrinks implements IMusicListPresenter {
     }
 
     private void OnError(Throwable throwable) {
+
     }
 
     private void onDisplayCategoryListSuccess(DrinksResult drinksResult) {

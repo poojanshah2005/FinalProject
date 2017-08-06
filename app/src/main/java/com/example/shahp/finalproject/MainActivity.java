@@ -244,7 +244,7 @@ public class MainActivity extends AppCompatActivity
 //                            .observeOn(AndroidSchedulers.mainThread())
 //                            .subscribeOn(Schedulers.newThread())
 //                        .subscribe(MainActivity.this::onDisplayCategoryListSuccess, MainActivity.this::OnError);
-                    onDisplayCategoryList(c.getStrCategory());
+//                    onDisplayCategoryList(c.getStrCategory());
                     return false;
                 }
             });
@@ -348,6 +348,16 @@ if (id == R.id.nav_camera) {
     @Override
     public void onFetchDataSuccess(DrinksResult drinksResult) {
         Log.i("onFetchDataSuccess","onFetchDataSuccess");
+        Bundle args = new Bundle();
+        args.putParcelable("drinksResult", drinksResult);
+        DrinksFragment drinksFragment = new DrinksFragment ();
+        drinksFragment.onAttach(MainActivity.this);
+        drinksFragment.setArguments(args);
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_main, drinksFragment)
+                .addToBackStack(drinksFragment.getClass().getName())
+                .commit();
+
     }
 
     @Override
