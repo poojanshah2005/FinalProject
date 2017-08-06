@@ -97,15 +97,6 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-//                interactor_.getCategoryList()
-//                        .observeOn(AndroidSchedulers.mainThread())
-//                        .subscribeOn(Schedulers.newThread())
-//                        .subscribe(MainActivity.this::onSuccess, MainActivity.this::OnError);
-//
-//                interactor_.getByCategory("Cocktail")
-//                        .observeOn(AndroidSchedulers.mainThread())
-//                        .subscribeOn(Schedulers.newThread())
-//                        .subscribe(MainActivity.this::onSuccess, MainActivity.this::OnError);
             }
         });
 
@@ -140,11 +131,9 @@ public class MainActivity extends AppCompatActivity
             ingredientMenu.add(ingredient.getStrIngredient1()).setIcon(R.drawable.ic_local_drink_48px).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem menuItem) {
-//                    displayResults(ingredient.getStrIngredient1());
 
                     Answers.getInstance().logCustom(new CustomEvent("Ingredient Selected")
                             .putCustomAttribute("Ingredient",ingredient.getStrIngredient1()));
-//                    displayDrinkByIngredient(ingredient.getStrIngredient1());
                     iMusicListPresenter =  new DisplayIngredientDrinks(interactor_);
                     iMusicListPresenter.attachView(iMusicListView);
                     iMusicListPresenter.performListDisplay(ingredient.getStrIngredient1());
@@ -174,14 +163,8 @@ public class MainActivity extends AppCompatActivity
             glassMenu.add(g.getStrGlass()).setIcon(R.drawable.ic_local_drink_48px).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem menuItem) {
-//                    displayResults(g.getStrGlass());
                     Answers.getInstance().logCustom(new CustomEvent("Glass Selected")
                             .putCustomAttribute("Glass",g.getStrGlass()));
-//                    interactor_.getByCategory(c.getStrCategory())
-//                            .observeOn(AndroidSchedulers.mainThread())
-//                            .subscribeOn(Schedulers.newThread())
-//                        .subscribe(MainActivity.this::onDisplayCategoryListSuccess, MainActivity.this::OnError);
-//                    displayDrinkByGlass();
                     iMusicListPresenter =  new DisplayGlassDrinks(interactor_);
                     iMusicListPresenter.attachView(iMusicListView);
                     iMusicListPresenter.performListDisplay(g.getStrGlass());
@@ -213,15 +196,9 @@ public class MainActivity extends AppCompatActivity
                 public boolean onMenuItemClick(MenuItem menuItem) {
                     Answers.getInstance().logCustom(new CustomEvent("Alcoholic Selected")
                             .putCustomAttribute("Alcoholic",a.getStrAlcoholic()));
-//                    interactor_.getByCategory(c.getStrCategory())
-//                            .observeOn(AndroidSchedulers.mainThread())
-//                            .subscribeOn(Schedulers.newThread())
-//                        .subscribe(MainActivity.this::onDisplayCategoryListSuccess, MainActivity.this::OnError);
                     iMusicListPresenter =  new DisplayAlcoholicDrinks(interactor_);
                     iMusicListPresenter.attachView(iMusicListView);
                     iMusicListPresenter.performListDisplay(a.getStrAlcoholic());
-//                    displayResults(a.getStrAlcoholic());
-//                    displayDrinkByAlcoholic(a.getStrAlcoholic());
                     return false;
                 }
             });
@@ -260,24 +237,6 @@ public class MainActivity extends AppCompatActivity
 
         progressBar.setVisibility(View.INVISIBLE);
     }
-
-//    private static void displayResults(String value) {
-//        iMusicListPresenter.attachView(iMusicListView);
-//        iMusicListPresenter.performListDisplay(value);
-//
-//    }
-
-//    private void onDisplayCategoryListSuccess(DrinksResult drinksResult) {
-//        Bundle args = new Bundle();
-//        args.putParcelable("drinksResult", drinksResult);
-//        DrinksFragment drinksFragment = new DrinksFragment ();
-//        drinksFragment.onAttach(MainActivity.this);
-//        drinksFragment.setArguments(args);
-//        fragmentManager.beginTransaction()
-//                .replace(R.id.content_main, drinksFragment)
-//                .addToBackStack(drinksFragment.getClass().getName())
-//                .commit();
-//    }
 
     private void OnError(Throwable throwable) {
         Log.i("OnError", throwable.getMessage());
@@ -357,7 +316,6 @@ if (id == R.id.nav_camera) {
                 .replace(R.id.content_main, drinksFragment)
                 .addToBackStack(drinksFragment.getClass().getName())
                 .commit();
-
     }
 
     @Override
@@ -409,7 +367,9 @@ if (id == R.id.nav_camera) {
         Log.i("DISPLAYDRINKS",ingredient);
         Answers.getInstance().logCustom(new CustomEvent("displayDrinkByIngredient")
                 .putCustomAttribute("Ingredient", ingredient));
-        interactor_.getCallByIngredient(ingredient).enqueue(drinksResultCall);
+        iMusicListPresenter =  new DisplayIngredientDrinks(interactor_);
+        iMusicListPresenter.attachView(iMusicListView);
+        iMusicListPresenter.performListDisplay(ingredient);
     }
 
     public static void displayDrinkByAlcoholic(String alcoholic) {
@@ -423,14 +383,18 @@ if (id == R.id.nav_camera) {
         Log.i("DISPLAYDRINKS",category);
         Answers.getInstance().logCustom(new CustomEvent("displayDrinkByCategory")
                 .putCustomAttribute("Category", category));
-        interactor_.getCallByCategory(category).enqueue(drinksResultCall);
+        iMusicListPresenter =  new DisplayCategoryDrinks(interactor_);
+        iMusicListPresenter.attachView(iMusicListView);
+        iMusicListPresenter.performListDisplay(category);
     }
 
     public static void displayDrinkByGlass(String glass) {
         Log.i("DISPLAYDRINKS",glass);
         Answers.getInstance().logCustom(new CustomEvent("displayDrinkByGlass")
                 .putCustomAttribute("Glass", glass));
-        interactor_.getCallByGlass(glass).enqueue(drinksResultCall);
+        iMusicListPresenter =  new DisplayGlassDrinks(interactor_);
+        iMusicListPresenter.attachView(iMusicListView);
+        iMusicListPresenter.performListDisplay(glass);
     }
 
     static Callback<DrinksResult> drinksResultCall = new Callback<DrinksResult>() {
