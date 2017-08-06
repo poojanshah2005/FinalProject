@@ -123,7 +123,6 @@ public class MainActivity extends AppCompatActivity
         int i = 1;
 
         for(Ingredient ingredient: ingredientResults.getIngredients()){
-            Log.i("alcoholicResult", ingredient.getStrIngredient1());
             progressBar.setProgress(i);
             progressBar.setSecondaryProgress(i);
             i++;
@@ -151,7 +150,6 @@ public class MainActivity extends AppCompatActivity
         progressBar.setMax(glassResults.getGlass().size());
         int i = 1;
         for(Glass g: glassResults.getGlass()){
-            Log.i("alcoholicResult", g.getStrGlass());
             progressBar.setProgress(i);
             progressBar.setSecondaryProgress(i);
             i++;
@@ -178,7 +176,6 @@ public class MainActivity extends AppCompatActivity
         progressBar.setMax(alcoholicResult.getAlcoholics().size());
         int i = 1;
         for(Alcoholic a: alcoholicResult.getAlcoholics()){
-            Log.i("alcoholicResult", a.getStrAlcoholic());
             progressBar.setProgress(i);
             progressBar.setSecondaryProgress(i);
             i++;

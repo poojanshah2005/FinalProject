@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.example.shahp.finalproject.MainActivity;
 import com.example.shahp.finalproject.Models.drinksResult.Drink;
 import com.example.shahp.finalproject.R;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -113,6 +114,7 @@ public class DisplayDrinkFragment extends Fragment {
                 Picasso
                         .with(getContext())
                         .load(imageLink)
+                        .networkPolicy(NetworkPolicy.OFFLINE)
                         .into(imDrink);
             }
         }
