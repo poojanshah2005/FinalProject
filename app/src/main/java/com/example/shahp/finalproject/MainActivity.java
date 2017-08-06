@@ -397,25 +397,4 @@ if (id == R.id.nav_camera) {
         iMusicListPresenter.performListDisplay(glass);
     }
 
-    static Callback<DrinksResult> drinksResultCall = new Callback<DrinksResult>() {
-        @Override
-        public void onResponse(Call<DrinksResult> call, Response<DrinksResult> response) {
-            DrinksResult drinkResult = response.body();
-            if(drinkResult.getDrinks().size() > 0) {
-                Bundle args = new Bundle();
-                args.putParcelable("drinksResult", drinkResult);
-                DrinksFragment displayDrinkFragment = new DrinksFragment();
-                displayDrinkFragment.setArguments(args);
-                fragmentManager.beginTransaction()
-                        .replace(R.id.content_main, displayDrinkFragment)
-                        .commit();
-            }
-        }
-
-        @Override
-        public void onFailure(Call<DrinksResult> call, Throwable t) {
-            Log.i("Onfailure",t.getMessage());
-        }
-    };
-
 }
