@@ -27,9 +27,5 @@ public interface Interactor {
     Observable<DrinksResult> getByAlcoholic(@Query("a") String alcoholic);
     Observable<DrinksResult> getByGlass(@Query("g") String glass);
     Observable<DrinkResult> getDrinkById(String id);
-    Call<DrinksResult> getCallByIngredient(String ingredient);
-    Call<DrinksResult> getCallByCategory(String category);
-    Call<DrinksResult> getCallByAlcoholic( String alcoholic);
-    Call<DrinksResult> getCallByGlass(String glass);
 
 }

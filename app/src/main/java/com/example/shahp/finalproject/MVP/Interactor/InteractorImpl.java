@@ -94,24 +94,4 @@ public class InteractorImpl implements  Interactor {
     public Observable<DrinkResult> getDrinkById(String id) {
         return requestInterface.getDrinkById(id);
     }
-
-    @Override
-    public Call<DrinksResult> getCallByIngredient(String ingredient) {
-        return requestInterface.getCallByIngredient(ingredient);
-    }
-
-    @Override
-    public Call<DrinksResult> getCallByCategory(String category) {
-        return requestInterface.getCallByCategory(category);
-    }
-
-    @Override
-    public Call<DrinksResult> getCallByAlcoholic(String alcoholic) {
-        return requestInterface.getCallByAlcoholic(alcoholic);
-    }
-
-    @Override
-    public Call<DrinksResult> getCallByGlass(String glass) {
-        return requestInterface.getCallByGlass(glass);
-    }
 }

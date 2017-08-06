@@ -121,11 +121,8 @@ public class MainActivity extends AppCompatActivity
 
     private void onSuccessgGetIngredientList(IngredientResults ingredientResults) {
         progressBar.setVisibility(View.VISIBLE);
-
         SubMenu ingredientMenu = menu.addSubMenu("Ingredients");
-
         ingredientMenu.setHeaderTitle("Ingredients");
-
         progressBar.setMax(ingredientResults.getDrinks().size());
         int i = 1;
 
@@ -153,14 +150,10 @@ public class MainActivity extends AppCompatActivity
 
     private void onSuccessgGetGlassList(GlassResults glassResults) {
         progressBar.setVisibility(View.VISIBLE);
-
         SubMenu glassMenu = menu.addSubMenu("Glass");
-
         glassMenu.setHeaderTitle("Glass");
-
         progressBar.setMax(glassResults.getGlass().size());
         int i = 1;
-
         for(Glass g: glassResults.getGlass()){
             Log.i("alcoholicResult", g.getStrGlass());
             progressBar.setProgress(i);
@@ -184,14 +177,10 @@ public class MainActivity extends AppCompatActivity
 
     private void onSuccessgGetAlcoholicList(AlcoholicResult alcoholicResult) {
         progressBar.setVisibility(View.VISIBLE);
-
         SubMenu alcoholicMenu = menu.addSubMenu("Alcoholic");
-
         alcoholicMenu.setHeaderTitle("Alcoholic");
-
         progressBar.setMax(alcoholicResult.getAlcoholics().size());
         int i = 1;
-
         for(Alcoholic a: alcoholicResult.getAlcoholics()){
             Log.i("alcoholicResult", a.getStrAlcoholic());
             progressBar.setProgress(i);
@@ -216,11 +205,8 @@ public class MainActivity extends AppCompatActivity
     private void onSuccessgGetCategoryList(CategoryResults categoryResults) {
 
         progressBar.setVisibility(View.VISIBLE);
-
         SubMenu categoriesMenu = menu.addSubMenu("Categories");
-
         categoriesMenu.setHeaderTitle("Categories");
-
         progressBar.setMax(categoryResults.getCategories().size());
         int i = 1;
 
@@ -240,7 +226,6 @@ public class MainActivity extends AppCompatActivity
                 }
             });
         }
-
         progressBar.setVisibility(View.INVISIBLE);
     }
 
@@ -361,33 +346,6 @@ if (id == R.id.nav_camera) {
         iDrinkPresenter =  new DisplayDrink(interactor_);
         iDrinkPresenter.attachView(iDrinkView);
         iDrinkPresenter.performDrinkDisplay(idDrink);
-//        interactor_.getDrinkById(idDrink).enqueue(new Callback<DrinkResult>() {
-//            @Override
-//            public void onResponse(Call<DrinkResult> call, Response<DrinkResult> response) {
-//                DrinkResult drinkResult = response.body();
-//                Log.i("",drinkResult.getDrinks().get(0).getStrDrink());
-////                if(drinkResult.getDrinks().size() > 0) {
-////                    com.example.shahp.finalproject.Models.drinkResult.Drink drink = drinkResult.getDrinks().get(0);
-////                    Answers.getInstance().logCustom(new CustomEvent("Displaying Drink")
-////                            .putCustomAttribute("Drink", drink.getStrDrink()));
-////                    Bundle args = new Bundle();
-////                    args.putParcelable("drink", drink);
-////                    DisplayDrinkFragment displayDrinkFragment = new DisplayDrinkFragment();
-////                    displayDrinkFragment.setArguments(args);
-////                    fragmentManager.beginTransaction()
-////                            .replace(R.id.content_main, displayDrinkFragment)
-////                            .commit();
-////                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<DrinkResult> call, Throwable t) {
-//                Log.i("Onfailure",t.getMessage());
-//
-//            }
-//        });
-
-
     }
 
     public static void displayDrinkByIngredient(String ingredient) {
