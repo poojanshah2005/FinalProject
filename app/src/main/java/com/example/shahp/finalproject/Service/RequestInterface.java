@@ -27,6 +27,12 @@ public interface RequestInterface {
     @GET(Consts.AlcoholicList)
     Observable<AlcoholicResult> getAlcoholicList();
     @GET(Consts.FILTER)
+    Observable<DrinksResult> getByIngredient(@Query("i") String ingredient);
+    @GET(Consts.FILTER)
+    Observable<DrinksResult> getByAlcoholic(@Query("a") String alcoholic);
+    @GET(Consts.FILTER)
+    Observable<DrinksResult> getByGlass(@Query("g") String glass);
+    @GET(Consts.FILTER)
     Observable<DrinksResult> getByCategory(@Query("c") String category);
     @GET(Consts.FILTER)
     Call<DrinksResult> getCallByCategory(@Query("c") String category);

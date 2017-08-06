@@ -104,11 +104,6 @@ public class DisplayDrinkFragment extends Fragment {
             }
         });
 
-
-//        tvGlass.setPaintFlags(tvGlass.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-//        tvCatergories.setPaintFlags(tvCatergories.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-//        tvAlc.setPaintFlags(tvAlc.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-
         initRows();
 
         try {
