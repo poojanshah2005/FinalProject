@@ -33,7 +33,7 @@ public class DisplayDrinkFragment extends Fragment {
     ImageView imDrink;
     TextView tvDrinkName, tvInstructions, tvGlass, tvCatergories, tvAlc;
     TableLayout DrinkIngs;
-    int a = 35;
+    int a = 70;
     TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
 
 
