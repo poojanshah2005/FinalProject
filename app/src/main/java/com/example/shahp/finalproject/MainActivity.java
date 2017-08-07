@@ -20,13 +20,13 @@ import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.CustomEvent;
 import com.example.shahp.finalproject.Fragment.Drink.DisplayDrinkFragment;
 import com.example.shahp.finalproject.Fragment.Drinks.DrinksFragment;
-import com.example.shahp.finalproject.MVP.Drinks.DisplayAlcoholicDrinks;
-import com.example.shahp.finalproject.MVP.Drinks.DisplayCategoryDrinks;
 import com.example.shahp.finalproject.MVP.Drink.DisplayDrink;
-import com.example.shahp.finalproject.MVP.Drinks.DisplayGlassDrinks;
-import com.example.shahp.finalproject.MVP.Drinks.DisplayIngredientDrinks;
 import com.example.shahp.finalproject.MVP.Drink.IDrinkPresenter;
 import com.example.shahp.finalproject.MVP.Drink.IDrinkView;
+import com.example.shahp.finalproject.MVP.Drinks.DisplayAlcoholicDrinks;
+import com.example.shahp.finalproject.MVP.Drinks.DisplayCategoryDrinks;
+import com.example.shahp.finalproject.MVP.Drinks.DisplayGlassDrinks;
+import com.example.shahp.finalproject.MVP.Drinks.DisplayIngredientDrinks;
 import com.example.shahp.finalproject.MVP.Drinks.IDrinksPresenter;
 import com.example.shahp.finalproject.MVP.Drinks.IDrinksView;
 import com.example.shahp.finalproject.MVP.Interactor.InteractorImpl;
@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity
     static IDrinksView iDrinksView;
     static IDrinkView iDrinkView;
     static android.support.v4.app.FragmentManager fragmentManager;
+    NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,9 +110,11 @@ public class MainActivity extends AppCompatActivity
                 drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         menu = navigationView.getMenu();
         navigationView.setNavigationItemSelectedListener(this);
+
+        displayDrinkByCategory("Ordinary Drink");
 
     }
 
@@ -139,9 +142,9 @@ public class MainActivity extends AppCompatActivity
                 }
             });
         }
-
         progressBar.setVisibility(View.INVISIBLE);
     }
+
 
     private void onSuccessgGetGlassList(GlassResults glassResults) {
         progressBar.setVisibility(View.VISIBLE);
@@ -224,6 +227,7 @@ public class MainActivity extends AppCompatActivity
                 }
             });
         }
+
         progressBar.setVisibility(View.INVISIBLE);
     }
 
@@ -303,7 +307,7 @@ if (id == R.id.nav_camera) {
         drinksFragment.setArguments(args);
         fragmentManager.beginTransaction()
                 .replace(R.id.content_main, drinksFragment)
-                .addToBackStack(drinksFragment.getClass().getName())
+                .disallowAddToBackStack()
                 .commit();
     }
 
@@ -319,6 +323,7 @@ if (id == R.id.nav_camera) {
             displayDrinkFragment.setArguments(args);
             fragmentManager.beginTransaction()
                     .replace(R.id.content_main, displayDrinkFragment)
+                    .disallowAddToBackStack()
                     .commit();
 
     }
