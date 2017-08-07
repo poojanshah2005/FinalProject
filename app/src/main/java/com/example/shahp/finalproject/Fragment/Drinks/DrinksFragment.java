@@ -1,21 +1,17 @@
-package com.example.shahp.finalproject.Fragment;
+package com.example.shahp.finalproject.Fragment.Drinks;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.shahp.finalproject.Adapters.DrinkAdapter;
-import com.example.shahp.finalproject.Models.drinksResult.Drink;
-import com.example.shahp.finalproject.Models.drinksResult.DrinksResult;
+import com.example.shahp.finalproject.Models.DrinksResult.DrinksResult;
 import com.example.shahp.finalproject.R;
 
 /**

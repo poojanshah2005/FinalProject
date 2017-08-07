@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.shahp.finalproject.MainActivity;
-import com.example.shahp.finalproject.Models.drinksResult.DrinksResult;
+import com.example.shahp.finalproject.Models.DrinksResult.DrinksResult;
 import com.example.shahp.finalproject.R;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;

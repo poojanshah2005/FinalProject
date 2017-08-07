@@ -1,4 +1,4 @@
-package com.example.shahp.finalproject.Models.ingredientResults;
+package com.example.shahp.finalproject.Models.IngredientResults;
 
 /**
  * Created by shahp on 31/07/2017.

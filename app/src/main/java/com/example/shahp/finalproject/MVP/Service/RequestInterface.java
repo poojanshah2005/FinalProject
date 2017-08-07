@@ -1,11 +1,11 @@
 package com.example.shahp.finalproject.MVP.Service;
 
 import com.example.shahp.finalproject.Models.AlcoholicResult.AlcoholicResult;
-import com.example.shahp.finalproject.Models.categoryList.CategoryResults;
-import com.example.shahp.finalproject.Models.drinkResult.DrinkResult;
-import com.example.shahp.finalproject.Models.drinksResult.DrinksResult;
-import com.example.shahp.finalproject.Models.glassList.GlassResults;
-import com.example.shahp.finalproject.Models.ingredientResults.IngredientResults;
+import com.example.shahp.finalproject.Models.CategoryList.CategoryResults;
+import com.example.shahp.finalproject.Models.DrinkResult.DrinkResult;
+import com.example.shahp.finalproject.Models.DrinksResult.DrinksResult;
+import com.example.shahp.finalproject.Models.GlassList.GlassResults;
+import com.example.shahp.finalproject.Models.IngredientResults.IngredientResults;
 
 import io.reactivex.Observable;
 import retrofit2.Call;

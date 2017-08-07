@@ -18,28 +18,28 @@ import android.widget.ProgressBar;
 
 import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.CustomEvent;
-import com.example.shahp.finalproject.Fragment.DisplayDrinkFragment;
-import com.example.shahp.finalproject.Fragment.DrinksFragment;
-import com.example.shahp.finalproject.MVP.DisplayAlcoholicDrinks;
-import com.example.shahp.finalproject.MVP.DisplayCategoryDrinks;
-import com.example.shahp.finalproject.MVP.DisplayDrink;
-import com.example.shahp.finalproject.MVP.DisplayGlassDrinks;
-import com.example.shahp.finalproject.MVP.DisplayIngredientDrinks;
-import com.example.shahp.finalproject.MVP.IDrinkPresenter;
-import com.example.shahp.finalproject.MVP.IDrinkView;
-import com.example.shahp.finalproject.MVP.IDrinksPresenter;
-import com.example.shahp.finalproject.MVP.IDrinksView;
+import com.example.shahp.finalproject.Fragment.Drink.DisplayDrinkFragment;
+import com.example.shahp.finalproject.Fragment.Drinks.DrinksFragment;
+import com.example.shahp.finalproject.MVP.Drinks.DisplayAlcoholicDrinks;
+import com.example.shahp.finalproject.MVP.Drinks.DisplayCategoryDrinks;
+import com.example.shahp.finalproject.MVP.Drink.DisplayDrink;
+import com.example.shahp.finalproject.MVP.Drinks.DisplayGlassDrinks;
+import com.example.shahp.finalproject.MVP.Drinks.DisplayIngredientDrinks;
+import com.example.shahp.finalproject.MVP.Drink.IDrinkPresenter;
+import com.example.shahp.finalproject.MVP.Drink.IDrinkView;
+import com.example.shahp.finalproject.MVP.Drinks.IDrinksPresenter;
+import com.example.shahp.finalproject.MVP.Drinks.IDrinksView;
 import com.example.shahp.finalproject.MVP.Interactor.InteractorImpl;
 import com.example.shahp.finalproject.Models.AlcoholicResult.Alcoholic;
 import com.example.shahp.finalproject.Models.AlcoholicResult.AlcoholicResult;
-import com.example.shahp.finalproject.Models.categoryList.Category;
-import com.example.shahp.finalproject.Models.categoryList.CategoryResults;
-import com.example.shahp.finalproject.Models.drinkResult.DrinkResult;
-import com.example.shahp.finalproject.Models.drinksResult.DrinksResult;
-import com.example.shahp.finalproject.Models.glassList.Glass;
-import com.example.shahp.finalproject.Models.glassList.GlassResults;
-import com.example.shahp.finalproject.Models.ingredientResults.Ingredient;
-import com.example.shahp.finalproject.Models.ingredientResults.IngredientResults;
+import com.example.shahp.finalproject.Models.CategoryList.Category;
+import com.example.shahp.finalproject.Models.CategoryList.CategoryResults;
+import com.example.shahp.finalproject.Models.DrinkResult.DrinkResult;
+import com.example.shahp.finalproject.Models.DrinksResult.DrinksResult;
+import com.example.shahp.finalproject.Models.GlassList.Glass;
+import com.example.shahp.finalproject.Models.GlassList.GlassResults;
+import com.example.shahp.finalproject.Models.IngredientResults.Ingredient;
+import com.example.shahp.finalproject.Models.IngredientResults.IngredientResults;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -310,7 +310,7 @@ if (id == R.id.nav_camera) {
     @Override
     public void onFetchDataSuccess(DrinkResult drinkResult) {
 
-            com.example.shahp.finalproject.Models.drinkResult.Drink drink = drinkResult.getDrinks().get(0);
+            com.example.shahp.finalproject.Models.DrinkResult.Drink drink = drinkResult.getDrinks().get(0);
             Answers.getInstance().logCustom(new CustomEvent("Displaying Drink")
                     .putCustomAttribute("Drink", drink.getStrDrink()));
             Bundle args = new Bundle();

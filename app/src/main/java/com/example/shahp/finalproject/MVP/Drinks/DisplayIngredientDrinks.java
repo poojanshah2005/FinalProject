@@ -1,7 +1,7 @@
-package com.example.shahp.finalproject.MVP;
+package com.example.shahp.finalproject.MVP.Drinks;
 
 import com.example.shahp.finalproject.MVP.Interactor.InteractorImpl;
-import com.example.shahp.finalproject.Models.drinksResult.DrinksResult;
+import com.example.shahp.finalproject.Models.DrinksResult.DrinksResult;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -10,20 +10,20 @@ import io.reactivex.schedulers.Schedulers;
  * Created by shahp on 01/08/2017.
  */
 
-public class DisplayGlassDrinks implements IDrinksPresenter {
+public class DisplayIngredientDrinks implements IDrinksPresenter {
     InteractorImpl interactor_;
     IDrinksView iDrinksView;
 
 
-    public DisplayGlassDrinks(InteractorImpl interactor_) {
+    public DisplayIngredientDrinks(InteractorImpl interactor_) {
         this.interactor_ = interactor_;
     }
 
     @Override
     public void performListDisplay(String category) {
-        interactor_.getByGlass(category).observeOn(AndroidSchedulers.mainThread())
+        interactor_.getByIngredient(category).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
-                .subscribe(DisplayGlassDrinks.this::onDisplayCategoryListSuccess, DisplayGlassDrinks.this::OnError);
+                .subscribe(DisplayIngredientDrinks.this::onDisplayCategoryListSuccess, DisplayIngredientDrinks.this::OnError);
 
     }
 

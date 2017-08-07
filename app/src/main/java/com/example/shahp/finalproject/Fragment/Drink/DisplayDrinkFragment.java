@@ -1,8 +1,6 @@
-package com.example.shahp.finalproject.Fragment;
+package com.example.shahp.finalproject.Fragment.Drink;
 
-import android.content.Context;
 import android.graphics.Paint;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,7 +16,6 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.shahp.finalproject.MainActivity;
-import com.example.shahp.finalproject.Models.drinksResult.Drink;
 import com.example.shahp.finalproject.R;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
@@ -32,7 +29,7 @@ import com.squareup.picasso.Picasso;
  * create an instance of this fragment.
  */
 public class DisplayDrinkFragment extends Fragment {
-    com.example.shahp.finalproject.Models.drinkResult.Drink drink;
+    com.example.shahp.finalproject.Models.DrinkResult.Drink drink;
     ImageView imDrink;
     TextView tvDrinkName, tvInstructions, tvGlass, tvCatergories, tvAlc;
     TableLayout DrinkIngs;

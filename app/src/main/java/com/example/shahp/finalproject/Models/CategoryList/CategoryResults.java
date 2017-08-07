@@ -1,4 +1,4 @@
-package com.example.shahp.finalproject.Models.categoryList;
+package com.example.shahp.finalproject.Models.CategoryList;
 
 /**
  * Created by shahp on 31/07/2017.
@@ -34,7 +34,7 @@ public class CategoryResults implements Parcelable
         })
         public CategoryResults createFromParcel(Parcel in) {
             CategoryResults instance = new CategoryResults();
-            in.readList(instance.categories, (com.example.shahp.finalproject.Models.categoryList.Category.class.getClassLoader()));
+            in.readList(instance.categories, (com.example.shahp.finalproject.Models.CategoryList.Category.class.getClassLoader()));
             return instance;
         }
 

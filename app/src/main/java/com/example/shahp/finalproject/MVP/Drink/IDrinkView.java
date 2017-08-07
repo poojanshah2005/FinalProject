@@ -1,7 +1,7 @@
-package com.example.shahp.finalproject.MVP;
+package com.example.shahp.finalproject.MVP.Drink;
 
-import com.example.shahp.finalproject.Models.drinkResult.DrinkResult;
-import com.example.shahp.finalproject.Models.drinksResult.DrinksResult;
+import com.example.shahp.finalproject.MVP.MVPView;
+import com.example.shahp.finalproject.Models.DrinkResult.DrinkResult;
 
 /**
  * Created by shahp on 14/07/2017.

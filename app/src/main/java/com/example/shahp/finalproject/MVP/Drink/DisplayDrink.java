@@ -1,8 +1,7 @@
-package com.example.shahp.finalproject.MVP;
+package com.example.shahp.finalproject.MVP.Drink;
 
 import com.example.shahp.finalproject.MVP.Interactor.InteractorImpl;
-import com.example.shahp.finalproject.Models.drinkResult.DrinkResult;
-import com.example.shahp.finalproject.Models.drinksResult.DrinksResult;
+import com.example.shahp.finalproject.Models.DrinkResult.DrinkResult;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -11,7 +10,7 @@ import io.reactivex.schedulers.Schedulers;
  * Created by Poojan on 06/08/2017.
  */
 
-public class DisplayDrink implements IDrinkPresenter{
+public class DisplayDrink implements IDrinkPresenter {
     InteractorImpl interactor_;
     IDrinkView iDrinkView;
 

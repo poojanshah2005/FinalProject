@@ -1,4 +1,4 @@
-package com.example.shahp.finalproject.Models.drinksResult;
+package com.example.shahp.finalproject.Models.DrinksResult;
 
 /**
  * Created by shahp on 31/07/2017.
@@ -7,7 +7,7 @@ package com.example.shahp.finalproject.Models.drinksResult;
 import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -25,7 +25,7 @@ public class DrinksResult implements Parcelable
         })
         public DrinksResult createFromParcel(Parcel in) {
             DrinksResult instance = new DrinksResult();
-            in.readList(instance.drinks, (com.example.shahp.finalproject.Models.drinksResult.Drink.class.getClassLoader()));
+            in.readList(instance.drinks, (com.example.shahp.finalproject.Models.DrinksResult.Drink.class.getClassLoader()));
             return instance;
         }
 
