@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.example.shahp.finalproject.MainActivity;
 import com.example.shahp.finalproject.Models.drinksResult.Drink;
 import com.example.shahp.finalproject.R;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
@@ -115,7 +116,30 @@ public class DisplayDrinkFragment extends Fragment {
                         .with(getContext())
                         .load(imageLink)
                         .networkPolicy(NetworkPolicy.OFFLINE)
-                        .into(imDrink);
+                        .into(imDrink, new Callback() {
+                            @Override
+                            public void onSuccess() {
+
+                            }
+
+                            @Override
+                            public void onError() {
+                                //Try again online if cache failed
+                                Picasso.with(getActivity())
+                                        .load(imageLink)
+                                        .into(imDrink, new Callback() {
+                                            @Override
+                                            public void onSuccess() {
+
+                                            }
+
+                                            @Override
+                                            public void onError() {
+                                                Log.v("Picasso","Could not fetch image");
+                                            }
+                                        });
+                            }
+                        });
             }
         }
         catch(Exception e){
