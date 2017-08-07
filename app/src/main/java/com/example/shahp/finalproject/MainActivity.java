@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity
 
     Menu menu;
     ProgressBar progressBar;
-    static InteractorImpl interactor_ = new InteractorImpl();
+    static InteractorImpl interactor_;
     static IDrinksPresenter iDrinksPresenter;
     static IDrinkPresenter iDrinkPresenter;
     static IDrinksView iDrinksView;
@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        interactor_ = new InteractorImpl(getApplicationContext());
         this.iDrinksView = this;
         this.iDrinkView = this;
         setContentView(R.layout.activity_main);
@@ -68,7 +69,6 @@ public class MainActivity extends AppCompatActivity
         progressBar.setVisibility(View.VISIBLE);
         setSupportActionBar(toolbar);
         fragmentManager = getSupportFragmentManager();
-        interactor_ = new InteractorImpl();
         iDrinksPresenter = new DisplayCategoryDrinks(interactor_);
         iDrinksPresenter.attachView(this);
 

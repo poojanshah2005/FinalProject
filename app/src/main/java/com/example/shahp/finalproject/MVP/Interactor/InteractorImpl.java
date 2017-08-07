@@ -1,5 +1,7 @@
 package com.example.shahp.finalproject.MVP.Interactor;
 
+import android.content.Context;
+
 import com.example.shahp.finalproject.Models.AlcoholicResult.AlcoholicResult;
 import com.example.shahp.finalproject.Models.categoryList.CategoryResults;
 import com.example.shahp.finalproject.Models.drinkResult.DrinkResult;
@@ -10,8 +12,14 @@ import com.example.shahp.finalproject.MVP.Service.Consts;
 import com.example.shahp.finalproject.MVP.Service.RequestInterface;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
+import java.io.File;
+import java.io.IOException;
+
 import io.reactivex.Observable;
+import okhttp3.Cache;
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -25,18 +33,33 @@ public class InteractorImpl implements  Interactor {
     static Retrofit retrofit;
     static OkHttpClient okHttpClient;
     RequestInterface requestInterface;
+    static Context context;
 
-    public InteractorImpl() {
+    public InteractorImpl(Context context) {
+        this.context = context;
+
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
 
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 //        File outputDir = context.getCacheDir();
 //        Cache cache = new Cache(outputDir, 50000);
 
+        //setup cache
+        File httpCacheDirectory = new File(context.getCacheDir(), "responses");
+        int cacheSize = 20 * 1024 * 1024; // 20 MiB
+        Cache cache = new Cache(httpCacheDirectory, cacheSize);
+        //add cache to the client
+
+//        okHttpClient = new OkHttpClient.Builder()
+//                .addInterceptor(httpLoggingInterceptor)
+//                .cache(cache)
+//                .build();
+
         okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(httpLoggingInterceptor)
+                .addNetworkInterceptor(REWRITE_CACHE_CONTROL_INTERCEPTOR)
+                .cache(cache)
                 .build();
-
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(Consts.BASE_URL)
@@ -48,6 +71,24 @@ public class InteractorImpl implements  Interactor {
         requestInterface = retrofit.create(RequestInterface.class);
 //        return retrofit.create(RequestInterface.class);
     }
+
+    private static final Interceptor REWRITE_CACHE_CONTROL_INTERCEPTOR = new Interceptor() {
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+            Response originalResponse = chain.proceed(chain.request());
+            if (Utils.isNetworkAvailable(context)) {
+                int maxAge = 60; // read from cache for 1 minute
+                return originalResponse.newBuilder()
+                        .header("Cache-Control", "public, max-age=" + maxAge)
+                        .build();
+            } else {
+                int maxStale = 60 * 60 * 24 * 28; // tolerate 4-weeks stale
+                return originalResponse.newBuilder()
+                        .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
+                        .build();
+            }
+        }
+    };
 
     @Override
     public Observable<CategoryResults> getCategoryList() {

@@ -57,9 +57,9 @@ public class DrinksFragment extends Fragment {
         setRetainInstance(true);
         Bundle b = getArguments();
         this.drinksResult = b.getParcelable("drinksResult");
-        for (Drink drinkResult : drinksResult.getDrinks()) {
-            Log.i("drinkResult 65", drinkResult.getStrDrink());
-        }
+//        for (Drink drinkResult : drinksResult.getDrinks()) {
+//            Log.i("drinkResult 65", drinkResult.getStrDrink());
+//        }
     }
 
     @Override
