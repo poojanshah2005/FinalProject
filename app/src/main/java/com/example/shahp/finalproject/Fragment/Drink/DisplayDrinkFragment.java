@@ -60,7 +60,7 @@ public class DisplayDrinkFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         Bundle b = getArguments();
-        drink = b.getParcelable("drink");
+        drink = b.getParcelable(getString(R.string.drink));
         Log.i("drink/Fragment",drink.getStrDrink());
     }
 
@@ -77,9 +77,9 @@ public class DisplayDrinkFragment extends Fragment {
 
 
         tvDrinkName.setText("Drink Name: "+ drink.getStrDrink());
-        tvGlass.setText(Html.fromHtml("Glass: " +  "<u> " + drink.getStrGlass() + "</u>"));
-        tvCatergories.setText(Html.fromHtml("Category: " + "<u> " +drink.getStrCategory() + "</u>"));
-        tvAlc.setText(Html.fromHtml("Alcoholic: " + "<u> " + drink.getStrAlcoholic() + "</u>"));
+        tvGlass.setText(Html.fromHtml(getString(R.string.glassTitle) +  "<u> " + drink.getStrGlass() + "</u>"));
+        tvCatergories.setText(Html.fromHtml(getString(R.string.category) + "<u> " +drink.getStrCategory() + "</u>"));
+        tvAlc.setText(Html.fromHtml(getString(R.string.Alcoholic) + "<u> " + drink.getStrAlcoholic() + "</u>"));
         tvInstructions.setText("Instructions: " + drink.getStrInstructions());
 
         tvGlass.setOnClickListener(new View.OnClickListener() {
@@ -177,14 +177,11 @@ public class DisplayDrinkFragment extends Fragment {
             row.addView(tv1I);
             row.addView(tv1Q);
             DrinkIngs.addView(row);
-            row.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    TableRow t = (TableRow) view;
-                    TextView firstTextView = (TextView) t.getChildAt(0);
-                    String Ingredient = firstTextView.getText().toString();
-                    MainActivity.displayDrinkByIngredient(Ingredient);
-                }
+            row.setOnClickListener(view -> {
+                TableRow t = (TableRow) view;
+                TextView firstTextView = (TextView) t.getChildAt(0);
+                String Ingredient = firstTextView.getText().toString();
+                MainActivity.displayDrinkByIngredient(Ingredient);
             });
         }
     }

@@ -43,7 +43,7 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.MyViewHolder
         try {
             String imageLink = (String) drinksResult.getDrinks().get(position).getStrDrinkThumb();
             if(imageLink != null) {
-                Log.i("onBindViewHolder", imageLink);
+//                Log.i("onBindViewHolder", imageLink);
                 Picasso
                         .with(context)
                         .load(imageLink)
@@ -81,7 +81,7 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.MyViewHolder
         holder.drinkCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("drinkID",drinksResult.getDrinks().get(position).getIdDrink().toString());
+//                Log.i("drinkID",drinksResult.getDrinks().get(position).getIdDrink().toString());
                 MainActivity.displayDrink(drinksResult.getDrinks().get(position).getIdDrink());
             }
         });

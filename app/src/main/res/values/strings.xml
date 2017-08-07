@@ -8,4 +8,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="message">Drink Time</string>
+    <string name="glassTitle">Glass:</string>
+    <string name="category">Category:</string>
+    <string name="Alcoholic">Alcoholic:</string>
+    <string name="drink">drink</string>
 </resources>
