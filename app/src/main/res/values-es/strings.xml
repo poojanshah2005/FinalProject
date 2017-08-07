@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Proyecto final</string>
+
+    <string name="navigation_drawer_open">Abrir el cajón de navegación</string>
+    <string name="navigation_drawer_close">Cerrar el cajón de navegación</string>
+
+    <string name="action_settings">Ajustes</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hola fragmento en blanco</string>
+    <string name="message">Tiempo de la bebida</string>
+    <string name="glassTitle">Vaso:</string>
+    <string name="category">Categoría:</string>
+    <string name="Alcoholic">Alcohólico:</string>
+    <string name="drink">beber</string>
+</resources>

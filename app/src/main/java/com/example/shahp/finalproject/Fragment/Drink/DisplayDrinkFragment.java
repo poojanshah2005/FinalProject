@@ -60,7 +60,7 @@ public class DisplayDrinkFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         Bundle b = getArguments();
-        drink = b.getParcelable(getString(R.string.drink));
+        drink = b.getParcelable("drink");
         Log.i("drink/Fragment",drink.getStrDrink());
     }
 
