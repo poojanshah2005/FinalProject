@@ -9,7 +9,9 @@ import android.os.Parcel;
 
 import com.google.gson.annotations.Expose;
         import com.google.gson.annotations.SerializedName;
-
+/**
+ * used to get list of Category data types
+ */
 public class Category implements Parcelable
 {
 

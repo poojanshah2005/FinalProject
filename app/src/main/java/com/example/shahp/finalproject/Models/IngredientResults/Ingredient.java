@@ -9,7 +9,9 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
+/**
+ * Ingredient is a data type that the user can filter drink
+ */
 public class Ingredient implements Parcelable
 {
 

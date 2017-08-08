@@ -10,7 +10,9 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
+/**
+ * used to get list of Ingredient data types
+ */
 public class IngredientResults implements Parcelable
 {
 

@@ -20,12 +20,7 @@ import java.util.List;
 import io.realm.Realm;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link DrinksOfflineFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link DrinksOfflineFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Displaying offline drinks
  */
 public class DrinksOfflineFragment extends Fragment {
 
@@ -52,6 +47,10 @@ public class DrinksOfflineFragment extends Fragment {
         return fragment;
     }
 
+    /**
+     * getting list of drinks to be shown form realm
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +59,13 @@ public class DrinksOfflineFragment extends Fragment {
         RealmHelper realmHelper = new RealmHelper(realm);
         drinks = realmHelper.getDrinks();
     }
-
+    /**
+     * Inflate the layout for this fragment
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -68,26 +73,16 @@ public class DrinksOfflineFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_drinks, container, false);
     }
 
+    /**
+     * init the Recycle View
+     * @param view
+     * @param savedInstanceState
+     */
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.fragmentDrinksRecycleView);
         mRecyclerView.setAdapter(new DrinkOfflineAdapter(drinks,getContext()));
         mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 }

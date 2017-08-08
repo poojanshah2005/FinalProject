@@ -11,6 +11,9 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * used to get list of Alcoholic data types
+ */
 public class AlcoholicResult implements Parcelable
 {
 

@@ -21,6 +21,9 @@ import com.squareup.picasso.Picasso;
  * Created by shahp on 02/08/2017.
  */
 
+/**
+ * The adapter is to show drinks when user selects a filter
+ */
 public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.MyViewHolder> {
     DrinksResult drinksResult;
     Context context;
@@ -29,17 +32,31 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.MyViewHolder
         this.context = context;
     }
 
+    /**
+     * This is to inflate the view
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.drink_card,parent,false);
         return new MyViewHolder(v);
     }
 
+    /**
+     * This method would bind each instance a drink to a cardView object
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         String drinkName = drinksResult.getDrinks().get(position).getStrDrink();
 
         holder.tvDrink.setText(drinkName);
+        /**
+         * Image caching
+         */
         try {
             String imageLink = (String) drinksResult.getDrinks().get(position).getStrDrinkThumb();
             if(imageLink != null) {
@@ -78,6 +95,9 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.MyViewHolder
             Log.i("Error", e.getMessage());
             Log.i("Error", String.valueOf(e.getCause()));
         }
+        /**
+         * setting a setOnClickListener on the card
+         */
         holder.drinkCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,6 +112,9 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.MyViewHolder
         return drinksResult.getDrinks().size();
     }
 
+    /**
+     * binding the display elements
+     */
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tvDrink;
         ImageView ivDrinkThumb;

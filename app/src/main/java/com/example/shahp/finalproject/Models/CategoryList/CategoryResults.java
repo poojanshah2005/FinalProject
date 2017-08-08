@@ -12,6 +12,9 @@ package com.example.shahp.finalproject.Models.CategoryList;
         import com.google.gson.annotations.Expose;
         import com.google.gson.annotations.SerializedName;
 
+/**
+ * Category is a data type that the user can filter drink
+ */
 public class CategoryResults implements Parcelable
 {
 

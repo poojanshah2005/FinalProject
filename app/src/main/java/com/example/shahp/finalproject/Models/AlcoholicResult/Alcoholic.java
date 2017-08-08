@@ -10,6 +10,9 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Alcoholic is a data type that the user can filter drink
+ */
 public class Alcoholic implements Parcelable
 {
 

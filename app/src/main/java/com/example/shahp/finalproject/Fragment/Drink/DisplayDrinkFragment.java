@@ -27,11 +27,7 @@ import com.squareup.picasso.Picasso;
 import io.realm.Realm;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * to handle interaction events.
- * Use the {@link DisplayDrinkFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * this fragment with display information about the drink to the user
  */
 public class DisplayDrinkFragment extends Fragment {
     com.example.shahp.finalproject.Models.DrinkResult.Drink drink;
@@ -63,6 +59,10 @@ public class DisplayDrinkFragment extends Fragment {
         return fragment;
     }
 
+    /**
+     * this would passed a drink object from the realm or the api, the fragment does not need to know
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,6 +85,11 @@ public class DisplayDrinkFragment extends Fragment {
         }
     }
 
+    /**
+     * this method would bind the xml objest and changes their values
+     * @param view
+     * @param savedInstanceState
+     */
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -114,13 +119,13 @@ public class DisplayDrinkFragment extends Fragment {
         Log.i("realm.containsDrink", String.valueOf(realmHelper.containsDrink(drink.getIdDrink())));
 
         checkButtons();
-
+        // save button from realm
         saveButton.setOnClickListener(view14 -> {
             realmHelper.saveData(drink);
             Toast.makeText(getContext(),"Drink has been saved to the database.",Toast.LENGTH_SHORT).show();
             checkButtons();
         });
-
+        //delete button from realm
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -133,6 +138,7 @@ public class DisplayDrinkFragment extends Fragment {
 
         initRows();
 
+        //image caching
         try {
             String imageLink = (String) drink.getStrDrinkThumb();
             if(imageLink != null) {
@@ -173,6 +179,9 @@ public class DisplayDrinkFragment extends Fragment {
         }
     }
 
+    /**
+     * checking state of buttons
+     */
     private void checkButtons() {
         if(realmHelper.containsDrink(drink.getIdDrink())){
             saveButton.setVisibility(View.INVISIBLE);
@@ -183,6 +192,9 @@ public class DisplayDrinkFragment extends Fragment {
         }
     }
 
+    /**
+     * adding rows of Ingredients to the table
+     */
     private void initRows() {
         addRow(drink.getStrIngredient1(), drink.getStrMeasure1());
         addRow(drink.getStrIngredient2(), drink.getStrMeasure2());
@@ -201,6 +213,11 @@ public class DisplayDrinkFragment extends Fragment {
         addRow(drink.getStrIngredient15(), drink.getStrMeasure15());
     }
 
+    /**
+     * create row in the table in the view
+     * @param ingredient
+     * @param measurement
+     */
     private void addRow(String ingredient, String measurement) {
         if(ingredient.length()> 1) {
             TableRow row = new TableRow(getContext());
@@ -233,6 +250,9 @@ public class DisplayDrinkFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_display_drink, container, false);
     }
 
+    /**
+     * not really used much just overriding
+     */
     @Override
     public void onDetach() {
         super.onDetach();

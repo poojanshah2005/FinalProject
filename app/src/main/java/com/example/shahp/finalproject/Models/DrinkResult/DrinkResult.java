@@ -11,6 +11,9 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * is used to get information about one drink.
+ */
 public class DrinkResult implements Parcelable
 {
 

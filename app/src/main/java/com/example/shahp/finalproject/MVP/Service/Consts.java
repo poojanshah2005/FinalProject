@@ -4,6 +4,9 @@ package com.example.shahp.finalproject.MVP.Service;
  * Created by shahp on 31/07/2017.
  */
 
+/**
+ * Contansts for the api
+ */
 public class Consts {
     public static final String BASE_URL = "http://www.thecocktaildb.com/api/json/v1/1/" ;
     public static final String CategoryList = "list.php?c=list";

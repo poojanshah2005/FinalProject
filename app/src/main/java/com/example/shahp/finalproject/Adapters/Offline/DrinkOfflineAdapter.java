@@ -23,6 +23,9 @@ import java.util.List;
  * Created by shahp on 02/08/2017.
  */
 
+/**
+ * this adapter is used when viewing offline drinks
+ */
 public class DrinkOfflineAdapter extends RecyclerView.Adapter<DrinkOfflineAdapter.MyViewHolder> {
     List<Drink> drinks;
     Context context;
@@ -31,12 +34,23 @@ public class DrinkOfflineAdapter extends RecyclerView.Adapter<DrinkOfflineAdapte
         this.context = context;
     }
 
+    /**
+     * inflating the view
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.drink_card,parent,false);
         return new MyViewHolder(v);
     }
 
+    /**
+     * binding each instance of a drink to a card
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         String drinkName = drinks.get(position).getStrDrink();
@@ -94,7 +108,7 @@ public class DrinkOfflineAdapter extends RecyclerView.Adapter<DrinkOfflineAdapte
     public int getItemCount() {
         return drinks.size();
     }
-
+    //binding display objects
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tvDrink;
         ImageView ivDrinkThumb;

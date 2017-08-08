@@ -18,6 +18,10 @@ import io.realm.RealmConfiguration;
  * Created by shahp on 28/07/2017.
  */
 
+/**
+ * used to set up Realm
+ * and Picasso Caching
+ */
 public class MyApplication extends Application {
     public static final String PREFS_NAME = "MyPrefsFile";
     public static final String KEY = "KEY";

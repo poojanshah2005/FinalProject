@@ -15,17 +15,10 @@ import com.example.shahp.finalproject.Models.DrinksResult.DrinksResult;
 import com.example.shahp.finalproject.R;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link DrinksFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link DrinksFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Displaying all drinks based on the users filtering
  */
 public class DrinksFragment extends Fragment {
-
-//    private OnFragmentInteractionListener mListener;
-
+    //initialzing values to be used
     private RecyclerView mRecyclerView;
     DrinksResult drinksResult;
 
@@ -47,6 +40,10 @@ public class DrinksFragment extends Fragment {
         return fragment;
     }
 
+    /**
+     * getting list of drinks to be shown
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,33 +55,30 @@ public class DrinksFragment extends Fragment {
 //        }
     }
 
+    /**
+     * Inflate the layout for this fragment
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_drinks, container, false);
     }
 
+    /**
+     * init the Recycle View
+     * @param view
+     * @param savedInstanceState
+     */
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.fragmentDrinksRecycleView);
         mRecyclerView.setAdapter(new DrinkAdapter(drinksResult,getContext()));
         mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 }

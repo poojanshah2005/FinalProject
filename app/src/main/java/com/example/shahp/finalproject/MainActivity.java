@@ -49,7 +49,9 @@ import io.reactivex.schedulers.Schedulers;
 
 import static com.example.shahp.finalproject.MVP.Service.Utils.isNetworkAvailable;
 
-
+/**
+ * MainActivity where presenters are called from
+ */
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, IDrinksView, IDrinkView, IDrinksViewOffline {
 
@@ -66,6 +68,10 @@ public class MainActivity extends AppCompatActivity
     static NavigationView navigationView;
     static Context context;
 
+    /**
+     * Creating the menu and population them and inflating the view
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,6 +131,9 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    /**
+     * displaying init home page
+     */
     private void showHome() {
         if(isNetworkAvailable(this)){
             displayDrinkByCategory("Ordinary Drink");
@@ -132,7 +141,9 @@ public class MainActivity extends AppCompatActivity
             displayDrinksOffline();
         }
     }
-
+    /**
+     * displaying init home page, when user selects delete from realm
+     */
     public static void showHomestatic() {
         if(isNetworkAvailable(context)){
             displayDrinkByCategory("Ordinary Drink");
@@ -140,32 +151,27 @@ public class MainActivity extends AppCompatActivity
             displayDrinksOffline();
         }
     }
-
+    /**
+     * init offline menu
+     */
     private void menuOfflineDrinks() {
-//        SubMenu ingredientMenu = menu.addSubMenu("Offline");
-//
-//                ingredientMenu.setHeaderTitle("Offline");
-
         int i = 1;
-
             i++;
             menu.add("Offline Drinks").setIcon(R.drawable.ic_local_drink_48px).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem menuItem) {
-
-//                    Answers.getInstance().logCustom(new CustomEvent("Ingredient Selected")
-//                            .putCustomAttribute("Ingredient",ingredient.getStrIngredient1()));
-                    displayDrinksOffline();;
+                    Answers.getInstance().logCustom(new CustomEvent("Offline Drinks")
+                            .putCustomAttribute("Offline Drinks","Offline Drinks"));
+                    displayDrinksOffline();
                     return false;
                 }
             });
     }
 
-    public static void showSaved(){
-
-        navigationView.getMenu().getItem(0).setChecked(true);
-    }
-
+    /**
+     * init Ingredient Menu
+     * @param ingredientResults
+     */
     private void onSuccessgGetIngredientList(IngredientResults ingredientResults) {
         progressBar.setVisibility(View.VISIBLE);
         SubMenu ingredientMenu = menu.addSubMenu("Ingredients");
@@ -193,7 +199,10 @@ public class MainActivity extends AppCompatActivity
         progressBar.setVisibility(View.INVISIBLE);
     }
 
-
+    /**
+     * init Glass Menu
+     * @param glassResults
+     */
     private void onSuccessgGetGlassList(GlassResults glassResults) {
         progressBar.setVisibility(View.VISIBLE);
         SubMenu glassMenu = menu.addSubMenu("Glass");
@@ -220,6 +229,10 @@ public class MainActivity extends AppCompatActivity
         progressBar.setVisibility(View.INVISIBLE);
     }
 
+    /**
+     * init Alcoholic Menu
+     * @param alcoholicResult
+     */
     private void onSuccessgGetAlcoholicList(AlcoholicResult alcoholicResult) {
         progressBar.setVisibility(View.VISIBLE);
         SubMenu alcoholicMenu = menu.addSubMenu("Alcoholic");
@@ -251,6 +264,10 @@ public class MainActivity extends AppCompatActivity
         progressBar.setVisibility(View.INVISIBLE);
     }
 
+    /**
+     * init Category Menu
+     * @param categoryResults
+     */
     private void onSuccessgGetCategoryList(CategoryResults categoryResults) {
 
         progressBar.setVisibility(View.VISIBLE);
@@ -279,13 +296,18 @@ public class MainActivity extends AppCompatActivity
         progressBar.setVisibility(View.INVISIBLE);
     }
 
+    /**
+     * on error when datadoes not come thought
+     * @param throwable
+     */
     private void OnError(Throwable throwable) {
         Log.i("OnError", throwable.getMessage());
         progressBar.setVisibility(View.INVISIBLE);
     }
-    
 
-
+    /**
+     * prevent exit application when clicking back
+     */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -296,6 +318,11 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * is required to be override
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -303,6 +330,11 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    /**
+     * is required to be override
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -317,7 +349,11 @@ public class MainActivity extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
-
+    /**
+     * is required to be override
+     * @param item
+     * @return
+     */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -345,6 +381,10 @@ if (id == R.id.nav_camera) {
         return true;
     }
 
+    /**
+     * getting drinksResult and display results
+     * @param drinksResult
+     */
     @Override
     public void onFetchDataSuccess(DrinksResult drinksResult) {
         Log.i("onFetchDataSuccess","onFetchDataSuccess");
@@ -358,7 +398,10 @@ if (id == R.id.nav_camera) {
                 .disallowAddToBackStack()
                 .commit();
     }
-
+    /**
+     * getting Drink and display results
+     * @param drinkResult
+     */
     @Override
     public void onFetchDataSuccess(DrinkResult drinkResult) {
 
@@ -373,9 +416,11 @@ if (id == R.id.nav_camera) {
                     .replace(R.id.content_main, displayDrinkFragment)
                     .disallowAddToBackStack()
                     .commit();
-
     }
 
+    /**
+     * displaying offline drinks to user
+     */
     @Override
     public void onFetchDataSuccess() {
 //        Answers.getInstance().logCustom(new CustomEvent("Displaying Drink")
@@ -389,6 +434,10 @@ if (id == R.id.nav_camera) {
                 .commit();
     }
 
+    /**
+     * shows errors
+     * @param throwable
+     */
     @Override
     public void onFetchDataFailure(Throwable throwable) {
         Log.i("onFetchDataFailure","onFetchDataFailure");
@@ -396,22 +445,34 @@ if (id == R.id.nav_camera) {
 
     }
 
+    /**
+     * just got these methods due to interface.
+     */
     @Override
     public void onFetchDataCompleted() {
         Log.i("ClassTrack","onFetchDataCompleted");
     }
-
+    /**
+     * just got these methods due to interface.
+     */
     @Override
     public void onFetchDataInProgress() {
         Log.i("ClassTrack","onFetchDataInProgress");
     }
 
+    /**
+     * displaying a drink
+     */
     public static void displayDrink(String idDrink) {
         iDrinkPresenter =  new DisplayDrink(interactor_);
         iDrinkPresenter.attachView(iDrinkView);
         iDrinkPresenter.performDrinkDisplay(idDrink);
     }
 
+    /**
+     * displaying drink offline
+     * @param idDrink
+     */
     public static void displayDrinkOffline(String idDrink) {
         DisplayDrinkFragment displayDrinkFragment = new DisplayDrinkFragment();
         Bundle args = new Bundle();
@@ -423,6 +484,9 @@ if (id == R.id.nav_camera) {
                 .commit();
     }
 
+    /**
+     * displaying a drink By Ingredient
+     */
     public static void displayDrinkByIngredient(String ingredient) {
         Log.i("DISPLAYDRINKS",ingredient);
         Answers.getInstance().logCustom(new CustomEvent("displayDrinkByIngredient")
@@ -432,19 +496,26 @@ if (id == R.id.nav_camera) {
         iDrinksPresenter.performListDisplay(ingredient);
     }
 
+    /**
+     * displaying a drink By Alcoholic
+     */
     public static void displayDrinkByAlcoholic(String alcoholic) {
         Log.i("DISPLAYDRINKS",alcoholic);
         iDrinksPresenter =  new DisplayAlcoholicDrinks(interactor_);
         iDrinksPresenter.attachView(iDrinksView);
         iDrinksPresenter.performListDisplay(alcoholic);
     }
-
+    /**
+     * displaying a drinks offline
+     */
     public static void displayDrinksOffline() {
         iDrinksPresenterOffline = new DrinksOffline();
         iDrinksPresenterOffline.attachView(iDrinksViewOffline);
         iDrinksPresenterOffline.performListDisplay();
     }
-
+    /**
+     * displaying a drink By Category
+     */
     public static void displayDrinkByCategory(String category) {
         Log.i("DISPLAYDRINKS",category);
         Answers.getInstance().logCustom(new CustomEvent("displayDrinkByCategory")
@@ -454,6 +525,9 @@ if (id == R.id.nav_camera) {
         iDrinksPresenter.performListDisplay(category);
     }
 
+    /**
+     * displaying a drink By Glass
+     */
     public static void displayDrinkByGlass(String glass) {
         Log.i("DISPLAYDRINKS",glass);
         Answers.getInstance().logCustom(new CustomEvent("displayDrinkByGlass")
@@ -462,7 +536,5 @@ if (id == R.id.nav_camera) {
         iDrinksPresenter.attachView(iDrinksView);
         iDrinksPresenter.performListDisplay(glass);
     }
-
-
 
 }

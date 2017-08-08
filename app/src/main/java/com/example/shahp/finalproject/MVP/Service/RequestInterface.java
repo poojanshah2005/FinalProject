@@ -16,6 +16,9 @@ import retrofit2.http.Query;
  * Created by shahp on 31/07/2017.
  */
 
+/**
+ * Request methods
+ */
 public interface RequestInterface {
 
     @GET(Consts.CategoryList)
@@ -34,14 +37,6 @@ public interface RequestInterface {
     Observable<DrinksResult> getByGlass(@Query("g") String glass);
     @GET(Consts.FILTER)
     Observable<DrinksResult> getByCategory(@Query("c") String category);
-    @GET(Consts.FILTER)
-    Call<DrinksResult> getCallByCategory(@Query("c") String category);
-    @GET(Consts.FILTER)
-    Call<DrinksResult> getCallByIngredient(@Query("i") String ingredient);
-    @GET(Consts.FILTER)
-    Call<DrinksResult> getCallByAlcoholic(@Query("a") String alcoholic);
-    @GET(Consts.FILTER)
-    Call<DrinksResult> getCallByGlass(@Query("g") String glass);
     @GET(Consts.BY_ID)
     Observable<DrinkResult> getDrinkById(@Query("i") String id);
 }

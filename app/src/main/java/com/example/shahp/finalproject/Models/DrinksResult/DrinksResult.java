@@ -10,7 +10,9 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
+/**
+ * this model is used to get a list of drink, based on the users filtering of drinks.
+ */
 public class DrinksResult implements Parcelable
 {
 

@@ -11,6 +11,9 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * is used to get a glass types, which the user can use to filter
+ */
 public class GlassResults implements Parcelable
 {
 
