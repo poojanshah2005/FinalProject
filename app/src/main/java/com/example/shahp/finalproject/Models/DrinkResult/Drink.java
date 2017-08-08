@@ -11,9 +11,15 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Drink implements Parcelable
+import java.util.Date;
+
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
+public class Drink extends RealmObject implements Parcelable
 {
 
+    @PrimaryKey
     @SerializedName("idDrink")
     @Expose
     private String idDrink;
@@ -34,7 +40,7 @@ public class Drink implements Parcelable
     private String strInstructions;
     @SerializedName("strDrinkThumb")
     @Expose
-    private Object strDrinkThumb;
+    private String strDrinkThumb;
     @SerializedName("strIngredient1")
     @Expose
     private String strIngredient1;
@@ -127,7 +133,7 @@ public class Drink implements Parcelable
     private String strMeasure15;
     @SerializedName("dateModified")
     @Expose
-    private Object dateModified;
+    private String dateModified;
     public final static Parcelable.Creator<Drink> CREATOR = new Creator<Drink>() {
 
 
@@ -142,7 +148,7 @@ public class Drink implements Parcelable
             instance.strAlcoholic = ((String) in.readValue((String.class.getClassLoader())));
             instance.strGlass = ((String) in.readValue((String.class.getClassLoader())));
             instance.strInstructions = ((String) in.readValue((String.class.getClassLoader())));
-            instance.strDrinkThumb = ((Object) in.readValue((Object.class.getClassLoader())));
+            instance.strDrinkThumb = ((String) in.readValue((String.class.getClassLoader())));
             instance.strIngredient1 = ((String) in.readValue((String.class.getClassLoader())));
             instance.strIngredient2 = ((String) in.readValue((String.class.getClassLoader())));
             instance.strIngredient3 = ((String) in.readValue((String.class.getClassLoader())));
@@ -173,7 +179,7 @@ public class Drink implements Parcelable
             instance.strMeasure13 = ((String) in.readValue((String.class.getClassLoader())));
             instance.strMeasure14 = ((String) in.readValue((String.class.getClassLoader())));
             instance.strMeasure15 = ((String) in.readValue((String.class.getClassLoader())));
-            instance.dateModified = ((Object) in.readValue((Object.class.getClassLoader())));
+            instance.dateModified = ((String) in.readValue((String.class.getClassLoader())));
             return instance;
         }
 
@@ -232,11 +238,11 @@ public class Drink implements Parcelable
         this.strInstructions = strInstructions;
     }
 
-    public Object getStrDrinkThumb() {
+    public String getStrDrinkThumb() {
         return strDrinkThumb;
     }
 
-    public void setStrDrinkThumb(Object strDrinkThumb) {
+    public void setStrDrinkThumb(String strDrinkThumb) {
         this.strDrinkThumb = strDrinkThumb;
     }
 
@@ -480,11 +486,11 @@ public class Drink implements Parcelable
         this.strMeasure15 = strMeasure15;
     }
 
-    public Object getDateModified() {
+    public String getDateModified() {
         return dateModified;
     }
 
-    public void setDateModified(Object dateModified) {
+    public void setDateModified(String dateModified) {
         this.dateModified = dateModified;
     }
 

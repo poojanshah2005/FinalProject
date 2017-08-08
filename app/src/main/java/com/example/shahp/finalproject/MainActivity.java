@@ -1,9 +1,7 @@
 package com.example.shahp.finalproject;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -20,6 +18,7 @@ import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.CustomEvent;
 import com.example.shahp.finalproject.Fragment.Drink.DisplayDrinkFragment;
 import com.example.shahp.finalproject.Fragment.Drinks.DrinksFragment;
+import com.example.shahp.finalproject.Fragment.Drinks.DrinksOfflineFragment;
 import com.example.shahp.finalproject.MVP.Drink.DisplayDrink;
 import com.example.shahp.finalproject.MVP.Drink.IDrinkPresenter;
 import com.example.shahp.finalproject.MVP.Drink.IDrinkView;
@@ -30,6 +29,9 @@ import com.example.shahp.finalproject.MVP.Drinks.DisplayIngredientDrinks;
 import com.example.shahp.finalproject.MVP.Drinks.IDrinksPresenter;
 import com.example.shahp.finalproject.MVP.Drinks.IDrinksView;
 import com.example.shahp.finalproject.MVP.Interactor.InteractorImpl;
+import com.example.shahp.finalproject.MVP.OfflineDrinks.IDrinksPresenterOffline;
+import com.example.shahp.finalproject.MVP.OfflineDrinks.IDrinksViewOffline;
+import com.example.shahp.finalproject.MVP.OfflineDrinks.DrinksOffline;
 import com.example.shahp.finalproject.Models.AlcoholicResult.Alcoholic;
 import com.example.shahp.finalproject.Models.AlcoholicResult.AlcoholicResult;
 import com.example.shahp.finalproject.Models.CategoryList.Category;
@@ -46,15 +48,17 @@ import io.reactivex.schedulers.Schedulers;
 
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, IDrinksView, IDrinkView {
+        implements NavigationView.OnNavigationItemSelectedListener, IDrinksView, IDrinkView, IDrinksViewOffline {
 
     Menu menu;
     ProgressBar progressBar;
     static InteractorImpl interactor_;
     static IDrinksPresenter iDrinksPresenter;
     static IDrinkPresenter iDrinkPresenter;
+    static IDrinksPresenterOffline iDrinksPresenterOffline;
     static IDrinksView iDrinksView;
     static IDrinkView iDrinkView;
+    static IDrinksViewOffline iDrinksViewOffline;
     static android.support.v4.app.FragmentManager fragmentManager;
     NavigationView navigationView;
 
@@ -64,6 +68,7 @@ public class MainActivity extends AppCompatActivity
         interactor_ = new InteractorImpl(getApplicationContext());
         this.iDrinksView = this;
         this.iDrinkView = this;
+        this.iDrinksViewOffline = this;
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         progressBar = (ProgressBar) findViewById(R.id.progressBar2);
@@ -72,6 +77,8 @@ public class MainActivity extends AppCompatActivity
         fragmentManager = getSupportFragmentManager();
         iDrinksPresenter = new DisplayCategoryDrinks(interactor_);
         iDrinksPresenter.attachView(this);
+
+
 
 
         interactor_.getCategoryList()
@@ -108,6 +115,27 @@ public class MainActivity extends AppCompatActivity
 
         displayDrinkByCategory("Ordinary Drink");
 
+        menuOfflineDrinks();
+
+    }
+
+    private void menuOfflineDrinks() {
+        SubMenu ingredientMenu = menu.addSubMenu("Offline");
+        ingredientMenu.setHeaderTitle("Offline");
+
+        int i = 1;
+
+            i++;
+            ingredientMenu.add("Offline Drinks").setIcon(R.drawable.ic_local_drink_48px).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem menuItem) {
+
+//                    Answers.getInstance().logCustom(new CustomEvent("Ingredient Selected")
+//                            .putCustomAttribute("Ingredient",ingredient.getStrIngredient1()));
+                    displayDrinksOffline();;
+                    return false;
+                }
+            });
     }
 
     private void onSuccessgGetIngredientList(IngredientResults ingredientResults) {
@@ -321,6 +349,19 @@ if (id == R.id.nav_camera) {
     }
 
     @Override
+    public void onFetchDataSuccess() {
+//        Answers.getInstance().logCustom(new CustomEvent("Displaying Drink")
+//                .putCustomAttribute("Drink", drink.getStrDrink()));
+        Bundle args = new Bundle();
+        DrinksOfflineFragment drinksOfflineFragment = new DrinksOfflineFragment();
+        drinksOfflineFragment.setArguments(args);
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_main, drinksOfflineFragment)
+                .disallowAddToBackStack()
+                .commit();
+    }
+
+    @Override
     public void onFetchDataFailure(Throwable throwable) {
         Log.i("onFetchDataFailure","onFetchDataFailure");
         Log.i("onFetchDataFailure",throwable.getMessage());
@@ -357,6 +398,12 @@ if (id == R.id.nav_camera) {
         iDrinksPresenter =  new DisplayAlcoholicDrinks(interactor_);
         iDrinksPresenter.attachView(iDrinksView);
         iDrinksPresenter.performListDisplay(alcoholic);
+    }
+
+    public static void displayDrinksOffline() {
+        iDrinksPresenterOffline = new DrinksOffline();
+        iDrinksPresenterOffline.attachView(iDrinksViewOffline);
+        iDrinksPresenterOffline.performListDisplay();
     }
 
     public static void displayDrinkByCategory(String category) {

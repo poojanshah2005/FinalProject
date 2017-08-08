@@ -9,17 +9,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.shahp.finalproject.MVP.Service.RealmHelper;
 import com.example.shahp.finalproject.MainActivity;
 import com.example.shahp.finalproject.R;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
+
+import io.realm.Realm;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,6 +38,9 @@ public class DisplayDrinkFragment extends Fragment {
     ImageView imDrink;
     TextView tvDrinkName, tvInstructions, tvGlass, tvCatergories, tvAlc;
     TableLayout DrinkIngs;
+    Button saveButton;
+    Realm realm;
+    RealmHelper realmHelper;
     int a = 70;
     TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
 
@@ -59,6 +67,8 @@ public class DisplayDrinkFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+        realm = Realm.getDefaultInstance();
+        realmHelper = new RealmHelper(realm);
         Bundle b = getArguments();
         drink = b.getParcelable("drink");
         Log.i("drink/Fragment",drink.getStrDrink());
@@ -74,6 +84,7 @@ public class DisplayDrinkFragment extends Fragment {
         tvCatergories =  view.findViewById(R.id.tvCatergories);
         tvAlc =  view.findViewById(R.id.tvAlc);
         tvInstructions =  view.findViewById(R.id.tvInstructions);
+        saveButton = view.findViewById(R.id.btnSave);
 
 
         tvDrinkName.setText("Drink Name: "+ drink.getStrDrink());
@@ -82,25 +93,15 @@ public class DisplayDrinkFragment extends Fragment {
         tvAlc.setText(Html.fromHtml(getString(R.string.Alcoholic) + "<u> " + drink.getStrAlcoholic() + "</u>"));
         tvInstructions.setText("Instructions: " + drink.getStrInstructions());
 
-        tvGlass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MainActivity.displayDrinkByGlass(drink.getStrGlass());
-            }
-        });
+        tvGlass.setOnClickListener(view13 -> MainActivity.displayDrinkByGlass(drink.getStrGlass()));
 
-        tvCatergories.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MainActivity.displayDrinkByCategory(drink.getStrCategory());
-            }
-        });
+        tvCatergories.setOnClickListener(view12 -> MainActivity.displayDrinkByCategory(drink.getStrCategory()));
 
-        tvAlc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MainActivity.displayDrinkByAlcoholic(drink.getStrAlcoholic());
-            }
+        tvAlc.setOnClickListener(view1 -> MainActivity.displayDrinkByAlcoholic(drink.getStrAlcoholic()));
+
+        saveButton.setOnClickListener(view14 -> {
+            realmHelper.saveData(drink);
+            Toast.makeText(getContext(),"Drink has been saved to the database.",Toast.LENGTH_SHORT).show();
         });
 
         initRows();
