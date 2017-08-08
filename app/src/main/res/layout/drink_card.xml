@@ -6,7 +6,9 @@
     android:background="@color/cardview_light_background"
     android:padding="10dp"
     android:minHeight="100dp"
-    android:maxHeight="150dp">
+    android:maxHeight="170dp"
+    android:minWidth="100dp"
+    android:maxWidth="170dp">
 
     <android.support.v7.widget.CardView
         android:id="@+id/drinkCard"
@@ -24,8 +26,6 @@
                 android:id="@+id/tvDrink"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:height="30dp"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF" />
 
@@ -38,11 +38,8 @@
                 android:layout_centerHorizontal="true"
                 android:maxHeight="170dp"
                 android:maxWidth="170dp"
-                android:minHeight="100dp"
-                android:minWidth="100dp"
-                android:layout_marginBottom="30dp"/>
-
-
+                android:minHeight="170dp"
+                android:minWidth="170dp" />
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>
