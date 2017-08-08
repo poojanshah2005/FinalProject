@@ -85,7 +85,8 @@ public class DrinkOfflineAdapter extends RecyclerView.Adapter<DrinkOfflineAdapte
             @Override
             public void onClick(View view) {
 //                Log.i("drinkID",drinksResult.getDrinks().get(position).getIdDrink().toString());
-//                MainActivity.displayDrink(drinks.get(position).getIdDrink());
+                String id = drinks.get(position).getIdDrink();
+                MainActivity.displayDrinkOffline(id);
             }
         });
     }

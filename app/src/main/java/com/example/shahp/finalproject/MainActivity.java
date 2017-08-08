@@ -17,6 +17,7 @@ import android.widget.ProgressBar;
 import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.CustomEvent;
 import com.example.shahp.finalproject.Fragment.Drink.DisplayDrinkFragment;
+import com.example.shahp.finalproject.Fragment.Drink.DisplayDrinkFragmentOffline;
 import com.example.shahp.finalproject.Fragment.Drinks.DrinksFragment;
 import com.example.shahp.finalproject.Fragment.Drinks.DrinksOfflineFragment;
 import com.example.shahp.finalproject.MVP.Drink.DisplayDrink;
@@ -382,6 +383,17 @@ if (id == R.id.nav_camera) {
         iDrinkPresenter =  new DisplayDrink(interactor_);
         iDrinkPresenter.attachView(iDrinkView);
         iDrinkPresenter.performDrinkDisplay(idDrink);
+    }
+
+    public static void displayDrinkOffline(String idDrink) {
+        DisplayDrinkFragmentOffline displayDrinkFragmentOffline = new DisplayDrinkFragmentOffline();
+        Bundle args = new Bundle();
+        args.putString("drink", idDrink);
+        displayDrinkFragmentOffline.setArguments(args);
+        fragmentManager.beginTransaction()
+                .replace(R.id.content_main, displayDrinkFragmentOffline)
+                .disallowAddToBackStack()
+                .commit();
     }
 
     public static void displayDrinkByIngredient(String ingredient) {
