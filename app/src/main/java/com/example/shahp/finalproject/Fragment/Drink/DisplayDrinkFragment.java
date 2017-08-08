@@ -70,7 +70,15 @@ public class DisplayDrinkFragment extends Fragment {
         realm = Realm.getDefaultInstance();
         realmHelper = new RealmHelper(realm);
         Bundle b = getArguments();
-        drink = b.getParcelable("drink");
+
+        if(b.containsKey("drinkID")) {
+            String id = b.getString("drinkID");
+            Realm realm = Realm.getDefaultInstance();
+            RealmHelper realmHelper = new RealmHelper(realm);
+            drink = realmHelper.getDrink(id);
+            Log.i("drink/Fragment", drink.getStrDrink());
+        }else {
+        drink = b.getParcelable("drink");}
         Log.i("drink/Fragment",drink.getStrDrink());
     }
 

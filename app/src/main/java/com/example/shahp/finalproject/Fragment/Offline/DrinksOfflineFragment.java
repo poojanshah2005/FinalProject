@@ -1,4 +1,4 @@
-package com.example.shahp.finalproject.Fragment.Drinks;
+package com.example.shahp.finalproject.Fragment.Offline;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,14 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.shahp.finalproject.Adapters.DrinkAdapter;
-import com.example.shahp.finalproject.Adapters.DrinkOfflineAdapter;
+import com.example.shahp.finalproject.Adapters.Offline.DrinkOfflineAdapter;
 import com.example.shahp.finalproject.MVP.Service.RealmHelper;
 import com.example.shahp.finalproject.Models.DrinkResult.Drink;
-import com.example.shahp.finalproject.Models.DrinksResult.DrinksResult;
 import com.example.shahp.finalproject.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.Realm;

@@ -1,4 +1,4 @@
-package com.example.shahp.finalproject.Fragment.Drink;
+package com.example.shahp.finalproject.Fragment.Offline;
 
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -70,7 +70,7 @@ public class DisplayDrinkFragmentOffline extends Fragment {
         realm = Realm.getDefaultInstance();
         realmHelper = new RealmHelper(realm);
         Bundle b = getArguments();
-        String id = b.getString("drink");
+        String id = b.getString("drinkID");
         Realm realm = Realm.getDefaultInstance();
         RealmHelper realmHelper = new RealmHelper(realm);
         drink = realmHelper.getDrink(id);

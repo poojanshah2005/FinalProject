@@ -1,4 +1,4 @@
-package com.example.shahp.finalproject.Adapters;
+package com.example.shahp.finalproject.Adapters.Offline;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;
@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.example.shahp.finalproject.MainActivity;
 import com.example.shahp.finalproject.Models.DrinkResult.Drink;
-import com.example.shahp.finalproject.Models.DrinksResult.DrinksResult;
 import com.example.shahp.finalproject.R;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;

@@ -17,9 +17,9 @@ import android.widget.ProgressBar;
 import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.CustomEvent;
 import com.example.shahp.finalproject.Fragment.Drink.DisplayDrinkFragment;
-import com.example.shahp.finalproject.Fragment.Drink.DisplayDrinkFragmentOffline;
+import com.example.shahp.finalproject.Fragment.Offline.DisplayDrinkFragmentOffline;
 import com.example.shahp.finalproject.Fragment.Drinks.DrinksFragment;
-import com.example.shahp.finalproject.Fragment.Drinks.DrinksOfflineFragment;
+import com.example.shahp.finalproject.Fragment.Offline.DrinksOfflineFragment;
 import com.example.shahp.finalproject.MVP.Drink.DisplayDrink;
 import com.example.shahp.finalproject.MVP.Drink.IDrinkPresenter;
 import com.example.shahp.finalproject.MVP.Drink.IDrinkView;
@@ -386,12 +386,12 @@ if (id == R.id.nav_camera) {
     }
 
     public static void displayDrinkOffline(String idDrink) {
-        DisplayDrinkFragmentOffline displayDrinkFragmentOffline = new DisplayDrinkFragmentOffline();
+        DisplayDrinkFragment displayDrinkFragment = new DisplayDrinkFragment();
         Bundle args = new Bundle();
-        args.putString("drink", idDrink);
-        displayDrinkFragmentOffline.setArguments(args);
+        args.putString("drinkID", idDrink);
+        displayDrinkFragment.setArguments(args);
         fragmentManager.beginTransaction()
-                .replace(R.id.content_main, displayDrinkFragmentOffline)
+                .replace(R.id.content_main, displayDrinkFragment)
                 .disallowAddToBackStack()
                 .commit();
     }
