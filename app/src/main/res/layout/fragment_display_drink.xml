@@ -108,5 +108,15 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true" />
 
+                <Button
+                    android:id="@+id/btnDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvAlc"
+                    android:text="Delete"
+                    android:gravity="center"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true" />
+
             </RelativeLayout>
 </ScrollView>

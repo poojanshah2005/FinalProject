@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.shahp.finalproject.Adapters.Offline.DrinkOfflineAdapter;
-import com.example.shahp.finalproject.MVP.Service.RealmHelper;
+import com.example.shahp.finalproject.MVP.Service.Realm.RealmHelper;
 import com.example.shahp.finalproject.Models.DrinkResult.Drink;
 import com.example.shahp.finalproject.R;
 

@@ -1,4 +1,4 @@
-package com.example.shahp.finalproject.MVP.Service;
+package com.example.shahp.finalproject.MVP.Service.Realm;
 
 import com.example.shahp.finalproject.Models.DrinkResult.Drink;
 
@@ -45,6 +45,19 @@ public class RealmHelper {
 
     public List<Drink> getDrinks() {
         return realm.where(Drink.class).findAll();
+    }
+
+    public boolean containsDrink(String idDrink){
+        Drink drink = realm.where(Drink.class).contains("idDrink",idDrink).findFirst();
+        if(drink == null) {
+            return false;
+        }
+        else if (drink.isValid()){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
 

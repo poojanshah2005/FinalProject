@@ -17,7 +17,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.shahp.finalproject.MVP.Service.RealmHelper;
+import com.example.shahp.finalproject.MVP.Service.Realm.RealmHelper;
 import com.example.shahp.finalproject.MainActivity;
 import com.example.shahp.finalproject.R;
 import com.squareup.picasso.Callback;
@@ -38,7 +38,7 @@ public class DisplayDrinkFragment extends Fragment {
     ImageView imDrink;
     TextView tvDrinkName, tvInstructions, tvGlass, tvCatergories, tvAlc;
     TableLayout DrinkIngs;
-    Button saveButton;
+    Button saveButton, deleteButton;
     Realm realm;
     RealmHelper realmHelper;
     int a = 70;
@@ -93,6 +93,7 @@ public class DisplayDrinkFragment extends Fragment {
         tvAlc =  view.findViewById(R.id.tvAlc);
         tvInstructions =  view.findViewById(R.id.tvInstructions);
         saveButton = view.findViewById(R.id.btnSave);
+        deleteButton = view.findViewById(R.id.btnDelete);
 
 
         tvDrinkName.setText("Drink Name: "+ drink.getStrDrink());
@@ -106,6 +107,16 @@ public class DisplayDrinkFragment extends Fragment {
         tvCatergories.setOnClickListener(view12 -> MainActivity.displayDrinkByCategory(drink.getStrCategory()));
 
         tvAlc.setOnClickListener(view1 -> MainActivity.displayDrinkByAlcoholic(drink.getStrAlcoholic()));
+
+        Log.i("realm.containsDrink", String.valueOf(realmHelper.containsDrink(drink.getIdDrink())));
+
+        if(realmHelper.containsDrink(drink.getIdDrink())){
+            saveButton.setVisibility(View.INVISIBLE);
+            deleteButton.setVisibility(View.VISIBLE);
+        } else{
+            saveButton.setVisibility(View.VISIBLE);
+            deleteButton.setVisibility(View.INVISIBLE);
+        }
 
         saveButton.setOnClickListener(view14 -> {
             realmHelper.saveData(drink);
