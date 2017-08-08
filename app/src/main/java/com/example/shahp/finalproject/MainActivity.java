@@ -17,7 +17,6 @@ import android.widget.ProgressBar;
 import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.CustomEvent;
 import com.example.shahp.finalproject.Fragment.Drink.DisplayDrinkFragment;
-import com.example.shahp.finalproject.Fragment.Offline.DisplayDrinkFragmentOffline;
 import com.example.shahp.finalproject.Fragment.Drinks.DrinksFragment;
 import com.example.shahp.finalproject.Fragment.Offline.DrinksOfflineFragment;
 import com.example.shahp.finalproject.MVP.Drink.DisplayDrink;

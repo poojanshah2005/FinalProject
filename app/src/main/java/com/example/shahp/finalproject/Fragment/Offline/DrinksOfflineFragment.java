@@ -59,9 +59,6 @@ public class DrinksOfflineFragment extends Fragment {
         Realm realm  = Realm.getDefaultInstance();
         RealmHelper realmHelper = new RealmHelper(realm);
         drinks = realmHelper.getDrinks();
-        //        for (Drink drinkResult : drinksResult.getDrinks()) {
-//            Log.i("drinkResult 65", drinkResult.getStrDrink());
-//        }
     }
 
     @Override
