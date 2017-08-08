@@ -60,6 +60,16 @@ public class RealmHelper {
         }
     }
 
+    public void removeDrink(String idDrink){
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                realm.where(Drink.class).contains("idDrink",idDrink).findFirst().deleteFromRealm();
+            }
+        });
+
+    }
+
 
 //    public ArrayList<String> getCustomers(){
 //        ArrayList<String> customers = new ArrayList<>();

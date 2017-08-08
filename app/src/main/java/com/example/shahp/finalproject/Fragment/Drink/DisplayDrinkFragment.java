@@ -71,15 +71,18 @@ public class DisplayDrinkFragment extends Fragment {
         realmHelper = new RealmHelper(realm);
         Bundle b = getArguments();
 
-        if(b.containsKey("drinkID")) {
-            String id = b.getString("drinkID");
-            Realm realm = Realm.getDefaultInstance();
-            RealmHelper realmHelper = new RealmHelper(realm);
-            drink = realmHelper.getDrink(id);
+        if (drink == null) {
+            if (b.containsKey("drinkID")) {
+                String id = b.getString("drinkID");
+                Realm realm = Realm.getDefaultInstance();
+                RealmHelper realmHelper = new RealmHelper(realm);
+                drink = realmHelper.getDrink(id);
+                Log.i("drink/Fragment", drink.getStrDrink());
+            } else {
+                drink = b.getParcelable("drink");
+            }
             Log.i("drink/Fragment", drink.getStrDrink());
-        }else {
-        drink = b.getParcelable("drink");}
-        Log.i("drink/Fragment",drink.getStrDrink());
+        }
     }
 
     @Override
@@ -110,17 +113,22 @@ public class DisplayDrinkFragment extends Fragment {
 
         Log.i("realm.containsDrink", String.valueOf(realmHelper.containsDrink(drink.getIdDrink())));
 
-        if(realmHelper.containsDrink(drink.getIdDrink())){
-            saveButton.setVisibility(View.INVISIBLE);
-            deleteButton.setVisibility(View.VISIBLE);
-        } else{
-            saveButton.setVisibility(View.VISIBLE);
-            deleteButton.setVisibility(View.INVISIBLE);
-        }
+        checkButtons();
 
         saveButton.setOnClickListener(view14 -> {
             realmHelper.saveData(drink);
             Toast.makeText(getContext(),"Drink has been saved to the database.",Toast.LENGTH_SHORT).show();
+            checkButtons();
+        });
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                realmHelper.removeDrink(drink.getIdDrink());
+                MainActivity.showHomestatic();
+                Toast.makeText(getContext(),"Drink has been removed to the database.",Toast.LENGTH_SHORT).show();
+//                checkButtons();
+            }
         });
 
         initRows();
@@ -162,6 +170,16 @@ public class DisplayDrinkFragment extends Fragment {
         catch(Exception e){
             Log.i("Error", e.getMessage());
             Log.i("Error", String.valueOf(e.getCause()));
+        }
+    }
+
+    private void checkButtons() {
+        if(realmHelper.containsDrink(drink.getIdDrink())){
+            saveButton.setVisibility(View.INVISIBLE);
+            deleteButton.setVisibility(View.VISIBLE);
+        } else{
+            saveButton.setVisibility(View.VISIBLE);
+            deleteButton.setVisibility(View.INVISIBLE);
         }
     }
 

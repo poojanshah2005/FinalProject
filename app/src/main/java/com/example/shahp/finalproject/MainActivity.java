@@ -1,5 +1,6 @@
 package com.example.shahp.finalproject;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -46,11 +47,13 @@ import com.example.shahp.finalproject.Models.IngredientResults.IngredientResults
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
+import static com.example.shahp.finalproject.MVP.Service.Utils.isNetworkAvailable;
+
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, IDrinksView, IDrinkView, IDrinksViewOffline {
 
-    Menu menu;
+    static Menu menu;
     ProgressBar progressBar;
     static InteractorImpl interactor_;
     static IDrinksPresenter iDrinksPresenter;
@@ -60,7 +63,8 @@ public class MainActivity extends AppCompatActivity
     static IDrinkView iDrinkView;
     static IDrinksViewOffline iDrinksViewOffline;
     static android.support.v4.app.FragmentManager fragmentManager;
-    NavigationView navigationView;
+    static NavigationView navigationView;
+    static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +73,7 @@ public class MainActivity extends AppCompatActivity
         this.iDrinksView = this;
         this.iDrinkView = this;
         this.iDrinksViewOffline = this;
+        this.context = getApplicationContext();
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         progressBar = (ProgressBar) findViewById(R.id.progressBar2);
@@ -113,20 +118,38 @@ public class MainActivity extends AppCompatActivity
         menu = navigationView.getMenu();
         navigationView.setNavigationItemSelectedListener(this);
 
-        displayDrinkByCategory("Ordinary Drink");
+        showHome();
+
 
         menuOfflineDrinks();
 
     }
 
+    private void showHome() {
+        if(isNetworkAvailable(this)){
+            displayDrinkByCategory("Ordinary Drink");
+        } else{
+            displayDrinksOffline();
+        }
+    }
+
+    public static void showHomestatic() {
+        if(isNetworkAvailable(context)){
+            displayDrinkByCategory("Ordinary Drink");
+        } else{
+            displayDrinksOffline();
+        }
+    }
+
     private void menuOfflineDrinks() {
-        SubMenu ingredientMenu = menu.addSubMenu("Offline");
-        ingredientMenu.setHeaderTitle("Offline");
+//        SubMenu ingredientMenu = menu.addSubMenu("Offline");
+//
+//                ingredientMenu.setHeaderTitle("Offline");
 
         int i = 1;
 
             i++;
-            ingredientMenu.add("Offline Drinks").setIcon(R.drawable.ic_local_drink_48px).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            menu.add("Offline Drinks").setIcon(R.drawable.ic_local_drink_48px).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem menuItem) {
 
@@ -136,6 +159,11 @@ public class MainActivity extends AppCompatActivity
                     return false;
                 }
             });
+    }
+
+    public static void showSaved(){
+
+        navigationView.getMenu().getItem(0).setChecked(true);
     }
 
     private void onSuccessgGetIngredientList(IngredientResults ingredientResults) {

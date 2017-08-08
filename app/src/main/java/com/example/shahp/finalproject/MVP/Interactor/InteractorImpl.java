@@ -2,6 +2,7 @@ package com.example.shahp.finalproject.MVP.Interactor;
 
 import android.content.Context;
 
+import com.example.shahp.finalproject.MVP.Service.Utils;
 import com.example.shahp.finalproject.Models.AlcoholicResult.AlcoholicResult;
 import com.example.shahp.finalproject.Models.CategoryList.CategoryResults;
 import com.example.shahp.finalproject.Models.DrinkResult.DrinkResult;
