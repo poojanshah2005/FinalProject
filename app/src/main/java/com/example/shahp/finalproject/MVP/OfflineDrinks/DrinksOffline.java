@@ -4,6 +4,9 @@ package com.example.shahp.finalproject.MVP.OfflineDrinks;
  * Created by shahp on 08/08/2017.
  */
 
+/**
+ * displaying offline drinks
+ */
 public class DrinksOffline implements IDrinksPresenterOffline {
     IDrinksViewOffline iDrinksViewOffline;
     @Override

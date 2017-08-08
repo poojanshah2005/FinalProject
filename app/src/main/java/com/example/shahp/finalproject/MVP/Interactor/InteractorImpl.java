@@ -30,6 +30,9 @@ import retrofit2.http.Query;
  * Created by shahp on 31/07/2017.
  */
 
+/**
+ * interactor
+ */
 public class InteractorImpl implements  Interactor {
     static Retrofit retrofit;
     static OkHttpClient okHttpClient;
@@ -50,11 +53,6 @@ public class InteractorImpl implements  Interactor {
         int cacheSize = 20 * 1024 * 1024; // 20 MiB
         Cache cache = new Cache(httpCacheDirectory, cacheSize);
         //add cache to the client
-
-//        okHttpClient = new OkHttpClient.Builder()
-//                .addInterceptor(httpLoggingInterceptor)
-//                .cache(cache)
-//                .build();
 
         okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(httpLoggingInterceptor)

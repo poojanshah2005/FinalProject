@@ -9,7 +9,9 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * Created by Poojan on 06/08/2017.
  */
-
+/**
+ * Displaying a single drink
+ */
 public class DisplayDrink implements IDrinkPresenter {
     InteractorImpl interactor_;
     IDrinkView iDrinkView;

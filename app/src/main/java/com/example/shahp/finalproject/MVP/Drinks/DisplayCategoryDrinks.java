@@ -9,7 +9,9 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * Created by shahp on 01/08/2017.
  */
-
+/**
+ * used when filtering drinks options by Category
+ */
 public class DisplayCategoryDrinks implements IDrinksPresenter {
     InteractorImpl interactor_;
     IDrinksView iDrinksView;
