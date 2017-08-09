@@ -97,26 +97,6 @@
                 android:layout_marginBottom="5dp"
                 android:textSize="@dimen/text"/>
 
-                <Button
-                    android:id="@+id/btnSave"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvAlc"
-                    android:text="Save"
-                    android:gravity="center"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true" />
-
-                <Button
-                    android:id="@+id/btnDelete"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvAlc"
-                    android:text="Delete"
-                    android:gravity="center"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true" />
-
                 <android.support.design.widget.FloatingActionButton
                     android:id="@+id/floatingSave"
                     android:layout_width="wrap_content"

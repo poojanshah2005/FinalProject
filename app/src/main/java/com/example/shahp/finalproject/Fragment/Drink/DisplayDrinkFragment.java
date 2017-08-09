@@ -48,10 +48,6 @@ public class DisplayDrinkFragment extends Fragment {
     TextView tvAlc;
     @BindView(R.id.displayLinear)
     TableLayout DrinkIngs;
-//    @BindView(R.id.btnSave)
-//    Button saveButton;
-//    @BindView(R.id.btnDelete)
-//    Button deleteButton;
     @BindView(R.id.floatingSave)
     FloatingActionButton floatingSave;
     @BindView(R.id.floatingDelete)
