@@ -399,8 +399,14 @@ if (id == R.id.nav_camera) {
         DrinksFragment drinksFragment = new DrinksFragment ();
         drinksFragment.onAttach(MainActivity.this);
         drinksFragment.setArguments(args);
-        fragmentManager.beginTransaction()
-                .replace(R.id.content_main, drinksFragment)
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
+
+
+        transaction.replace(R.id.content_main, drinksFragment)
                 .disallowAddToBackStack()
                 .commit();
     }
@@ -441,8 +447,13 @@ if (id == R.id.nav_camera) {
         Bundle args = new Bundle();
         DrinksOfflineFragment drinksOfflineFragment = new DrinksOfflineFragment();
         drinksOfflineFragment.setArguments(args);
-        fragmentManager.beginTransaction()
-                .replace(R.id.content_main, drinksOfflineFragment)
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
+
+        transaction.replace(R.id.content_main, drinksOfflineFragment)
                 .disallowAddToBackStack()
                 .commit();
     }
@@ -491,8 +502,11 @@ if (id == R.id.nav_camera) {
         Bundle args = new Bundle();
         args.putString("drinkID", idDrink);
         displayDrinkFragment.setArguments(args);
-        fragmentManager.beginTransaction()
-                .replace(R.id.content_main, displayDrinkFragment)
+
+        android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
+
+        transaction.replace(R.id.content_main, displayDrinkFragment)
                 .disallowAddToBackStack()
                 .commit();
     }
