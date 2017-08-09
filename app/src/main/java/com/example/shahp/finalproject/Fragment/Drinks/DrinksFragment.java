@@ -14,12 +14,16 @@ import com.example.shahp.finalproject.Adapters.DrinkAdapter;
 import com.example.shahp.finalproject.Models.DrinksResult.DrinksResult;
 import com.example.shahp.finalproject.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Displaying all drinks based on the users filtering
  */
 public class DrinksFragment extends Fragment {
     //initialzing values to be used
-    private RecyclerView mRecyclerView;
+    @BindView(R.id.fragmentDrinksRecycleView)
+    RecyclerView mRecyclerView;
     DrinksResult drinksResult;
 
     public DrinksFragment() {
@@ -66,7 +70,11 @@ public class DrinksFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_drinks, container, false);
+        View view =  inflater.inflate(R.layout.fragment_drinks, container, false);
+
+        ButterKnife.bind(this, view);
+
+        return view;
     }
 
     /**
@@ -77,7 +85,6 @@ public class DrinksFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.fragmentDrinksRecycleView);
         mRecyclerView.setAdapter(new DrinkAdapter(drinksResult,getContext()));
         mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
     }
