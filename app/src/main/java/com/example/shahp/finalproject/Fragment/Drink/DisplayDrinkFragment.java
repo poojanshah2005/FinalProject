@@ -3,6 +3,7 @@ package com.example.shahp.finalproject.Fragment.Drink;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.util.Log;
@@ -47,10 +48,14 @@ public class DisplayDrinkFragment extends Fragment {
     TextView tvAlc;
     @BindView(R.id.displayLinear)
     TableLayout DrinkIngs;
-    @BindView(R.id.btnSave)
-    Button saveButton;
-    @BindView(R.id.btnDelete)
-    Button deleteButton;
+//    @BindView(R.id.btnSave)
+//    Button saveButton;
+//    @BindView(R.id.btnDelete)
+//    Button deleteButton;
+    @BindView(R.id.floatingSave)
+    FloatingActionButton floatingSave;
+    @BindView(R.id.floatingDelete)
+    FloatingActionButton floatingDelete;
     Realm realm;
     RealmHelper realmHelper;
     int a = 70;
@@ -126,13 +131,13 @@ public class DisplayDrinkFragment extends Fragment {
 
         checkButtons();
         // save button from realm
-        saveButton.setOnClickListener(view14 -> {
+        floatingSave.setOnClickListener(view14 -> {
             realmHelper.saveData(drink);
             Toast.makeText(getContext(),"Drink has been saved to the database.",Toast.LENGTH_SHORT).show();
             checkButtons();
         });
         //delete button from realm
-        deleteButton.setOnClickListener(new View.OnClickListener() {
+        floatingDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 realmHelper.removeDrink(drink.getIdDrink());
@@ -190,11 +195,11 @@ public class DisplayDrinkFragment extends Fragment {
      */
     private void checkButtons() {
         if(realmHelper.containsDrink(drink.getIdDrink())){
-            saveButton.setVisibility(View.INVISIBLE);
-            deleteButton.setVisibility(View.VISIBLE);
+            floatingSave.setVisibility(View.INVISIBLE);
+            floatingDelete.setVisibility(View.VISIBLE);
         } else{
-            saveButton.setVisibility(View.VISIBLE);
-            deleteButton.setVisibility(View.INVISIBLE);
+            floatingSave.setVisibility(View.VISIBLE);
+            floatingDelete.setVisibility(View.INVISIBLE);
         }
     }
 
