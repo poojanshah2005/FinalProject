@@ -101,26 +101,26 @@
                     android:id="@+id/floatingSave"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@+id/imDrink"
                     android:layout_marginEnd="17dp"
                     android:layout_marginRight="17dp"
+                    android:layout_marginTop="48dp"
                     android:clickable="true"
                     app:fabSize="mini"
-                    app:srcCompat="@mipmap/ic_save"
-                    android:layout_alignTop="@+id/imDrink"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="48dp" />
+                    app:srcCompat="@drawable/ic_save_2" />
 
                 <android.support.design.widget.FloatingActionButton
                     android:id="@+id/floatingDelete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/floatingSave"
+                    android:layout_alignStart="@+id/floatingSave"
+                    android:layout_alignTop="@+id/floatingSave"
                     android:clickable="true"
                     app:fabSize="mini"
-                    app:srcCompat="@mipmap/ic_delete"
-                    android:layout_alignTop="@+id/floatingSave"
-                    android:layout_alignLeft="@+id/floatingSave"
-                    android:layout_alignStart="@+id/floatingSave" />
+                    app:srcCompat="@drawable/ic_delete_2" />
 
             </RelativeLayout>
 </ScrollView>

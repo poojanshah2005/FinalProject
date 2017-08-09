@@ -1,6 +1,5 @@
 package com.example.shahp.finalproject;
 
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -32,9 +31,9 @@ import com.example.shahp.finalproject.MVP.Drinks.DisplayIngredientDrinks;
 import com.example.shahp.finalproject.MVP.Drinks.IDrinksPresenter;
 import com.example.shahp.finalproject.MVP.Drinks.IDrinksView;
 import com.example.shahp.finalproject.MVP.Interactor.InteractorImpl;
+import com.example.shahp.finalproject.MVP.OfflineDrinks.DrinksOffline;
 import com.example.shahp.finalproject.MVP.OfflineDrinks.IDrinksPresenterOffline;
 import com.example.shahp.finalproject.MVP.OfflineDrinks.IDrinksViewOffline;
-import com.example.shahp.finalproject.MVP.OfflineDrinks.DrinksOffline;
 import com.example.shahp.finalproject.Models.AlcoholicResult.Alcoholic;
 import com.example.shahp.finalproject.Models.AlcoholicResult.AlcoholicResult;
 import com.example.shahp.finalproject.Models.CategoryList.Category;
@@ -80,7 +79,7 @@ public class MainActivity extends AppCompatActivity
 
     /**
      * Creating the menu and population them and inflating the view
-     * @param savedInstanceState
+     * @param savedInstanceState Bundle
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,22 +104,22 @@ public class MainActivity extends AppCompatActivity
         interactor_.getCategoryList()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
-                .subscribe(MainActivity.this::onSuccessgGetCategoryList, MainActivity.this::OnError);
+                .subscribe(MainActivity.this::onSuccessGetCategoryList, MainActivity.this::OnError);
 
         interactor_.getAlcoholicList()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
-                .subscribe(MainActivity.this::onSuccessgGetAlcoholicList, MainActivity.this::OnError);
+                .subscribe(MainActivity.this::onSuccessGetAlcoholicList, MainActivity.this::OnError);
 
         interactor_.getGlassList()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
-                .subscribe(MainActivity.this::onSuccessgGetGlassList, MainActivity.this::OnError);
+                .subscribe(MainActivity.this::onSuccessGetGlassList, MainActivity.this::OnError);
 
         interactor_.getIngredientList()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
-                .subscribe(MainActivity.this::onSuccessgGetIngredientList, MainActivity.this::OnError);
+                .subscribe(MainActivity.this::onSuccessGetIngredientList, MainActivity.this::OnError);
 
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -163,16 +162,11 @@ public class MainActivity extends AppCompatActivity
      * init offline menu
      */
     private void menuOfflineDrinks() {
-        int i = 1;
-            i++;
-            menu.add("Offline Drinks").setIcon(R.drawable.ic_local_drink_48px).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem menuItem) {
-                    Answers.getInstance().logCustom(new CustomEvent("Offline Drinks")
-                            .putCustomAttribute("Offline Drinks","Offline Drinks"));
-                    displayDrinksOffline();
-                    return false;
-                }
+        menu.add("Offline Drinks").setIcon(R.drawable.ic_local_drink_48px).setOnMenuItemClickListener(menuItem -> {
+                Answers.getInstance().logCustom(new CustomEvent("Offline Drinks")
+                        .putCustomAttribute("Offline Drinks","Offline Drinks"));
+                displayDrinksOffline();
+                return false;
             });
     }
 
@@ -180,7 +174,7 @@ public class MainActivity extends AppCompatActivity
      * init Ingredient Menu
      * @param ingredientResults
      */
-    private void onSuccessgGetIngredientList(IngredientResults ingredientResults) {
+    private void onSuccessGetIngredientList(IngredientResults ingredientResults) {
         progressBar.setVisibility(View.VISIBLE);
         SubMenu ingredientMenu = menu.addSubMenu("Ingredients");
         ingredientMenu.setHeaderTitle("Ingredients");
@@ -211,7 +205,7 @@ public class MainActivity extends AppCompatActivity
      * init Glass Menu
      * @param glassResults
      */
-    private void onSuccessgGetGlassList(GlassResults glassResults) {
+    private void onSuccessGetGlassList(GlassResults glassResults) {
         progressBar.setVisibility(View.VISIBLE);
         SubMenu glassMenu = menu.addSubMenu("Glass");
         glassMenu.setHeaderTitle("Glass");
@@ -241,7 +235,7 @@ public class MainActivity extends AppCompatActivity
      * init Alcoholic Menu
      * @param alcoholicResult
      */
-    private void onSuccessgGetAlcoholicList(AlcoholicResult alcoholicResult) {
+    private void onSuccessGetAlcoholicList(AlcoholicResult alcoholicResult) {
         progressBar.setVisibility(View.VISIBLE);
         SubMenu alcoholicMenu = menu.addSubMenu("Alcoholic");
         alcoholicMenu.setHeaderTitle("Alcoholic");
@@ -255,16 +249,13 @@ public class MainActivity extends AppCompatActivity
                 progressBar.setProgress(i);
                 progressBar.setSecondaryProgress(i);
                 i++;
-                alcoholicMenu.add(a.getStrAlcoholic()).setIcon(R.drawable.ic_local_drink_48px).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem menuItem) {
-                        Answers.getInstance().logCustom(new CustomEvent("Alcoholic Selected")
-                                .putCustomAttribute("Alcoholic", a.getStrAlcoholic()));
-                        iDrinksPresenter = new DisplayAlcoholicDrinks(interactor_);
-                        iDrinksPresenter.attachView(iDrinksView);
-                        iDrinksPresenter.performListDisplay(a.getStrAlcoholic());
-                        return false;
-                    }
+                alcoholicMenu.add(a.getStrAlcoholic()).setIcon(R.drawable.ic_local_drink_48px).setOnMenuItemClickListener(menuItem -> {
+                    Answers.getInstance().logCustom(new CustomEvent("Alcoholic Selected")
+                            .putCustomAttribute("Alcoholic", a.getStrAlcoholic()));
+                    iDrinksPresenter = new DisplayAlcoholicDrinks(interactor_);
+                    iDrinksPresenter.attachView(iDrinksView);
+                    iDrinksPresenter.performListDisplay(a.getStrAlcoholic());
+                    return false;
                 });
             }
         }
@@ -276,7 +267,7 @@ public class MainActivity extends AppCompatActivity
      * init Category Menu
      * @param categoryResults
      */
-    private void onSuccessgGetCategoryList(CategoryResults categoryResults) {
+    private void onSuccessGetCategoryList(CategoryResults categoryResults) {
 
         progressBar.setVisibility(View.VISIBLE);
         SubMenu categoriesMenu = menu.addSubMenu("Categories");
@@ -288,16 +279,13 @@ public class MainActivity extends AppCompatActivity
             progressBar.setProgress(i);
             progressBar.setSecondaryProgress(i);
             i++;
-            categoriesMenu.add(c.getStrCategory()).setIcon(R.drawable.ic_local_drink_48px).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem menuItem) {
-                    iDrinksPresenter =  new DisplayCategoryDrinks(interactor_);
-                    iDrinksPresenter.attachView(iDrinksView);
-                    iDrinksPresenter.performListDisplay(c.getStrCategory());
-                    Answers.getInstance().logCustom(new CustomEvent("Category Selected")
-                            .putCustomAttribute("Category", c.getStrCategory()));
-                    return false;
-                }
+            categoriesMenu.add(c.getStrCategory()).setIcon(R.drawable.ic_local_drink_48px).setOnMenuItemClickListener(menuItem -> {
+                iDrinksPresenter =  new DisplayCategoryDrinks(interactor_);
+                iDrinksPresenter.attachView(iDrinksView);
+                iDrinksPresenter.performListDisplay(c.getStrCategory());
+                Answers.getInstance().logCustom(new CustomEvent("Category Selected")
+                        .putCustomAttribute("Category", c.getStrCategory()));
+                return false;
             });
         }
 
@@ -305,7 +293,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     /**
-     * on error when datadoes not come thought
+     * on error when database not come thought
      * @param throwable
      */
     private void OnError(Throwable throwable) {
@@ -389,7 +377,7 @@ if (id == R.id.nav_camera) {
 
     /**
      * getting drinksResult and display results
-     * @param drinksResult
+     * @param drinksResult list of drinks
      */
     @Override
     public void onFetchDataSuccess(DrinksResult drinksResult) {
@@ -412,7 +400,7 @@ if (id == R.id.nav_camera) {
     }
     /**
      * getting Drink and display results
-     * @param drinkResult
+     * @param drinkResult list of drinks
      */
     @Override
     public void onFetchDataSuccess(DrinkResult drinkResult) {
@@ -460,7 +448,7 @@ if (id == R.id.nav_camera) {
 
     /**
      * shows errors
-     * @param throwable
+     * @param throwable error
      */
     @Override
     public void onFetchDataFailure(Throwable throwable) {
@@ -495,7 +483,7 @@ if (id == R.id.nav_camera) {
 
     /**
      * displaying drink offline
-     * @param idDrink
+     * @param idDrink Drink's id
      */
     public static void displayDrinkOffline(String idDrink) {
         DisplayDrinkFragment displayDrinkFragment = new DisplayDrinkFragment();
