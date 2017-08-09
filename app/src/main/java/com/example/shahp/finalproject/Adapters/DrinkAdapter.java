@@ -17,6 +17,7 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -118,14 +119,12 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.MyViewHolder
      * binding the display elements
      */
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView tvDrink;
-        ImageView ivDrinkThumb;
-        CardView drinkCard;
+        @BindView(R.id.tvDrink)TextView tvDrink;
+        @BindView(R.id.ivDrinkThumb) ImageView ivDrinkThumb;
+        @BindView(R.id.drinkCard) CardView drinkCard;
         public MyViewHolder(View v) {
             super(v);
-            tvDrink = v.findViewById(R.id.tvDrink);
-            ivDrinkThumb = v.findViewById(R.id.ivDrinkThumb);
-            drinkCard = v.findViewById(R.id.drinkCard);
+            ButterKnife.bind(this, v);
         }
     }
 }

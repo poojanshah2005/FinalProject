@@ -19,6 +19,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by shahp on 02/08/2017.
  */
@@ -108,16 +111,16 @@ public class DrinkOfflineAdapter extends RecyclerView.Adapter<DrinkOfflineAdapte
     public int getItemCount() {
         return drinks.size();
     }
-    //binding display objects
+    /**
+     * binding the display elements
+     */
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView tvDrink;
-        ImageView ivDrinkThumb;
-        CardView drinkCard;
+        @BindView(R.id.tvDrink)TextView tvDrink;
+        @BindView(R.id.ivDrinkThumb) ImageView ivDrinkThumb;
+        @BindView(R.id.drinkCard) CardView drinkCard;
         public MyViewHolder(View v) {
             super(v);
-            tvDrink = v.findViewById(R.id.tvDrink);
-            ivDrinkThumb = v.findViewById(R.id.ivDrinkThumb);
-            drinkCard = v.findViewById(R.id.drinkCard);
+            ButterKnife.bind(this, v);
         }
     }
 }

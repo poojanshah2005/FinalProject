@@ -109,16 +109,6 @@ public class DisplayDrinkFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        imDrink =  view.findViewById(R.id.imDrink);
-//        tvDrinkName =  view.findViewById(R.id.tvDrinkName);
-//        DrinkIngs = view.findViewById(R.id.displayLinear);
-//        tvGlass = view.findViewById(R.id.tvGlass);
-//        tvCatergories =  view.findViewById(R.id.tvCatergories);
-//        tvAlc =  view.findViewById(R.id.tvAlc);
-//        tvInstructions =  view.findViewById(R.id.tvInstructions);
-//        saveButton = view.findViewById(R.id.btnSave);
-//        deleteButton = view.findViewById(R.id.btnDelete);
-
 
         tvDrinkName.setText("Drink Name: "+ drink.getStrDrink());
         tvGlass.setText(Html.fromHtml(getString(R.string.glassTitle) +  "<u> " + drink.getStrGlass() + "</u>"));

@@ -44,6 +44,8 @@ import com.example.shahp.finalproject.Models.GlassList.GlassResults;
 import com.example.shahp.finalproject.Models.IngredientResults.Ingredient;
 import com.example.shahp.finalproject.Models.IngredientResults.IngredientResults;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, IDrinksView, IDrinkView, IDrinksViewOffline {
 
     static Menu menu;
+    @BindView(R.id.progressBar2)
     ProgressBar progressBar;
     static InteractorImpl interactor_;
     static IDrinksPresenter iDrinksPresenter;
@@ -65,8 +68,13 @@ public class MainActivity extends AppCompatActivity
     static IDrinkView iDrinkView;
     static IDrinksViewOffline iDrinksViewOffline;
     static android.support.v4.app.FragmentManager fragmentManager;
-    static NavigationView navigationView;
+    @BindView(R.id.nav_view)
+    NavigationView navigationView;
     static Context context;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawer;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     /**
      * Creating the menu and population them and inflating the view
@@ -75,14 +83,14 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         interactor_ = new InteractorImpl(getApplicationContext());
         this.iDrinksView = this;
         this.iDrinkView = this;
         this.iDrinksViewOffline = this;
         this.context = getApplicationContext();
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar2);
+
         progressBar.setVisibility(View.VISIBLE);
         setSupportActionBar(toolbar);
         fragmentManager = getSupportFragmentManager();
@@ -113,14 +121,12 @@ public class MainActivity extends AppCompatActivity
                 .subscribe(MainActivity.this::onSuccessgGetIngredientList, MainActivity.this::OnError);
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
                 drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
         menu = navigationView.getMenu();
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -310,7 +316,7 @@ public class MainActivity extends AppCompatActivity
      */
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -375,8 +381,6 @@ if (id == R.id.nav_camera) {
 
 }
 */
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
