@@ -1,8 +1,10 @@
 package com.example.shahp.finalproject;
 
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -409,17 +411,24 @@ if (id == R.id.nav_camera) {
     @Override
     public void onFetchDataSuccess(DrinkResult drinkResult) {
 
-            com.example.shahp.finalproject.Models.DrinkResult.Drink drink = drinkResult.getDrinks().get(0);
-            Answers.getInstance().logCustom(new CustomEvent("Displaying Drink")
-                    .putCustomAttribute("Drink", drink.getStrDrink()));
-            Bundle args = new Bundle();
-            args.putParcelable("drink", drink);
-            DisplayDrinkFragment displayDrinkFragment = new DisplayDrinkFragment();
-            displayDrinkFragment.setArguments(args);
-            fragmentManager.beginTransaction()
-                    .replace(R.id.content_main, displayDrinkFragment)
-                    .disallowAddToBackStack()
-                    .commit();
+        com.example.shahp.finalproject.Models.DrinkResult.Drink drink = drinkResult.getDrinks().get(0);
+
+        Answers.getInstance().logCustom(new CustomEvent("Displaying Drink")
+                .putCustomAttribute("Drink", drink.getStrDrink()));
+
+        Bundle args = new Bundle();
+        args.putParcelable("drink", drink);
+        DisplayDrinkFragment displayDrinkFragment = new DisplayDrinkFragment();
+        displayDrinkFragment.setArguments(args);
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter, R.anim.exit, R.anim.pop_enter, R.anim.pop_exit);
+
+        transaction.replace(R.id.content_main, displayDrinkFragment)
+                .disallowAddToBackStack()
+                .commit();
     }
 
     /**
