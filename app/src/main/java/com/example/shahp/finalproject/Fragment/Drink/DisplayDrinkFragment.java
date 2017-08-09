@@ -52,6 +52,8 @@ public class DisplayDrinkFragment extends Fragment {
     FloatingActionButton floatingSave;
     @BindView(R.id.floatingDelete)
     FloatingActionButton floatingDelete;
+
+
     Realm realm;
     RealmHelper realmHelper;
     int a = 70;
