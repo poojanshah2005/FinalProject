@@ -1,11 +1,11 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     tools:context="com.example.shahp.finalproject.Fragment.Drink.DisplayDrinkFragment">
-            <RelativeLayout
+            <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -14,7 +14,11 @@
             android:textAlignment="center"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:textSize="@dimen/text">
+                android:textSize="@dimen/text"
+                android:id="@+id/scrollView2">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/tvDrinkName"
@@ -97,30 +101,33 @@
                 android:layout_marginBottom="5dp"
                 android:textSize="@dimen/text"/>
 
-                <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/floatingSave"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignTop="@+id/imDrink"
-                    android:layout_marginEnd="17dp"
-                    android:layout_marginRight="17dp"
-                    android:layout_marginTop="48dp"
-                    android:clickable="true"
-                    app:fabSize="mini"
-                    app:srcCompat="@drawable/ic_save_2" />
 
-                <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/floatingDelete"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/floatingSave"
-                    android:layout_alignStart="@+id/floatingSave"
-                    android:layout_alignTop="@+id/floatingSave"
-                    android:clickable="true"
-                    app:fabSize="mini"
-                    app:srcCompat="@drawable/ic_delete_2" />
 
-            </RelativeLayout>
-</ScrollView>
+                </RelativeLayout>
+
+            </ScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="13dp"
+        android:layout_marginRight="13dp"
+        android:clickable="true"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/ic_save_2"
+        android:layout_alignTop="@+id/floatingDelete"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/ic_delete_2"
+        android:layout_alignBottom="@+id/scrollView2"
+        android:layout_alignLeft="@+id/floatingSave"
+        android:layout_alignStart="@+id/floatingSave" />
+</RelativeLayout>
