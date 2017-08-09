@@ -24,6 +24,8 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import io.realm.Realm;
 
 /**
@@ -31,10 +33,24 @@ import io.realm.Realm;
  */
 public class DisplayDrinkFragment extends Fragment {
     com.example.shahp.finalproject.Models.DrinkResult.Drink drink;
+    @BindView(R.id.imDrink)
     ImageView imDrink;
-    TextView tvDrinkName, tvInstructions, tvGlass, tvCatergories, tvAlc;
+    @BindView(R.id.tvDrinkName)
+    TextView tvDrinkName;
+    @BindView(R.id.tvInstructions)
+    TextView tvInstructions;
+    @BindView(R.id.tvGlass)
+    TextView tvGlass;
+    @BindView(R.id.tvCatergories)
+    TextView tvCatergories;
+    @BindView(R.id.tvAlc)
+    TextView tvAlc;
+    @BindView(R.id.displayLinear)
     TableLayout DrinkIngs;
-    Button saveButton, deleteButton;
+    @BindView(R.id.btnSave)
+    Button saveButton;
+    @BindView(R.id.btnDelete)
+    Button deleteButton;
     Realm realm;
     RealmHelper realmHelper;
     int a = 70;
@@ -93,15 +109,15 @@ public class DisplayDrinkFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        imDrink =  view.findViewById(R.id.imDrink);
-        tvDrinkName =  view.findViewById(R.id.tvDrinkName);
-        DrinkIngs = view.findViewById(R.id.displayLinear);
-        tvGlass = view.findViewById(R.id.tvGlass);
-        tvCatergories =  view.findViewById(R.id.tvCatergories);
-        tvAlc =  view.findViewById(R.id.tvAlc);
-        tvInstructions =  view.findViewById(R.id.tvInstructions);
-        saveButton = view.findViewById(R.id.btnSave);
-        deleteButton = view.findViewById(R.id.btnDelete);
+//        imDrink =  view.findViewById(R.id.imDrink);
+//        tvDrinkName =  view.findViewById(R.id.tvDrinkName);
+//        DrinkIngs = view.findViewById(R.id.displayLinear);
+//        tvGlass = view.findViewById(R.id.tvGlass);
+//        tvCatergories =  view.findViewById(R.id.tvCatergories);
+//        tvAlc =  view.findViewById(R.id.tvAlc);
+//        tvInstructions =  view.findViewById(R.id.tvInstructions);
+//        saveButton = view.findViewById(R.id.btnSave);
+//        deleteButton = view.findViewById(R.id.btnDelete);
 
 
         tvDrinkName.setText("Drink Name: "+ drink.getStrDrink());
@@ -247,7 +263,11 @@ public class DisplayDrinkFragment extends Fragment {
 
         // Inflate the layout for this fragment
 
-        return inflater.inflate(R.layout.fragment_display_drink, container, false);
+        View view =  inflater.inflate(R.layout.fragment_display_drink, container, false);
+
+        ButterKnife.bind(this, view);
+
+        return view;
     }
 
     /**

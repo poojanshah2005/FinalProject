@@ -17,6 +17,8 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
+import butterknife.ButterKnife;
+
 /**
  * Created by shahp on 02/08/2017.
  */
