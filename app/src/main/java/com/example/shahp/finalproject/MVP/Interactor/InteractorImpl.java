@@ -20,6 +20,7 @@ import io.reactivex.Observable;
 import okhttp3.Cache;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -74,20 +75,18 @@ public class InteractorImpl implements  Interactor {
     private static final Interceptor REWRITE_CACHE_CONTROL_INTERCEPTOR = new Interceptor() {
         @Override
         public Response intercept(Chain chain) throws IOException {
-            Response originalResponse = chain.proceed(chain.request());
-            if (Utils.isNetworkAvailable(context)) {
-                int maxAge = 60; // read from cache for 1 minute
-                return originalResponse.newBuilder()
-                        .header("Cache-Control", "public, max-age=" + maxAge)
-                        .build();
-            } else {
-                int maxStale = 60 * 60 * 24 * 28; // tolerate 4-weeks stale
-                return originalResponse.newBuilder()
-                        .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
-                        .build();
+            Request originalRequest = chain.request();
+            String cacheHeaderValue = Utils.isNetworkAvailable(context)
+                    ? "public, max-age=2419200"
+                    : "public, only-if-cached, max-stale=2419200" ;
+            Request request = originalRequest.newBuilder().build();
+            Response response = chain.proceed(request);
+            return response.newBuilder()
+                    .header("Cache-Control", cacheHeaderValue)
+                    .build();
             }
-        }
-    };
+        };
+
 
     @Override
     public Observable<CategoryResults> getCategoryList() {
