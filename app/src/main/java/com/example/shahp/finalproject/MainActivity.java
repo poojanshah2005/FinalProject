@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity
 
     /**
      * Creating the menu and population them and inflating the view
+     *
      * @param savedInstanceState Bundle
      */
     @Override
@@ -97,8 +98,6 @@ public class MainActivity extends AppCompatActivity
         fragmentManager = getSupportFragmentManager();
         iDrinksPresenter = new DisplayCategoryDrinks(interactor_);
         iDrinksPresenter.attachView(this);
-
-
 
 
         interactor_.getCategoryList()
@@ -125,7 +124,7 @@ public class MainActivity extends AppCompatActivity
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
-                drawer.setDrawerListener(toggle);
+        drawer.setDrawerListener(toggle);
         toggle.syncState();
 
         menu = navigationView.getMenu();
@@ -145,39 +144,38 @@ public class MainActivity extends AppCompatActivity
      * displaying init home page
      */
     private void showHome() {
-
         displayDrinksOffline();
-
-            displayDrinkByCategory("Ordinary Drink");
-
-
+        displayDrinkByCategory("Ordinary Drink");
 
     }
+
     /**
      * displaying init home page, when user selects delete from realm
      */
     public static void showHomestatic() {
         displayDrinksOffline();
 //        if(isNetworkAvailable(context)){
-            displayDrinkByCategory("Ordinary Drink");
+        displayDrinkByCategory("Ordinary Drink");
 //        } else{
 //            displayDrinksOffline();
 //        }
     }
+
     /**
      * init offline menu
      */
     private void menuOfflineDrinks() {
         menu.add("Offline Drinks").setIcon(R.drawable.ic_local_drink_48px).setOnMenuItemClickListener(menuItem -> {
-                Answers.getInstance().logCustom(new CustomEvent("Offline Drinks")
-                        .putCustomAttribute("Offline Drinks","Offline Drinks"));
-                displayDrinksOffline();
-                return false;
-            });
+            Answers.getInstance().logCustom(new CustomEvent("Offline Drinks")
+                    .putCustomAttribute("Offline Drinks", "Offline Drinks"));
+            displayDrinksOffline();
+            return false;
+        });
     }
 
     /**
      * init Ingredient Menu
+     *
      * @param ingredientResults
      */
     private void onSuccessGetIngredientList(IngredientResults ingredientResults) {
@@ -187,7 +185,7 @@ public class MainActivity extends AppCompatActivity
         progressBar.setMax(ingredientResults.getIngredients().size());
         int i = 1;
 
-        for(Ingredient ingredient: ingredientResults.getIngredients()){
+        for (Ingredient ingredient : ingredientResults.getIngredients()) {
             progressBar.setProgress(i);
             progressBar.setSecondaryProgress(i);
             i++;
@@ -196,8 +194,8 @@ public class MainActivity extends AppCompatActivity
                 public boolean onMenuItemClick(MenuItem menuItem) {
 
                     Answers.getInstance().logCustom(new CustomEvent("Ingredient Selected")
-                            .putCustomAttribute("Ingredient",ingredient.getStrIngredient1()));
-                    iDrinksPresenter =  new DisplayIngredientDrinks(interactor_);
+                            .putCustomAttribute("Ingredient", ingredient.getStrIngredient1()));
+                    iDrinksPresenter = new DisplayIngredientDrinks(interactor_);
                     iDrinksPresenter.attachView(iDrinksView);
                     iDrinksPresenter.performListDisplay(ingredient.getStrIngredient1());
                     return false;
@@ -209,6 +207,7 @@ public class MainActivity extends AppCompatActivity
 
     /**
      * init Glass Menu
+     *
      * @param glassResults
      */
     private void onSuccessGetGlassList(GlassResults glassResults) {
@@ -217,7 +216,7 @@ public class MainActivity extends AppCompatActivity
         glassMenu.setHeaderTitle("Glass");
         progressBar.setMax(glassResults.getGlass().size());
         int i = 1;
-        for(Glass g: glassResults.getGlass()){
+        for (Glass g : glassResults.getGlass()) {
             progressBar.setProgress(i);
             progressBar.setSecondaryProgress(i);
             i++;
@@ -225,8 +224,8 @@ public class MainActivity extends AppCompatActivity
                 @Override
                 public boolean onMenuItemClick(MenuItem menuItem) {
                     Answers.getInstance().logCustom(new CustomEvent("Glass Selected")
-                            .putCustomAttribute("Glass",g.getStrGlass()));
-                    iDrinksPresenter =  new DisplayGlassDrinks(interactor_);
+                            .putCustomAttribute("Glass", g.getStrGlass()));
+                    iDrinksPresenter = new DisplayGlassDrinks(interactor_);
                     iDrinksPresenter.attachView(iDrinksView);
                     iDrinksPresenter.performListDisplay(g.getStrGlass());
                     return false;
@@ -239,6 +238,7 @@ public class MainActivity extends AppCompatActivity
 
     /**
      * init Alcoholic Menu
+     *
      * @param alcoholicResult
      */
     private void onSuccessGetAlcoholicList(AlcoholicResult alcoholicResult) {
@@ -248,7 +248,7 @@ public class MainActivity extends AppCompatActivity
         progressBar.setMax(alcoholicResult.getAlcoholics().size());
         int i = 1;
         Log.i("alcoholicResult", String.valueOf(alcoholicResult.getAlcoholics().size()));
-        for(Alcoholic a: alcoholicResult.getAlcoholics()) {
+        for (Alcoholic a : alcoholicResult.getAlcoholics()) {
             Log.i("alcoholicResult", a.getStrAlcoholic().toString() + " " + String.valueOf(a.getStrAlcoholic().isEmpty()));
             Log.i("alcoholicResult", String.valueOf(a.getStrAlcoholic().isEmpty()));
             if (!a.getStrAlcoholic().isEmpty()) {
@@ -271,6 +271,7 @@ public class MainActivity extends AppCompatActivity
 
     /**
      * init Category Menu
+     *
      * @param categoryResults
      */
     private void onSuccessGetCategoryList(CategoryResults categoryResults) {
@@ -281,12 +282,12 @@ public class MainActivity extends AppCompatActivity
         progressBar.setMax(categoryResults.getCategories().size());
         int i = 1;
 
-        for(Category c: categoryResults.getCategories()){
+        for (Category c : categoryResults.getCategories()) {
             progressBar.setProgress(i);
             progressBar.setSecondaryProgress(i);
             i++;
             categoriesMenu.add(c.getStrCategory()).setIcon(R.drawable.ic_local_drink_48px).setOnMenuItemClickListener(menuItem -> {
-                iDrinksPresenter =  new DisplayCategoryDrinks(interactor_);
+                iDrinksPresenter = new DisplayCategoryDrinks(interactor_);
                 iDrinksPresenter.attachView(iDrinksView);
                 iDrinksPresenter.performListDisplay(c.getStrCategory());
                 Answers.getInstance().logCustom(new CustomEvent("Category Selected")
@@ -300,6 +301,7 @@ public class MainActivity extends AppCompatActivity
 
     /**
      * on error when database not come thought
+     *
      * @param throwable
      */
     private void OnError(Throwable throwable) {
@@ -322,6 +324,7 @@ public class MainActivity extends AppCompatActivity
 
     /**
      * is required to be override
+     *
      * @param menu
      * @return
      */
@@ -334,6 +337,7 @@ public class MainActivity extends AppCompatActivity
 
     /**
      * is required to be override
+     *
      * @param item
      * @return
      */
@@ -351,8 +355,10 @@ public class MainActivity extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
+
     /**
      * is required to be override
+     *
      * @param item
      * @return
      */
@@ -383,14 +389,15 @@ if (id == R.id.nav_camera) {
 
     /**
      * getting drinksResult and display results
+     *
      * @param drinksResult list of drinks
      */
     @Override
     public void onFetchDataSuccess(DrinksResult drinksResult) {
-        Log.i("onFetchDataSuccess","onFetchDataSuccess");
+        Log.i("onFetchDataSuccess", "onFetchDataSuccess");
         Bundle args = new Bundle();
         args.putParcelable("drinksResult", drinksResult);
-        DrinksFragment drinksFragment = new DrinksFragment ();
+        DrinksFragment drinksFragment = new DrinksFragment();
         drinksFragment.onAttach(MainActivity.this);
         drinksFragment.setArguments(args);
 
@@ -404,12 +411,16 @@ if (id == R.id.nav_camera) {
                 .disallowAddToBackStack()
                 .commit();
     }
+
     /**
      * getting Drink and display results
+     *
      * @param drinkResult list of drinks
      */
     @Override
     public void onFetchDataSuccess(DrinkResult drinkResult) {
+
+        progressBar.setVisibility(View.VISIBLE);
 
         com.example.shahp.finalproject.Models.DrinkResult.Drink drink = drinkResult.getDrinks().get(0);
 
@@ -429,6 +440,8 @@ if (id == R.id.nav_camera) {
         transaction.replace(R.id.content_main, displayDrinkFragment)
                 .disallowAddToBackStack()
                 .commit();
+
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     /**
@@ -454,12 +467,13 @@ if (id == R.id.nav_camera) {
 
     /**
      * shows errors
+     *
      * @param throwable error
      */
     @Override
     public void onFetchDataFailure(Throwable throwable) {
-        Log.i("onFetchDataFailure","onFetchDataFailure");
-        Log.i("onFetchDataFailure",throwable.getMessage());
+        Log.i("onFetchDataFailure", "onFetchDataFailure");
+        Log.i("onFetchDataFailure", throwable.getMessage());
 
     }
 
@@ -468,27 +482,29 @@ if (id == R.id.nav_camera) {
      */
     @Override
     public void onFetchDataCompleted() {
-        Log.i("ClassTrack","onFetchDataCompleted");
+        Log.i("ClassTrack", "onFetchDataCompleted");
     }
+
     /**
      * just got these methods due to interface.
      */
     @Override
     public void onFetchDataInProgress() {
-        Log.i("ClassTrack","onFetchDataInProgress");
+        Log.i("ClassTrack", "onFetchDataInProgress");
     }
 
     /**
      * displaying a drink
      */
     public static void displayDrink(String idDrink) {
-        iDrinkPresenter =  new DisplayDrink(interactor_);
+        iDrinkPresenter = new DisplayDrink(interactor_);
         iDrinkPresenter.attachView(iDrinkView);
         iDrinkPresenter.performDrinkDisplay(idDrink);
     }
 
     /**
      * displaying drink offline
+     *
      * @param idDrink Drink's id
      */
     public static void displayDrinkOffline(String idDrink) {
@@ -509,10 +525,10 @@ if (id == R.id.nav_camera) {
      * displaying a drink By Ingredient
      */
     public static void displayDrinkByIngredient(String ingredient) {
-        Log.i("DISPLAYDRINKS",ingredient);
+        Log.i("DISPLAYDRINKS", ingredient);
         Answers.getInstance().logCustom(new CustomEvent("displayDrinkByIngredient")
                 .putCustomAttribute("Ingredient", ingredient));
-        iDrinksPresenter =  new DisplayIngredientDrinks(interactor_);
+        iDrinksPresenter = new DisplayIngredientDrinks(interactor_);
         iDrinksPresenter.attachView(iDrinksView);
         iDrinksPresenter.performListDisplay(ingredient);
     }
@@ -521,11 +537,12 @@ if (id == R.id.nav_camera) {
      * displaying a drink By Alcoholic
      */
     public static void displayDrinkByAlcoholic(String alcoholic) {
-        Log.i("DISPLAYDRINKS",alcoholic);
-        iDrinksPresenter =  new DisplayAlcoholicDrinks(interactor_);
+        Log.i("DISPLAYDRINKS", alcoholic);
+        iDrinksPresenter = new DisplayAlcoholicDrinks(interactor_);
         iDrinksPresenter.attachView(iDrinksView);
         iDrinksPresenter.performListDisplay(alcoholic);
     }
+
     /**
      * displaying a drinks offline
      */
@@ -534,14 +551,15 @@ if (id == R.id.nav_camera) {
         iDrinksPresenterOffline.attachView(iDrinksViewOffline);
         iDrinksPresenterOffline.performListDisplay();
     }
+
     /**
      * displaying a drink By Category
      */
     public static void displayDrinkByCategory(String category) {
-        Log.i("DISPLAYDRINKS",category);
+        Log.i("DISPLAYDRINKS", category);
         Answers.getInstance().logCustom(new CustomEvent("displayDrinkByCategory")
                 .putCustomAttribute("Category", category));
-        iDrinksPresenter =  new DisplayCategoryDrinks(interactor_);
+        iDrinksPresenter = new DisplayCategoryDrinks(interactor_);
         iDrinksPresenter.attachView(iDrinksView);
         iDrinksPresenter.performListDisplay(category);
     }
@@ -550,10 +568,10 @@ if (id == R.id.nav_camera) {
      * displaying a drink By Glass
      */
     public static void displayDrinkByGlass(String glass) {
-        Log.i("DISPLAYDRINKS",glass);
+        Log.i("DISPLAYDRINKS", glass);
         Answers.getInstance().logCustom(new CustomEvent("displayDrinkByGlass")
                 .putCustomAttribute("Glass", glass));
-        iDrinksPresenter =  new DisplayGlassDrinks(interactor_);
+        iDrinksPresenter = new DisplayGlassDrinks(interactor_);
         iDrinksPresenter.attachView(iDrinksView);
         iDrinksPresenter.performListDisplay(glass);
     }
