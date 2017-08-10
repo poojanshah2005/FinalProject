@@ -22,7 +22,7 @@
         android:textSize="@dimen/text">
 
         <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
@@ -37,16 +37,15 @@
 
             <ImageView
                 android:id="@+id/imDrink"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="450dp"
+                android:layout_height="450dp"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/tvDrinkName"
                 android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
                 android:gravity="center"
-                android:minHeight="150dp"
-                android:minWidth="150dp" />
+                android:minHeight="250dp"
+                android:minWidth="250dp" />
 
             <TextView
                 android:id="@+id/tvInstructions"
