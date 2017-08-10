@@ -11,6 +11,8 @@ import com.example.shahp.finalproject.Models.GlassList.GlassResults;
 import com.example.shahp.finalproject.Models.IngredientResults.IngredientResults;
 import com.example.shahp.finalproject.MVP.Service.Consts;
 import com.example.shahp.finalproject.MVP.Service.RequestInterface;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.io.File;
@@ -63,7 +65,9 @@ public class InteractorImpl implements  Interactor {
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(Consts.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(new GsonBuilder()
+                        .setLenient()
+                        .create()))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient)
                 .build();
