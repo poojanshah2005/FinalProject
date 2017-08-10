@@ -51,8 +51,6 @@ import butterknife.ButterKnife;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-import static com.example.shahp.finalproject.MVP.Service.Utils.isNetworkAvailable;
-
 /**
  * MainActivity where presenters are called from
  */
@@ -147,21 +145,24 @@ public class MainActivity extends AppCompatActivity
      * displaying init home page
      */
     private void showHome() {
-        if(isNetworkAvailable(this)){
+
+        displayDrinksOffline();
+
             displayDrinkByCategory("Ordinary Drink");
-        } else{
-            displayDrinksOffline();
-        }
+
+
+
     }
     /**
      * displaying init home page, when user selects delete from realm
      */
     public static void showHomestatic() {
-        if(isNetworkAvailable(context)){
+        displayDrinksOffline();
+//        if(isNetworkAvailable(context)){
             displayDrinkByCategory("Ordinary Drink");
-        } else{
-            displayDrinksOffline();
-        }
+//        } else{
+//            displayDrinksOffline();
+//        }
     }
     /**
      * init offline menu
