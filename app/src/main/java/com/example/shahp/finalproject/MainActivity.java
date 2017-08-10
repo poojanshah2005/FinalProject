@@ -46,6 +46,9 @@ import com.example.shahp.finalproject.Models.GlassList.GlassResults;
 import com.example.shahp.finalproject.Models.IngredientResults.Ingredient;
 import com.example.shahp.finalproject.Models.IngredientResults.IngredientResults;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -135,8 +138,20 @@ public class MainActivity extends AppCompatActivity
 
         menuOfflineDrinks();
 
-        loadData = new LoadData(getApplicationContext());
-        loadData.execute();
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+
+                // run AsyncTask here.
+                loadData = new LoadData(getApplicationContext());
+                loadData.execute();
+
+
+            }
+        }, 3000);// 3 seconds delay
+
+
+
 
     }
 

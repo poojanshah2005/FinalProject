@@ -1,5 +1,6 @@
 package com.example.shahp.finalproject.Fragment.Drink;
 
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -232,6 +233,8 @@ public class DisplayDrinkFragment extends Fragment {
             TableRow row = new TableRow(getContext());
             TextView tv1I = new TextView(getContext());
             TextView tv1Q = new TextView(getContext());
+            tv1I.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+            tv1Q.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
             tv1I.setText(ingredient);
             tv1I.setPaintFlags(tv1I.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
             if (measurement.length() > 1) tv1Q.setText(measurement);

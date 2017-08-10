@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:textColor="#FFFFFF" />
+                android:textColor="@color/colorPrimaryDark" />
 
 
             <ImageView

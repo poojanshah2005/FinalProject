@@ -17,6 +17,9 @@ import com.example.shahp.finalproject.Models.GlassList.GlassResults;
 import com.example.shahp.finalproject.Models.IngredientResults.Ingredient;
 import com.example.shahp.finalproject.Models.IngredientResults.IngredientResults;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -37,21 +40,72 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... voids) {
         if(Utils.isNetworkAvailable(this.context)){
-            interactor_.getCategoryList()
-                    .subscribeOn(Schedulers.newThread())
-                    .subscribe(LoadData.this::onSuccessGetCategoryList, LoadData.this::OnErrorsCategoryList);
 
-            interactor_.getAlcoholicList()
-                    .subscribeOn(Schedulers.newThread())
-                    .subscribe(LoadData.this::onSuccessGetAlcoholicList, LoadData.this::OnEngorgeAlcoholicList);
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
 
-            interactor_.getGlassList()
-                    .subscribeOn(Schedulers.newThread())
-                    .subscribe(LoadData.this::onSuccessGetGlassList, LoadData.this::OnEngorgeGlassList);
+                    // run AsyncTask here.
+                    interactor_.getCategoryList()
+                            .subscribeOn(Schedulers.newThread())
+                            .subscribe(LoadData.this::onSuccessGetCategoryList, LoadData.this::OnErrorsCategoryList);
 
-            interactor_.getIngredientList()
-                    .subscribeOn(Schedulers.newThread())
-                    .subscribe(LoadData.this::onSuccessGetIngredientList, LoadData.this::OnEngorgeIngredientList);
+
+                }
+            }, 2000);
+
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+
+                    // run AsyncTask here.
+                    interactor_.getCategoryList()
+                            .subscribeOn(Schedulers.newThread())
+                            .subscribe(LoadData.this::onSuccessGetCategoryList, LoadData.this::OnErrorsCategoryList);
+
+
+                }
+            }, 4000);
+
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+
+                    // run AsyncTask here.
+                    interactor_.getAlcoholicList()
+                            .subscribeOn(Schedulers.newThread())
+                            .subscribe(LoadData.this::onSuccessGetAlcoholicList, LoadData.this::OnEngorgeAlcoholicList);
+
+
+                }
+            }, 6000);
+
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+
+                    // run AsyncTask here.
+                    interactor_.getGlassList()
+                            .subscribeOn(Schedulers.newThread())
+                            .subscribe(LoadData.this::onSuccessGetGlassList, LoadData.this::OnEngorgeGlassList);
+
+
+                }
+            }, 8000);
+
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+
+                    // run AsyncTask here.
+                    interactor_.getIngredientList()
+                            .subscribeOn(Schedulers.newThread())
+                            .subscribe(LoadData.this::onSuccessGetIngredientList, LoadData.this::OnEngorgeIngredientList);
+
+
+                }
+            }, 10000);
+
         }
         return null;
     }
