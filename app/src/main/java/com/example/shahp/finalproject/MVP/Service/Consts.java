@@ -13,6 +13,6 @@ public class Consts {
     public static final String GlassList = "list.php?g=list";
     public static final String IngredientList = "list.php?i=list";
     public static final String AlcoholicList = "list.php?a=list";
-    public static final String BY_ID = "lookup.php?";
+    public static final String BY_ID = "lookup.php";
     public static final String FILTER = "filter.php";
 }

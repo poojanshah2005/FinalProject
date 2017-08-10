@@ -34,6 +34,7 @@ import com.example.shahp.finalproject.MVP.Interactor.InteractorImpl;
 import com.example.shahp.finalproject.MVP.OfflineDrinks.DrinksOffline;
 import com.example.shahp.finalproject.MVP.OfflineDrinks.IDrinksPresenterOffline;
 import com.example.shahp.finalproject.MVP.OfflineDrinks.IDrinksViewOffline;
+import com.example.shahp.finalproject.MVP.Service.LoadData;
 import com.example.shahp.finalproject.Models.AlcoholicResult.Alcoholic;
 import com.example.shahp.finalproject.Models.AlcoholicResult.AlcoholicResult;
 import com.example.shahp.finalproject.Models.CategoryList.Category;
@@ -69,6 +70,7 @@ public class MainActivity extends AppCompatActivity
     static IDrinkView iDrinkView;
     static IDrinksViewOffline iDrinksViewOffline;
     static android.support.v4.app.FragmentManager fragmentManager;
+    LoadData loadData;
     @BindView(R.id.nav_view)
     NavigationView navigationView;
     static Context context;
@@ -135,6 +137,9 @@ public class MainActivity extends AppCompatActivity
 
 
         menuOfflineDrinks();
+
+        loadData = new LoadData(getApplicationContext());
+        loadData.execute();
 
     }
 
