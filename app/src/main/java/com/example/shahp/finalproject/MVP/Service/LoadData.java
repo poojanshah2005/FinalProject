@@ -30,7 +30,8 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
     private Context context;
     private Interactor interactor_;
-    int i = 0;
+    int i = 3000;
+    int a = 100;
 
     public LoadData (Context context){
         this.context = context;
@@ -52,7 +53,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
 
                 }
-            }, 5000);
+            }, i * 1);
 
             new Timer().schedule(new TimerTask() {
                 @Override
@@ -65,7 +66,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
 
                 }
-            }, 10000);
+            }, i * 2);
 
             new Timer().schedule(new TimerTask() {
                 @Override
@@ -78,7 +79,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
 
                 }
-            }, 15000);
+            }, i * 3);
 
             new Timer().schedule(new TimerTask() {
                 @Override
@@ -91,7 +92,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
 
                 }
-            }, 20000);
+            }, i * 4);
 
             new Timer().schedule(new TimerTask() {
                 @Override
@@ -104,7 +105,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
 
                 }
-            }, 25000);
+            }, i * 5);
 
 //        }
         return null;
@@ -115,34 +116,70 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
     private void onSuccessGetIngredientList(IngredientResults ingredientResults) {
         for(Ingredient value: ingredientResults.getIngredients()) {
-            Log.i("Drink", value.getStrIngredient1());
-            interactor_.getByIngredient(value.getStrIngredient1())
-                    .subscribeOn(Schedulers.newThread())
-                    .subscribe(LoadData.this::onSuccessDrinks, LoadData.this::OnEngorgeByIngredient);
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+
+                // run AsyncTask here.
+                Log.i("Drink", value.getStrIngredient1());
+                interactor_.getByIngredient(value.getStrIngredient1())
+                        .subscribeOn(Schedulers.newThread())
+                        .subscribe(LoadData.this::onSuccessDrinks, LoadData.this::OnEngorgeByIngredient);
+
+
+            }
+        },a);
         }
     }
 
     private void onSuccessGetGlassList(GlassResults glassResults) {
         for(Glass value: glassResults.getGlass()) {
-            interactor_.getByGlass(value.getStrGlass())
-                    .subscribeOn(Schedulers.newThread())
-                    .subscribe(LoadData.this::onSuccessDrinks, LoadData.this::OnErrorSuccessGetGlassList);
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+
+                    // run AsyncTask here.
+                    interactor_.getByGlass(value.getStrGlass())
+                            .subscribeOn(Schedulers.newThread())
+                            .subscribe(LoadData.this::onSuccessDrinks, LoadData.this::OnErrorSuccessGetGlassList);
+
+
+                }
+            },a);
         }
     }
 
     private void onSuccessGetAlcoholicList(AlcoholicResult alcoholicResult) {
         for(Alcoholic value: alcoholicResult.getAlcoholics()) {
-            interactor_.getByAlcoholic(value.getStrAlcoholic())
-                    .subscribeOn(Schedulers.newThread())
-                    .subscribe(LoadData.this::onSuccessDrinks, LoadData.this::OnErrorSuccessGetAlcoholicList);
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+
+                    // run AsyncTask here.
+                    interactor_.getByAlcoholic(value.getStrAlcoholic())
+                            .subscribeOn(Schedulers.newThread())
+                            .subscribe(LoadData.this::onSuccessDrinks, LoadData.this::OnErrorSuccessGetAlcoholicList);
+
+
+                }
+            },a);
+
         }
     }
 
     private void onSuccessGetCategoryList(CategoryResults categoryResults) {
         for(Category value: categoryResults.getCategories()) {
-            interactor_.getByCategory(value.getStrCategory())
-                    .subscribeOn(Schedulers.newThread())
-                    .subscribe(LoadData.this::onSuccessDrinks, LoadData.this::OnErrorSuccessGetCategoryList);
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+
+                    // run AsyncTask here.
+                    interactor_.getByCategory(value.getStrCategory())
+                            .subscribeOn(Schedulers.newThread())
+                            .subscribe(LoadData.this::onSuccessDrinks, LoadData.this::OnErrorSuccessGetCategoryList);
+                }
+            },a);
+
         }
     }
 
