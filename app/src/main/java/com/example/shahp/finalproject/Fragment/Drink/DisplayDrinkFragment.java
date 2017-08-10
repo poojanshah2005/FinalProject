@@ -114,7 +114,7 @@ public class DisplayDrinkFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        tvDrinkName.setText("Drink Name: "+ drink.getStrDrink());
+        tvDrinkName.setText(drink.getStrDrink());
         tvGlass.setText(Html.fromHtml(getString(R.string.glassTitle) +  "<u> " + drink.getStrGlass() + "</u>"));
         tvCatergories.setText(Html.fromHtml(getString(R.string.category) + "<u> " +drink.getStrCategory() + "</u>"));
         tvAlc.setText(Html.fromHtml(getString(R.string.Alcoholic) + "<u> " + drink.getStrAlcoholic() + "</u>"));
