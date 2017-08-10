@@ -136,14 +136,11 @@ public class DisplayDrinkFragment extends Fragment {
             checkButtons();
         });
         //delete button from realm
-        floatingDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                realmHelper.removeDrink(drink.getIdDrink());
-                MainActivity.showHomestatic();
-                Toast.makeText(getContext(),"Drink has been removed to the database.",Toast.LENGTH_SHORT).show();
+        floatingDelete.setOnClickListener(view15 -> {
+            realmHelper.removeDrink(drink.getIdDrink());
+            MainActivity.showHomestatic();
+            Toast.makeText(getContext(),"Drink has been removed to the database.",Toast.LENGTH_SHORT).show();
 //                checkButtons();
-            }
         });
 
         initRows();

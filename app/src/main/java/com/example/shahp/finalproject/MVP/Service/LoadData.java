@@ -39,7 +39,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected Void doInBackground(Void... voids) {
-        if(Utils.isNetworkAvailable(this.context)){
+//        if(Utils.isNetworkAvailable(this.context)){
 
             new Timer().schedule(new TimerTask() {
                 @Override
@@ -52,7 +52,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
 
                 }
-            }, 2000);
+            }, 5000);
 
             new Timer().schedule(new TimerTask() {
                 @Override
@@ -65,7 +65,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
 
                 }
-            }, 4000);
+            }, 10000);
 
             new Timer().schedule(new TimerTask() {
                 @Override
@@ -78,7 +78,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
 
                 }
-            }, 6000);
+            }, 15000);
 
             new Timer().schedule(new TimerTask() {
                 @Override
@@ -91,7 +91,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
 
                 }
-            }, 8000);
+            }, 20000);
 
             new Timer().schedule(new TimerTask() {
                 @Override
@@ -104,9 +104,9 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
 
                 }
-            }, 10000);
+            }, 25000);
 
-        }
+//        }
         return null;
     }
 
