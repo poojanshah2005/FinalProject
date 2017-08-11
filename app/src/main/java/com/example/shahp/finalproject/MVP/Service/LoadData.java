@@ -156,7 +156,6 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
                 new Timer().schedule(new TimerTask() {
                     @Override
                     public void run() {
-                        Log.i("Drink154", drink.getStrDrink());
                         // run AsyncTask here.
                         interactor_.getDrinkById(drink.getIdDrink())
                                 .subscribeOn(Schedulers.newThread())
