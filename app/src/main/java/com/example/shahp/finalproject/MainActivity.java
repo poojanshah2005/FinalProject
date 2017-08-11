@@ -133,22 +133,26 @@ public class MainActivity extends AppCompatActivity
         menu = navigationView.getMenu();
         navigationView.setNavigationItemSelectedListener(this);
 
-        showHome();
-
 
         menuOfflineDrinks();
 
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
 
-                // run AsyncTask here.
-                loadData = new LoadData(getApplicationContext());
-                loadData.execute();
+        showHome();
 
 
-            }
-        }, 3000);// 3 seconds delay
+
+
+//        new Timer().schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//
+//                // run AsyncTask here.
+//                loadData = new LoadData(getApplicationContext());
+//                loadData.execute();
+//
+//
+//            }
+//        }, 3000);// 3 seconds delay
 
 
 
