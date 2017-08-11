@@ -142,17 +142,17 @@ public class MainActivity extends AppCompatActivity
 
 
 
-//        new Timer().schedule(new TimerTask() {
-//            @Override
-//            public void run() {
-//
-//                // run AsyncTask here.
-//                loadData = new LoadData(getApplicationContext());
-//                loadData.execute();
-//
-//
-//            }
-//        }, 3000);// 3 seconds delay
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+
+                // run AsyncTask here.
+                loadData = new LoadData(getApplicationContext());
+                loadData.execute();
+
+
+            }
+        }, 3000);// 3 seconds delay
 
 
 

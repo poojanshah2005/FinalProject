@@ -21,6 +21,7 @@ import com.example.shahp.finalproject.Models.IngredientResults.IngredientResults
 import java.util.Timer;
 import java.util.TimerTask;
 
+import io.reactivex.exceptions.UndeliverableException;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -31,7 +32,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
     private Context context;
     private Interactor interactor_;
-    int timeDrinksTask = 10000;
+    int timeDrinksTask = 500;
     int a = 0;
 
     public LoadData (Context context){
@@ -120,56 +121,14 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
 
     private void onSuccessGetIngredientList(IngredientResults ingredientResults) {
-        for(Ingredient value: ingredientResults.getIngredients()) {
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
 
-                // run AsyncTask here.
-                Log.i("Drink", value.getStrIngredient1());
-                interactor_.getByIngredient(value.getStrIngredient1())
-                        .subscribeOn(Schedulers.newThread())
-                        .subscribe(LoadData.this::onSuccessDrinks, LoadData.this::OnEngorgeByIngredient);
-
-
-            }
-        }, timeDrinksTask++ * 2);
-        }
     }
 
     private void onSuccessGetGlassList(GlassResults glassResults) {
-        for(Glass value: glassResults.getGlass()) {
-            new Timer().schedule(new TimerTask() {
-                @Override
-                public void run() {
-
-                    // run AsyncTask here.
-                    interactor_.getByGlass(value.getStrGlass())
-                            .subscribeOn(Schedulers.newThread())
-                            .subscribe(LoadData.this::onSuccessDrinks, LoadData.this::OnErrorSuccessGetGlassList);
-
-
-                }
-            }, timeDrinksTask++ * 3);
-        }
     }
 
     private void onSuccessGetAlcoholicList(AlcoholicResult alcoholicResult) {
-        for(Alcoholic value: alcoholicResult.getAlcoholics()) {
-            new Timer().schedule(new TimerTask() {
-                @Override
-                public void run() {
 
-                    // run AsyncTask here.
-                    interactor_.getByAlcoholic(value.getStrAlcoholic())
-                            .subscribeOn(Schedulers.newThread())
-                            .subscribe(LoadData.this::onSuccessDrinks, LoadData.this::OnErrorSuccessGetAlcoholicList);
-
-
-                }
-            }, timeDrinksTask++ * 4);
-
-        }
     }
 
     private void onSuccessGetCategoryList(CategoryResults categoryResults) {
@@ -189,19 +148,26 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
     }
 
     private void onSuccessDrinks(DrinksResult drinksResult) {
-        for(Drink drink:drinksResult.getDrinks()){
-            new Timer().schedule(new TimerTask() {
-                @Override
-                public void run() {
-
-                    // run AsyncTask here.
-                    interactor_.getDrinkById(drink.getIdDrink())
-                            .subscribeOn(Schedulers.newThread())
-                            .subscribe(LoadData.this::onSuccessDrink, LoadData.this::OnErrorSuccessGetCategoryList);
-
-                }
-            }, a = a + 150);
-
+        int b = 1000;
+        try {
+            this.a += 3000;
+            for (Drink drink : drinksResult.getDrinks()) {
+                b += 100;
+                new Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        Log.i("Drink154", drink.getStrDrink());
+                        // run AsyncTask here.
+                        interactor_.getDrinkById(drink.getIdDrink())
+                                .subscribeOn(Schedulers.newThread())
+                                .subscribe(LoadData.this::onSuccessDrink, LoadData.this::OnErrorSuccessGetCategoryList);
+                    }
+                }, b+= 100 + this.a);
+            }
+        } catch (OutOfMemoryError e){
+            Log.e("Error",e.getMessage());
+        } catch (UndeliverableException e){
+            Log.e("Error",e.getMessage());
         }
     }
 
