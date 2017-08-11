@@ -31,9 +31,8 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
     private Context context;
     private Interactor interactor_;
-    int i = 3000;
-    int a = 100;
-    int b = 350;
+    int timeDrinksTask = 5000;
+    int timeDrinkTask = 4000;
 
     public LoadData (Context context){
         this.context = context;
@@ -55,7 +54,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
 
                 }
-            }, i * 1);
+            }, timeDrinksTask * 1);
 
             new Timer().schedule(new TimerTask() {
                 @Override
@@ -68,7 +67,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
 
                 }
-            }, i * 2);
+            }, timeDrinksTask * 2);
 
             new Timer().schedule(new TimerTask() {
                 @Override
@@ -81,7 +80,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
 
                 }
-            }, i * 3);
+            }, timeDrinksTask * 3);
 
             new Timer().schedule(new TimerTask() {
                 @Override
@@ -94,7 +93,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
 
                 }
-            }, i * 4);
+            }, timeDrinksTask * 4);
 
             new Timer().schedule(new TimerTask() {
                 @Override
@@ -107,7 +106,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
 
                 }
-            }, i * 5);
+            }, timeDrinksTask * 5);
 
 //        }
         return null;
@@ -130,7 +129,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
 
             }
-        },a);
+        }, timeDrinkTask * 2);
         }
     }
 
@@ -147,7 +146,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
 
                 }
-            },a);
+            }, timeDrinkTask * 3);
         }
     }
 
@@ -164,7 +163,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
 
                 }
-            },a);
+            }, timeDrinkTask * 4);
 
         }
     }
@@ -180,7 +179,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
                             .subscribeOn(Schedulers.newThread())
                             .subscribe(LoadData.this::onSuccessDrinks, LoadData.this::OnErrorSuccessGetCategoryList);
                 }
-            },a);
+            }, timeDrinkTask * 5);
 
         }
     }
@@ -196,7 +195,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
                             .subscribeOn(Schedulers.newThread())
                             .subscribe(LoadData.this::onSuccessDrink, LoadData.this::OnErrorSuccessGetCategoryList);
                 }
-            },b);
+            }, timeDrinkTask/10);
 
         }
     }
