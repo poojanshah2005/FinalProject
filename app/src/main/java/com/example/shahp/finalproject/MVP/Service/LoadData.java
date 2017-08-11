@@ -31,8 +31,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
     private Context context;
     private Interactor interactor_;
-    int timeDrinksTask = 5000;
-    int timeDrinkTask = 4000;
+    int timeDrinksTask = 10000;
 
     public LoadData (Context context){
         this.context = context;
@@ -129,7 +128,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
 
             }
-        }, timeDrinkTask * 2);
+        }, timeDrinksTask * 2);
         }
     }
 
@@ -146,7 +145,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
 
                 }
-            }, timeDrinkTask * 3);
+            }, timeDrinksTask * 3);
         }
     }
 
@@ -163,7 +162,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
 
                 }
-            }, timeDrinkTask * 4);
+            }, timeDrinksTask * 4);
 
         }
     }
@@ -179,7 +178,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
                             .subscribeOn(Schedulers.newThread())
                             .subscribe(LoadData.this::onSuccessDrinks, LoadData.this::OnErrorSuccessGetCategoryList);
                 }
-            }, timeDrinkTask * 5);
+            }, timeDrinksTask * 5);
 
         }
     }
@@ -195,7 +194,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
                             .subscribeOn(Schedulers.newThread())
                             .subscribe(LoadData.this::onSuccessDrink, LoadData.this::OnErrorSuccessGetCategoryList);
                 }
-            }, timeDrinkTask/10);
+            }, timeDrinksTask);
 
         }
     }
