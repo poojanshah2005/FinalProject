@@ -31,11 +31,15 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
     private Context context;
     private Interactor interactor_;
-    int timeDrinksTask = 25000;
+    int timeDrinksTask = 10000;
 
     public LoadData (Context context){
         this.context = context;
         interactor_ = new InteractorImpl(context);
+    }
+
+    public void increase(){
+        this.timeDrinksTask += 100;
     }
 
     @Override
@@ -193,8 +197,9 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
                     interactor_.getDrinkById(drink.getIdDrink())
                             .subscribeOn(Schedulers.newThread())
                             .subscribe(LoadData.this::onSuccessDrink, LoadData.this::OnErrorSuccessGetCategoryList);
+                    increase();
                 }
-            }, 10000);
+            }, timeDrinksTask);
 
         }
     }
