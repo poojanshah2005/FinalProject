@@ -148,8 +148,9 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
     }
 
     private void onSuccessDrinks(DrinksResult drinksResult) {
-        int b = 1000;
+
         try {
+            int b = 100;
             this.a += 3000;
             for (Drink drink : drinksResult.getDrinks()) {
                 b += 100;
@@ -157,6 +158,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
                     @Override
                     public void run() {
                         // run AsyncTask here.
+                        Log.i("Drink154", drink.getStrDrink());
                         interactor_.getDrinkById(drink.getIdDrink())
                                 .subscribeOn(Schedulers.newThread())
                                 .subscribe(LoadData.this::onSuccessDrink, LoadData.this::OnErrorSuccessGetCategoryList);
@@ -166,6 +168,8 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
         } catch (OutOfMemoryError e){
             Log.e("Error",e.getMessage());
         } catch (UndeliverableException e){
+            Log.e("Error",e.getMessage());
+        } catch (Exception e){
             Log.e("Error",e.getMessage());
         }
     }
