@@ -10,6 +10,7 @@ import com.example.shahp.finalproject.Models.AlcoholicResult.Alcoholic;
 import com.example.shahp.finalproject.Models.AlcoholicResult.AlcoholicResult;
 import com.example.shahp.finalproject.Models.CategoryList.Category;
 import com.example.shahp.finalproject.Models.CategoryList.CategoryResults;
+import com.example.shahp.finalproject.Models.DrinkResult.DrinkResult;
 import com.example.shahp.finalproject.Models.DrinksResult.Drink;
 import com.example.shahp.finalproject.Models.DrinksResult.DrinksResult;
 import com.example.shahp.finalproject.Models.GlassList.Glass;
@@ -32,6 +33,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
     private Interactor interactor_;
     int i = 3000;
     int a = 100;
+    int b = 350;
 
     public LoadData (Context context){
         this.context = context;
@@ -185,8 +187,22 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
     private void onSuccessDrinks(DrinksResult drinksResult) {
         for(Drink drink:drinksResult.getDrinks()){
-            String value = drink.getIdDrink();
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+
+                    // run AsyncTask here.
+                    interactor_.getDrinkById(drink.getIdDrink())
+                            .subscribeOn(Schedulers.newThread())
+                            .subscribe(LoadData.this::onSuccessDrink, LoadData.this::OnErrorSuccessGetCategoryList);
+                }
+            },b);
+
         }
+    }
+
+    private void onSuccessDrink(DrinkResult drinkResult) {
+        Log.i("onSuccessDrink", String.valueOf(drinkResult.getDrinks().size()));
     }
 
     /**
