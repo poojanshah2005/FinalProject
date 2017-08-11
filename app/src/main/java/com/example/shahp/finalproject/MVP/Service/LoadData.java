@@ -31,7 +31,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
     private Context context;
     private Interactor interactor_;
-    int timeDrinksTask = 10000;
+    int timeDrinksTask = 25000;
 
     public LoadData (Context context){
         this.context = context;
@@ -194,7 +194,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
                             .subscribeOn(Schedulers.newThread())
                             .subscribe(LoadData.this::onSuccessDrink, LoadData.this::OnErrorSuccessGetCategoryList);
                 }
-            }, timeDrinksTask);
+            }, 10000);
 
         }
     }
