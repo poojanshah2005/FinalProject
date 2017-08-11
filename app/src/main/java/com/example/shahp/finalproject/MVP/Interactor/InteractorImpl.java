@@ -53,7 +53,7 @@ public class InteractorImpl implements  Interactor {
 
         //setup cache
         File httpCacheDirectory = new File(context.getCacheDir(), "responses");
-        int cacheSize = 50 * 1024 * 1024; // 50 MiB
+        int cacheSize = 100 * 1024 * 1024; // 100 MiB
         Cache cache = new Cache(httpCacheDirectory, cacheSize);
         //add cache to the client
 
