@@ -32,88 +32,53 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
     private Context context;
     private Interactor interactor_;
-    int timeDrinksTask = 500;
-    int a = 0;
-
+    private final int seconds = 1000;
     public LoadData (Context context){
         this.context = context;
         interactor_ = new InteractorImpl(context);
     }
 
-    public void increase(){
-        this.timeDrinksTask += 100;
-    }
-
     @Override
     protected Void doInBackground(Void... voids) {
-//        if(Utils.isNetworkAvailable(this.context)){
+        if(Utils.isNetworkAvailable(this.context)){
 
-            new Timer().schedule(new TimerTask() {
-                @Override
-                public void run() {
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                interactor_.getCategoryList()
+                        .subscribeOn(Schedulers.newThread())
+                        .subscribe(LoadData.this::onSuccessGetCategoryList, LoadData.this::OnErrorsCategoryList);
+            }
+        }, seconds * 10);// 10 seconds delay
 
-                    // run AsyncTask here.
-                    interactor_.getCategoryList()
-                            .subscribeOn(Schedulers.newThread())
-                            .subscribe(LoadData.this::onSuccessGetCategoryList, LoadData.this::OnErrorsCategoryList);
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                interactor_.getAlcoholicList()
+                        .subscribeOn(Schedulers.newThread())
+                        .subscribe(LoadData.this::onSuccessGetAlcoholicList, LoadData.this::OnEngorgeAlcoholicList);
+            }
+        }, seconds * 80);// 80 seconds delay
 
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                interactor_.getGlassList()
+                        .subscribeOn(Schedulers.newThread())
+                        .subscribe(LoadData.this::onSuccessGetGlassList, LoadData.this::OnEngorgeGlassList);
+            }
+        }, seconds * 160);// 160 seconds delay
 
-                }
-            }, timeDrinksTask++ * 1);
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                interactor_.getIngredientList()
+                        .subscribeOn(Schedulers.newThread())
+                        .subscribe(LoadData.this::onSuccessGetIngredientList, LoadData.this::OnEngorgeIngredientList);
+            }
+        }, seconds * 240);// 240 seconds delay
 
-            new Timer().schedule(new TimerTask() {
-                @Override
-                public void run() {
-
-                    // run AsyncTask here.
-                    interactor_.getCategoryList()
-                            .subscribeOn(Schedulers.newThread())
-                            .subscribe(LoadData.this::onSuccessGetCategoryList, LoadData.this::OnErrorsCategoryList);
-
-
-                }
-            }, timeDrinksTask++ * 2);
-
-            new Timer().schedule(new TimerTask() {
-                @Override
-                public void run() {
-
-                    // run AsyncTask here.
-                    interactor_.getAlcoholicList()
-                            .subscribeOn(Schedulers.newThread())
-                            .subscribe(LoadData.this::onSuccessGetAlcoholicList, LoadData.this::OnEngorgeAlcoholicList);
-
-
-                }
-            }, timeDrinksTask++ * 3);
-
-            new Timer().schedule(new TimerTask() {
-                @Override
-                public void run() {
-
-                    // run AsyncTask here.
-                    interactor_.getGlassList()
-                            .subscribeOn(Schedulers.newThread())
-                            .subscribe(LoadData.this::onSuccessGetGlassList, LoadData.this::OnEngorgeGlassList);
-
-
-                }
-            }, timeDrinksTask++ * 4);
-
-            new Timer().schedule(new TimerTask() {
-                @Override
-                public void run() {
-
-                    // run AsyncTask here.
-                    interactor_.getIngredientList()
-                            .subscribeOn(Schedulers.newThread())
-                            .subscribe(LoadData.this::onSuccessGetIngredientList, LoadData.this::OnEngorgeIngredientList);
-
-
-                }
-            }, timeDrinksTask++ * 5);
-
-//        }
+       }
         return null;
     }
 
@@ -121,49 +86,52 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
 
     private void onSuccessGetIngredientList(IngredientResults ingredientResults) {
+        for(Ingredient ingredient : ingredientResults.getIngredients())
+        interactor_.getByIngredient(ingredient.getStrIngredient1())
+                .subscribeOn(Schedulers.newThread())
+                .subscribe(LoadData.this::onSuccessDrinks, LoadData.this::OnEngorgeIngredientList);
 
     }
 
+    private void onSuccessDrinkFake(DrinksResult drinksResult) {
+    }
+
+
     private void onSuccessGetGlassList(GlassResults glassResults) {
+        for(Glass glass: glassResults.getGlass()){
+            interactor_.getByGlass(glass.getStrGlass())
+                    .subscribeOn(Schedulers.newThread())
+                    .subscribe(LoadData.this::onSuccessDrinks, LoadData.this::OnEngorgeIngredientList);
+
+        }
     }
 
     private void onSuccessGetAlcoholicList(AlcoholicResult alcoholicResult) {
+        for(Alcoholic alcoholic: alcoholicResult.getAlcoholics()){
+            interactor_.getByAlcoholic(alcoholic.getStrAlcoholic())
+                    .subscribeOn(Schedulers.newThread())
+                    .subscribe(LoadData.this::onSuccessDrinks, LoadData.this::OnEngorgeIngredientList);
+
+        }
 
     }
 
     private void onSuccessGetCategoryList(CategoryResults categoryResults) {
         for(Category value: categoryResults.getCategories()) {
-            new Timer().schedule(new TimerTask() {
-                @Override
-                public void run() {
-
-                    // run AsyncTask here.
                     interactor_.getByCategory(value.getStrCategory())
                             .subscribeOn(Schedulers.newThread())
                             .subscribe(LoadData.this::onSuccessDrinks, LoadData.this::OnErrorSuccessGetCategoryList);
                 }
-            }, timeDrinksTask++ * 5);
-
-        }
     }
 
     private void onSuccessDrinks(DrinksResult drinksResult) {
 
         try {
-            int b = 100;
-            this.a += 3000;
             for (Drink drink : drinksResult.getDrinks()) {
-                b += 100;
-                new Timer().schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        // run AsyncTask here.
                         Log.i("Drink154", drink.getStrDrink());
                         interactor_.getDrinkById(drink.getIdDrink())
                                 .subscribeOn(Schedulers.newThread())
                                 .subscribe(LoadData.this::onSuccessDrink, LoadData.this::OnErrorSuccessGetCategoryList);
-                    }
-                }, b+= 100 + this.a);
             }
         } catch (OutOfMemoryError e){
             Log.e("Error",e.getMessage());
