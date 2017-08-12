@@ -66,19 +66,6 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
                 public void run() {
 
                     // run AsyncTask here.
-                    interactor_.getCategoryList()
-                            .subscribeOn(Schedulers.newThread())
-                            .subscribe(LoadData.this::onSuccessGetCategoryList, LoadData.this::OnErrorsCategoryList);
-
-
-                }
-            }, timeDrinksTask++ * 2);
-
-            new Timer().schedule(new TimerTask() {
-                @Override
-                public void run() {
-
-                    // run AsyncTask here.
                     interactor_.getAlcoholicList()
                             .subscribeOn(Schedulers.newThread())
                             .subscribe(LoadData.this::onSuccessGetAlcoholicList, LoadData.this::OnEngorgeAlcoholicList);
@@ -121,13 +108,33 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
 
 
     private void onSuccessGetIngredientList(IngredientResults ingredientResults) {
+        for(Ingredient ingredient : ingredientResults.getIngredients())
+        interactor_.getByIngredient(ingredient.getStrIngredient1())
+                .subscribeOn(Schedulers.newThread())
+                .subscribe(LoadData.this::onSuccessDrinkFake, LoadData.this::OnEngorgeIngredientList);
 
     }
 
+    private void onSuccessDrinkFake(DrinksResult drinksResult) {
+    }
+
+
     private void onSuccessGetGlassList(GlassResults glassResults) {
+        for(Glass glass: glassResults.getGlass()){
+            interactor_.getByGlass(glass.getStrGlass())
+                    .subscribeOn(Schedulers.newThread())
+                    .subscribe(LoadData.this::onSuccessDrinkFake, LoadData.this::OnEngorgeIngredientList);
+
+        }
     }
 
     private void onSuccessGetAlcoholicList(AlcoholicResult alcoholicResult) {
+        for(Alcoholic alcoholic: alcoholicResult.getAlcoholics()){
+            interactor_.getByAlcoholic(alcoholic.getStrAlcoholic())
+                    .subscribeOn(Schedulers.newThread())
+                    .subscribe(LoadData.this::onSuccessDrinkFake, LoadData.this::OnEngorgeIngredientList);
+
+        }
 
     }
 
