@@ -49,7 +49,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
                         .subscribeOn(Schedulers.newThread())
                         .subscribe(LoadData.this::onSuccessGetCategoryList, LoadData.this::OnErrorsCategoryList);
             }
-        }, seconds * 0);// 0 seconds delay
+        }, seconds * 10);// 10 seconds delay
 
         new Timer().schedule(new TimerTask() {
             @Override
@@ -58,7 +58,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
                         .subscribeOn(Schedulers.newThread())
                         .subscribe(LoadData.this::onSuccessGetAlcoholicList, LoadData.this::OnEngorgeAlcoholicList);
             }
-        }, seconds * 30);// 30 seconds delay
+        }, seconds * 80);// 80 seconds delay
 
         new Timer().schedule(new TimerTask() {
             @Override
@@ -67,7 +67,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
                         .subscribeOn(Schedulers.newThread())
                         .subscribe(LoadData.this::onSuccessGetGlassList, LoadData.this::OnEngorgeGlassList);
             }
-        }, seconds * 60);// 60 seconds delay
+        }, seconds * 160);// 160 seconds delay
 
         new Timer().schedule(new TimerTask() {
             @Override
@@ -76,7 +76,7 @@ public class LoadData extends AsyncTask<Void, Void, Void> {
                         .subscribeOn(Schedulers.newThread())
                         .subscribe(LoadData.this::onSuccessGetIngredientList, LoadData.this::OnEngorgeIngredientList);
             }
-        }, seconds * 90);// 90 seconds delay
+        }, seconds * 240);// 240 seconds delay
 
        }
         return null;
