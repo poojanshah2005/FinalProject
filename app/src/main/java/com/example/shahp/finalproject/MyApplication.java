@@ -70,7 +70,7 @@ public class MyApplication extends Application {
          * RealmConfiguration
          */
         RealmConfiguration realmConfiguration = new RealmConfiguration.Builder()
-                .name(Realm.DEFAULT_REALM_NAME)
+                .name("Drinks")
                 .schemaVersion(1)
                 .encryptionKey(key)
                 .deleteRealmIfMigrationNeeded()
