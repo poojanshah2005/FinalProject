@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity
     LoadData loadData;
     @BindView(R.id.nav_view)
     NavigationView navigationView;
-    static Context context;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
     @BindView(R.id.toolbar)
@@ -94,7 +93,6 @@ public class MainActivity extends AppCompatActivity
         this.iDrinksView = this;
         this.iDrinkView = this;
         this.iDrinksViewOffline = this;
-        this.context = getApplicationContext();
 
         progressBar.setVisibility(View.VISIBLE);
         setSupportActionBar(toolbar);
